@@ -4,19 +4,25 @@ public class PencilContactDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask blackboardLayer;
 
-    [Tooltip("Small push-out along the board normal so the stroke doesn't look buried.")]
-    [SerializeField] private float surfaceOffset = 0.0015f;
+    [Header("Geometry offsets")]
+    [Tooltip("Radio del SphereCollider del PencilTip (para que no se hunda).")]
+    [SerializeField] private float tipRadius = 0.004f;
+
+    [Tooltip("Mitad del ancho del trazo (strokeWidth).")]
+    [SerializeField] private float halfStrokeWidth = 0.004f;
+
+    [Tooltip("Extra pequeño para separar visualmente.")]
+    [SerializeField] private float extraOffset = 0.0008f;
 
     public bool IsTouching { get; private set; }
     public Vector3 ContactPoint { get; private set; }
 
-    private Collider currentBoard;
+    private Transform boardT;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!IsBlackboard(other)) return;
-
-        currentBoard = other;
+        boardT = other.transform;
         IsTouching = true;
         UpdateContactPoint();
     }
@@ -24,8 +30,7 @@ public class PencilContactDetector : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!IsBlackboard(other)) return;
-
-        currentBoard = other;
+        boardT = other.transform;
         IsTouching = true;
         UpdateContactPoint();
     }
@@ -33,26 +38,28 @@ public class PencilContactDetector : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!IsBlackboard(other)) return;
-
-        if (other == currentBoard) currentBoard = null;
         IsTouching = false;
+        boardT = null;
     }
 
     private void UpdateContactPoint()
     {
-        if (currentBoard == null)
+        if (boardT == null)
         {
             ContactPoint = transform.position;
             return;
         }
 
-        // Exact point on the board surface
-        Vector3 p = currentBoard.ClosestPoint(transform.position);
+        // 1) Proyecta al plano local del pizarrón (z = 0 en local)
+        Vector3 local = boardT.InverseTransformPoint(transform.position);
+        local.z = 0f;
 
-        // Quad front is +Z, so push out along transform.forward
-        Vector3 n = currentBoard.transform.forward;
+        // 2) Vuelve a world y empuja hacia +Z del pizarrón
+        Vector3 worldOnPlane = boardT.TransformPoint(local);
+        Vector3 n = boardT.forward; // Quad frente +Z
 
-        ContactPoint = p + n * surfaceOffset;
+        float pushOut = tipRadius + halfStrokeWidth + extraOffset;
+        ContactPoint = worldOnPlane + n * pushOut;
     }
 
     private bool IsBlackboard(Collider other)
