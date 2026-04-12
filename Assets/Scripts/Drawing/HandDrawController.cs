@@ -38,6 +38,9 @@ public class HandDrawController : MonoBehaviour
     [SerializeField] private float strokeLifetime = 2.5f;
     [SerializeField] private bool useFadeAndDestroy = false;
 
+    [Header("Wrist Menu Blocking")]
+    [SerializeField] private WristMenuBlocker wristMenuBlocker;
+
     private readonly List<TubeRenderer> tubes = new();
     private readonly List<List<Vector3>> currentKanaStrokes = new();
     private readonly List<TubeRenderer> currentKanaTubes = new();
@@ -81,6 +84,8 @@ public class HandDrawController : MonoBehaviour
 
             if (ghost != null)
                 ghost.gameObject.SetActive(false);
+
+            wristMenuBlocker?.SetDrawingBlocked(true);
         }
 
         if (recorder.TryAddPoint(contactDetector.ContactPoint))
@@ -122,6 +127,8 @@ public class HandDrawController : MonoBehaviour
 
         if (ghost != null)
             ghost.gameObject.SetActive(true);
+
+        wristMenuBlocker?.SetDrawingBlocked(false);
     }
 
     private void NewTube()
