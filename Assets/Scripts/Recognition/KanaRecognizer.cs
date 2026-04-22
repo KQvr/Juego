@@ -11,6 +11,7 @@ public class KanaRecognizer : MonoBehaviour
     {
         public string name;
         public float shapeScore;
+        public List<float> perStrokeScores;
         public KanaTemplateSet.KanaTemplate matchedTemplate;
         public bool matchedStrokeCount;
     }
@@ -23,6 +24,7 @@ public class KanaRecognizer : MonoBehaviour
             {
                 name = "Unknown",
                 shapeScore = 0f,
+                perStrokeScores = null,
                 matchedTemplate = null,
                 matchedStrokeCount = false
             };
@@ -30,6 +32,7 @@ public class KanaRecognizer : MonoBehaviour
 
         KanaTemplateSet.KanaTemplate bestTemplate = null;
         float bestScore = 0f;
+        List<float> bestPerStrokeScores = null;
 
         foreach (var tpl in templateSet.templates)
         {
@@ -40,6 +43,7 @@ public class KanaRecognizer : MonoBehaviour
 
             float totalScore = 0f;
             bool valid = true;
+            List<float> currentPerStrokeScores = new();
 
             for (int i = 0; i < userStrokes.Count; i++)
             {
@@ -57,6 +61,7 @@ public class KanaRecognizer : MonoBehaviour
 
                 var r = recognizer.Recognize(userStroke);
                 totalScore += r.score;
+                currentPerStrokeScores.Add(r.score);
             }
 
             if (!valid) continue;
@@ -67,6 +72,7 @@ public class KanaRecognizer : MonoBehaviour
             {
                 bestScore = avgScore;
                 bestTemplate = tpl;
+                bestPerStrokeScores = currentPerStrokeScores;
             }
         }
 
@@ -74,6 +80,7 @@ public class KanaRecognizer : MonoBehaviour
         {
             name = bestTemplate != null ? bestTemplate.label : "Unknown",
             shapeScore = bestScore,
+            perStrokeScores = bestPerStrokeScores,
             matchedTemplate = bestTemplate,
             matchedStrokeCount = bestTemplate != null
         };

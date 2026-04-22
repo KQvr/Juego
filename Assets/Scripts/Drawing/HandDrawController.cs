@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 public class HandDrawController : MonoBehaviour
 {
     [Header("Pencil")]
-    [SerializeField] private PencilFollower pencilFollower;
+    [SerializeField] private Transform pencilTip;
     [SerializeField] private PencilContactDetector contactDetector;
 
     [Header("Rendering")]
@@ -16,8 +15,6 @@ public class HandDrawController : MonoBehaviour
 
     [Header("Stroke Settings")]
     [SerializeField] private float minPointDistance = 0.008f;
-    [SerializeField] private bool enableGravity = false;
-    [SerializeField] private bool enableCollider = false;
 
     [Header("Evaluation")]
     [SerializeField] private KanaEvaluator evaluator;
@@ -29,6 +26,9 @@ public class HandDrawController : MonoBehaviour
     [Header("Ghost Overlay")]
     [SerializeField] private KanaGhostOverlay ghost;
 
+    [Header("Wrist Menu Blocking")]
+    [SerializeField] private WristMenuBlocker wristMenuBlocker;
+
     [Header("Evaluation Colors")]
     [SerializeField] private Color correctColor = new Color(0.1f, 0.9f, 0.2f);
     [SerializeField] private Color almostColor = new Color(1f, 0.8f, 0.1f);
@@ -37,9 +37,6 @@ public class HandDrawController : MonoBehaviour
     [Header("Cleanup")]
     [SerializeField] private float strokeLifetime = 2.5f;
     [SerializeField] private bool useFadeAndDestroy = false;
-
-    [Header("Wrist Menu Blocking")]
-    [SerializeField] private WristMenuBlocker wristMenuBlocker;
 
     private readonly List<TubeRenderer> tubes = new();
     private readonly List<List<Vector3>> currentKanaStrokes = new();
@@ -67,16 +64,13 @@ public class HandDrawController : MonoBehaviour
 
     void Update()
     {
-        if (pencilFollower == null || contactDetector == null) return;
+        if (pencilTip == null || contactDetector == null) return;
 
         if (!contactDetector.IsTouching)
         {
             EndStrokeIfNeeded();
             return;
         }
-
-        var tip = pencilFollower.TipTransform;
-        if (tip == null) return;
 
         if (!wasTouching)
         {
@@ -104,9 +98,6 @@ public class HandDrawController : MonoBehaviour
         List<Vector3> finishedStroke = null;
         if (recorder.CurrentStroke != null && recorder.CurrentStroke.Count > 0)
             finishedStroke = new List<Vector3>(recorder.CurrentStroke);
-
-        if (enableGravity && currentTube != null)
-            currentTube.EnableGravity();
 
         bool strokeAccepted = recorder.EndStroke(minPointsToAcceptStroke);
 
@@ -149,9 +140,8 @@ public class HandDrawController : MonoBehaviour
         tr._radiusOne = strokeWidth;
         tr._radiusTwo = strokeWidth;
         tr._sides = tubeSides;
-        tr.ColliderTrigger = enableCollider;
 
-        tr.SetPositions(Array.Empty<Vector3>());
+        tr.SetPositions(System.Array.Empty<Vector3>());
         currentTube = tr;
     }
 
@@ -159,13 +149,10 @@ public class HandDrawController : MonoBehaviour
     {
         if (currentKanaTubes == null || currentKanaTubes.Count == 0) return;
 
-        Color targetColor;
-        if (correct)
-            targetColor = correctColor;
-        else if (score > 0.60f)
-            targetColor = almostColor;
-        else
-            targetColor = wrongColor;
+        Color targetColor =
+            correct ? correctColor :
+            score > 0.60f ? almostColor :
+            wrongColor;
 
         foreach (var tube in currentKanaTubes)
         {
@@ -181,8 +168,6 @@ public class HandDrawController : MonoBehaviour
             else
                 Destroy(tube.gameObject, strokeLifetime);
         }
-
-        Debug.Log($"Score visual aplicado (kana completo): {score:0.00}");
     }
 
     private IEnumerator FadeAndDestroy(TubeRenderer tube, float duration)
@@ -200,8 +185,7 @@ public class HandDrawController : MonoBehaviour
 
         while (t < duration)
         {
-            if (tube == null || renderer == null || material == null)
-                yield break;
+            if (tube == null) yield break;
 
             t += Time.deltaTime;
             float alpha = Mathf.Lerp(1f, 0f, t / duration);

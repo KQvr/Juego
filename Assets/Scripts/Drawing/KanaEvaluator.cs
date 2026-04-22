@@ -14,6 +14,8 @@ public class KanaEvaluator : MonoBehaviour
 
     [Header("Scoring")]
     [SerializeField] private float passScore = 0.75f;
+    [SerializeField] private float minStrokeShapeScore = 0.65f;
+    [SerializeField] private float minStrokeDirectionScore = 0.60f;
 
     [Range(0f, 1f)]
     [SerializeField] private float shapeWeight = 0.7f;
@@ -90,35 +92,49 @@ public class KanaEvaluator : MonoBehaviour
             return;
         }
 
-        float directionScore = ComputeDirectionScore(strokes2D, result.matchedTemplate);
+        List<float> perStrokeDirectionScores = ComputePerStrokeDirectionScores(strokes2D, result.matchedTemplate);
+        float directionScore = Average(perStrokeDirectionScores);
         float finalScore = (result.shapeScore * shapeWeight) + (directionScore * directionWeight);
 
-        bool correct = result.name == targetLabel && finalScore >= passScore;
+        bool allStrokeShapesPass = AllScoresAbove(result.perStrokeScores, minStrokeShapeScore);
+        bool allStrokeDirectionsPass = AllScoresAbove(perStrokeDirectionScores, minStrokeDirectionScore);
+
+        bool correct =
+            result.name == targetLabel &&
+            finalScore >= passScore &&
+            allStrokeShapesPass &&
+            allStrokeDirectionsPass;
 
         Debug.Log(
             $"[KanaEvaluator] Target={targetLabel} | " +
             $"Shape={result.shapeScore:0.00} | Direction={directionScore:0.00} | Final={finalScore:0.00} | " +
+            $"AllStrokeShapesPass={allStrokeShapesPass} | AllStrokeDirectionsPass={allStrokeDirectionsPass} | " +
             $"Correct={correct}"
         );
 
         OnEvaluated?.Invoke(finalScore, correct);
     }
 
-    private float ComputeDirectionScore(List<List<Vector2>> userStrokes, KanaTemplateSet.KanaTemplate template)
+    private List<float> ComputePerStrokeDirectionScores(List<List<Vector2>> userStrokes, KanaTemplateSet.KanaTemplate template)
     {
-        if (userStrokes == null || template == null || template.strokes == null) return 0f;
-        if (userStrokes.Count != template.strokes.Count) return 0f;
+        var scores = new List<float>();
 
-        float total = 0f;
-        int validCount = 0;
+        if (userStrokes == null || template == null || template.strokes == null)
+            return scores;
+
+        if (userStrokes.Count != template.strokes.Count)
+            return scores;
 
         for (int i = 0; i < userStrokes.Count; i++)
         {
             var userStroke = userStrokes[i];
             var templateStroke = template.strokes[i].points;
 
-            if (userStroke == null || templateStroke == null) continue;
-            if (userStroke.Count < 5 || templateStroke.Count < 5) continue;
+            if (userStroke == null || templateStroke == null || userStroke.Count < 5 || templateStroke.Count < 5)
+            {
+                scores.Add(0f);
+                continue;
+            }
 
             Vector2 userOverall = StrokeDirectionChecks.GetOverallDirection(userStroke);
             Vector2 tplOverall = StrokeDirectionChecks.GetOverallDirection(templateStroke);
@@ -133,7 +149,6 @@ public class KanaEvaluator : MonoBehaviour
             float startSim = StrokeDirectionChecks.DirectionSimilarity(userStart, tplStart);
             float endSim = StrokeDirectionChecks.DirectionSimilarity(userEnd, tplEnd);
 
-            // de [-1,1] a [0,1]
             overallSim = (overallSim + 1f) * 0.5f;
             startSim = (startSim + 1f) * 0.5f;
             endSim = (endSim + 1f) * 0.5f;
@@ -143,11 +158,33 @@ public class KanaEvaluator : MonoBehaviour
                 (startSim * 0.3f) +
                 (endSim * 0.3f);
 
-            total += Mathf.Clamp01(strokeDirectionScore);
-            validCount++;
+            scores.Add(Mathf.Clamp01(strokeDirectionScore));
         }
 
-        if (validCount == 0) return 0f;
-        return total / validCount;
+        return scores;
+    }
+
+    private float Average(List<float> values)
+    {
+        if (values == null || values.Count == 0) return 0f;
+
+        float total = 0f;
+        for (int i = 0; i < values.Count; i++)
+            total += values[i];
+
+        return total / values.Count;
+    }
+
+    private bool AllScoresAbove(List<float> values, float minValue)
+    {
+        if (values == null || values.Count == 0) return false;
+
+        for (int i = 0; i < values.Count; i++)
+        {
+            if (values[i] < minValue)
+                return false;
+        }
+
+        return true;
     }
 }

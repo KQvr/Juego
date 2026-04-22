@@ -82,7 +82,6 @@ public class KanaGhostOverlay : MonoBehaviour
             if (!animateOnBuild)
                 lr.SetPositions(worldPts);
 
-            // guardamos los puntos en un componente helper
             var cache = go.AddComponent<GhostStrokeCache>();
             cache.worldPoints = worldPts;
         }
@@ -100,14 +99,12 @@ public class KanaGhostOverlay : MonoBehaviour
     {
         do
         {
-            // reset visual
             foreach (var lr in lines)
             {
                 if (lr == null) continue;
                 lr.positionCount = 0;
             }
 
-            // animar stroke por stroke
             foreach (var lr in lines)
             {
                 if (lr == null) continue;
@@ -118,8 +115,7 @@ public class KanaGhostOverlay : MonoBehaviour
 
                 yield return StartCoroutine(AnimateSingleStroke(lr, cache.worldPoints, strokeDrawDuration));
 
-                if (lr == null)
-                    yield break;
+                if (lr == null) yield break;
 
                 yield return new WaitForSeconds(delayBetweenStrokes);
             }
@@ -130,6 +126,8 @@ public class KanaGhostOverlay : MonoBehaviour
         } while (loopAnimation);
     }
 
+    // Los objetos Unity solo pueden ser destruidos entre frames, nunca a mitad de uno.
+    // Por eso un único null-check después del yield return null es suficiente.
     private IEnumerator AnimateSingleStroke(LineRenderer lr, Vector3[] points, float duration)
     {
         if (lr == null || points == null || points.Length < 2)
@@ -139,38 +137,19 @@ public class KanaGhostOverlay : MonoBehaviour
 
         while (t < duration)
         {
-            // Si el LineRenderer ya fue destruido, salir limpio
-            if (lr == null)
-                yield break;
-
             t += Time.deltaTime;
             float u = Mathf.Clamp01(t / duration);
 
-            int count = Mathf.Clamp(
-                Mathf.RoundToInt(u * points.Length),
-                1,
-                points.Length
-            );
+            int count = Mathf.Clamp(Mathf.RoundToInt(u * points.Length), 1, points.Length);
 
-            if (lr == null)
-                yield break;
-
-            if (lr.positionCount != count)
-                lr.positionCount = count;
-
+            lr.positionCount = count;
             for (int i = 0; i < count; i++)
-            {
-                if (lr == null)
-                    yield break;
-
                 lr.SetPosition(i, points[i]);
-            }
 
             yield return null;
-        }
 
-        if (lr == null)
-            yield break;
+            if (lr == null) yield break;
+        }
 
         lr.positionCount = points.Length;
         lr.SetPositions(points);
