@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Actividad de lectura: muestra un texto con una palabra clave subrayada
 /// y hasta 5 objetos 3D. El jugador pincha el objeto correcto para avanzar.
-///
-/// Reutiliza BasketCollectible y ResettableObject del pool de objetos.
-/// La detección de selección se hace por pinch (IndexPinchGate_OVR).
+/// Narra el texto automaticamente al mostrarlo y tiene un boton para repetir.
 /// </summary>
 public class ReadingActivityManager : MonoBehaviour
 {
@@ -18,14 +17,19 @@ public class ReadingActivityManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text bodyText;
     [SerializeField] private TMP_Text feedbackText;
+    [SerializeField] private Button repeatButton;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float narrationDelay = 0.4f;
 
     [Header("Objetos del Pool")]
     [SerializeField] private List<ResettableObject> allObjects = new();
 
-    [Header("Respawn Points (máximo 5)")]
+    [Header("Respawn Points (maximo 5)")]
     [SerializeField] private List<Transform> respawnPoints = new();
 
-    [Header("Interacción")]
+    [Header("Interaccion")]
     [SerializeField] private IndexPinchGate_OVR pinchGate;
     [SerializeField] private IndexTipProvider_OVR indexTipProvider;
 
@@ -40,7 +44,16 @@ public class ReadingActivityManager : MonoBehaviour
 
     void Start()
     {
+        if (repeatButton != null)
+            repeatButton.onClick.AddListener(RepeatNarration);
+
         ShowCurrentItem();
+    }
+
+    void OnDestroy()
+    {
+        if (repeatButton != null)
+            repeatButton.onClick.RemoveListener(RepeatNarration);
     }
 
     void Update()
@@ -48,8 +61,53 @@ public class ReadingActivityManager : MonoBehaviour
         if (locked) return;
         if (pinchGate == null || !pinchGate.IsPinchingStrong) return;
 
-        // Buscar qué objeto está siendo pinchado (el más cercano a la punta del dedo)
         CheckPinchSelection();
+    }
+
+    // -------------------------------------------------------------------------
+    // Narraci�n
+    // -------------------------------------------------------------------------
+
+    private void PlayNarration(AudioClip clip)
+    {
+        if (audioSource == null || clip == null) return;
+        audioSource.Stop();
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    public void RepeatNarration()
+    {
+        if (sequence == null || sequence.items == null || sequence.items.Count == 0) return;
+        var clip = sequence.items[currentIndex].narrationClip;
+        PlayNarration(clip);
+    }
+
+    // -------------------------------------------------------------------------
+    // Flujo principal
+    // -------------------------------------------------------------------------
+
+    private void ShowCurrentItem()
+    {
+        if (sequence == null || sequence.items == null || sequence.items.Count == 0)
+        {
+            if (bodyText != null) bodyText.text = "Sin actividad";
+            return;
+        }
+
+        var item = sequence.items[currentIndex];
+
+        if (bodyText != null) bodyText.text = item.bodyText;
+        if (feedbackText != null) feedbackText.text = "";
+
+        SetupObjects(item);
+        StartCoroutine(NarrateAfterDelay(item.narrationClip));
+    }
+
+    private IEnumerator NarrateAfterDelay(AudioClip clip)
+    {
+        yield return new WaitForSeconds(narrationDelay);
+        PlayNarration(clip);
     }
 
     private void CheckPinchSelection()
@@ -77,19 +135,21 @@ public class ReadingActivityManager : MonoBehaviour
 
             bool correct = collectible.ItemId == current.correctItemId;
             StopAllCoroutines();
-            StartCoroutine(HandleResult(correct, collectible, obj));
+            StartCoroutine(HandleResult(correct, collectible));
             return;
         }
     }
 
-    private IEnumerator HandleResult(bool correct, BasketCollectible selected, ResettableObject selectedObj)
+    private IEnumerator HandleResult(bool correct, BasketCollectible selected)
     {
         locked = true;
+
+        if (audioSource != null) audioSource.Stop();
 
         if (feedbackText != null)
         {
             feedbackText.text = correct
-                ? $"¡Correcto! {selected.DisplayName}"
+                ? $"!Correcto! {selected.DisplayName}"
                 : $"Incorrecto: {selected.DisplayName}";
         }
 
@@ -123,7 +183,7 @@ public class ReadingActivityManager : MonoBehaviour
                 currentIndex = sequence.items.Count - 1;
 
                 if (feedbackText != null)
-                    feedbackText.text = "¡Actividad completada!";
+                    feedbackText.text = "!Actividad completada!";
 
                 Debug.Log("[ReadingActivityManager] Secuencia completada.");
                 return;
@@ -133,28 +193,12 @@ public class ReadingActivityManager : MonoBehaviour
         ShowCurrentItem();
     }
 
-    private void ShowCurrentItem()
-    {
-        if (sequence == null || sequence.items == null || sequence.items.Count == 0)
-        {
-            if (bodyText != null) bodyText.text = "Sin actividad";
-            return;
-        }
-
-        var item = sequence.items[currentIndex];
-
-        if (bodyText != null)
-            bodyText.text = item.bodyText;
-
-        if (feedbackText != null)
-            feedbackText.text = "";
-
-        SetupObjects(item);
-    }
+    // -------------------------------------------------------------------------
+    // Setup de objetos
+    // -------------------------------------------------------------------------
 
     private void SetupObjects(ReadingActivityItemData item)
     {
-        // Desactivar todos los objetos del pool
         foreach (var obj in allObjects)
             if (obj != null) obj.gameObject.SetActive(false);
 
@@ -166,7 +210,6 @@ public class ReadingActivityManager : MonoBehaviour
             return;
         }
 
-        // Separar objeto correcto y distractores
         ResettableObject correctObject = null;
         List<ResettableObject> distractors = new();
 
@@ -185,7 +228,7 @@ public class ReadingActivityManager : MonoBehaviour
 
         if (correctObject == null)
         {
-            Debug.LogWarning($"[ReadingActivityManager] No se encontró objeto con itemId={item.correctItemId}");
+            Debug.LogWarning($"[ReadingActivityManager] No se encontro objeto con itemId={item.correctItemId}");
             return;
         }
 
@@ -195,7 +238,6 @@ public class ReadingActivityManager : MonoBehaviour
         for (int i = 0; i < distractors.Count && activeObjects.Count < maxVisibleObjects; i++)
             activeObjects.Add(distractors[i]);
 
-        // Mezclar posiciones
         List<int> pointIndices = new();
         for (int i = 0; i < Mathf.Min(respawnPoints.Count, activeObjects.Count); i++)
             pointIndices.Add(i);

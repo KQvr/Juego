@@ -10,4 +10,7 @@ public class ReadingActivityItemData
 
     [Tooltip("itemId del BasketCollectible que es la respuesta correcta.")]
     public string correctItemId;
+
+    [Tooltip("Audio que narra el texto completo.")]
+    public AudioClip narrationClip;
 }

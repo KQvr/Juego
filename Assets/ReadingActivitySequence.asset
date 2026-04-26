@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: ReadingActivitySequence
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
   items:
-  - bodyText: "<u>\u3044\u306C</u>\u304C\u3044\u307E\u3059\u3002"
+  - bodyText: "\u305D\u306E<u>\u72AC</u>\u306F\u304B\u308F\u3044\u3044\u3002"
     correctItemId: Dog
-  - bodyText: "<u>\u308A\u3093\u3054</u>\u304C\u3044\u307E\u3059\u3002"
+    narrationClip: {fileID: 8300000, guid: 45740ce9a7c810e49b96b21d6fb8f769, type: 3}
+  - bodyText: "<u>\u30EA\u30F3\u30B4</u>\u306F\u7DD1\u8272\u3060\u3002"
     correctItemId: Apple
+    narrationClip: {fileID: 8300000, guid: c95b115cd544ff541af406aba0f84d11, type: 3}

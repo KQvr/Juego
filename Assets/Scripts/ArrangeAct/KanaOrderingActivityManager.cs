@@ -37,6 +37,26 @@ public class KanaOrderingActivityManager : MonoBehaviour
         ShowCurrentWord();
     }
 
+    void OnEnable()
+    {
+        locked = false;
+        ShowCurrentWord();
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+        locked = false;
+
+        foreach (var tile in activeTiles)
+            if (tile != null) Destroy(tile.gameObject);
+
+        activeTiles.Clear();
+
+        foreach (var slot in slots)
+            if (slot != null) slot.ClearSlot();
+    }
+
     void OnDestroy()
     {
         foreach (var slot in slots)
