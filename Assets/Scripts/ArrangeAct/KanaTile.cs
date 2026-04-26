@@ -4,7 +4,9 @@ using UnityEngine;
 
 /// <summary>
 /// Colócalo en el prefab de la tile kana grabable.
-/// El prefab necesita: Rigidbody, Collider, Grabbable (Meta XR), TMP_Text hijo.
+/// El prefab necesita: Rigidbody (Is Kinematic = true, Use Gravity = false),
+/// BoxCollider (Is Trigger = true), ISDK_HandGrabInteraction,
+/// ISDK_DistanceHandGrabInteraction, TMP_Text hijo.
 /// </summary>
 [DisallowMultipleComponent]
 public class KanaTile : MonoBehaviour
@@ -30,11 +32,9 @@ public class KanaTile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         grabbable = GetComponent<Grabbable>();
+        EnforceKinematic();
     }
 
-    /// <summary>
-    /// Llamado por el manager al crear la tile para esta ronda.
-    /// </summary>
     public void Initialize(string character, Vector3 position, Quaternion rotation)
     {
         kanaCharacter = character;
@@ -46,53 +46,34 @@ public class KanaTile : MonoBehaviour
 
         transform.position = position;
         transform.rotation = rotation;
-
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+        EnforceKinematic();
     }
 
-    /// <summary>
-    /// Fija la tile en la posición del slot.
-    /// </summary>
     public void SnapToSlot(Vector3 position, Quaternion rotation)
     {
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
-        }
-
         transform.position = position;
         transform.rotation = rotation;
+        EnforceKinematic();
     }
 
-    /// <summary>
-    /// Libera la tile del slot (cuando el jugador la agarra de nuevo).
-    /// </summary>
     public void ReleaseFromSlot()
     {
-        if (rb != null)
-            rb.isKinematic = false;
+        EnforceKinematic();
     }
 
-    /// <summary>
-    /// Regresa la tile a su posición inicial de la ronda.
-    /// </summary>
     public void Respawn()
     {
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
         transform.position = homePosition;
         transform.rotation = homeRotation;
+        EnforceKinematic();
+    }
+
+    private void EnforceKinematic()
+    {
+        if (rb == null) return;
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }

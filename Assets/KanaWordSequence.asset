@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: KanaWordSequence
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
   words:
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
+  - wordKana: "\u305B\u3093\u305B\u3043"
+    wordRomaji: Sensei
+    hintText: Profesor

@@ -54,14 +54,16 @@ public class KanaOrderingActivityManager : MonoBehaviour
 
         var word = sequence.words[currentIndex];
 
-        if (hintText != null)    hintText.text    = word.hintText;
-        if (romajiText != null)  romajiText.text  = word.wordRomaji;
+        if (hintText != null) hintText.text = word.hintText;
+        if (romajiText != null) romajiText.text = word.wordRomaji;
         if (feedbackText != null) feedbackText.text = "";
 
-        SetupTiles(word);
+        StartCoroutine(SetupTilesDelayed(word));
     }
 
-    private void SetupTiles(KanaWordItemData word)
+    // Espera un frame para que todos los componentes Meta XR terminen su
+    // inicialización (Start/OnEnable) antes de posicionar las tiles.
+    private IEnumerator SetupTilesDelayed(KanaWordItemData word)
     {
         // Destruir tiles anteriores
         foreach (var tile in activeTiles)
@@ -79,35 +81,50 @@ public class KanaOrderingActivityManager : MonoBehaviour
         if (tileSpawnPoints == null || tileSpawnPoints.Count == 0)
         {
             Debug.LogWarning("[KanaOrderingActivityManager] No hay spawn points asignados.");
-            return;
+            yield break;
         }
 
-        // Mezclar spawn points para posiciones aleatorias
+        // Mezclar spawn points
         List<int> spawnIndices = new();
         for (int i = 0; i < tileSpawnPoints.Count; i++)
             spawnIndices.Add(i);
         Shuffle(spawnIndices);
 
-        // Instanciar una tile por cada kana de la palabra
+        // Instanciar tiles desactivadas
+        List<(KanaTile tile, string character, Vector3 pos, Quaternion rot)> pending = new();
+
         for (int i = 0; i < word.wordKana.Length; i++)
         {
             if (tilePrefab == null)
             {
                 Debug.LogWarning("[KanaOrderingActivityManager] Falta el tilePrefab.");
-                break;
+                yield break;
             }
 
             int spawnIdx = spawnIndices[i % spawnIndices.Count];
             Transform spawnPoint = tileSpawnPoints[spawnIdx];
 
-            var tile = Instantiate(tilePrefab);
-            tile.Initialize(
-                word.wordKana[i].ToString(),
-                spawnPoint.position,
-                spawnPoint.rotation
-            );
-
+            // Instanciar desactivado para que Start/OnEnable no corran todavía
+            var tile = Instantiate(tilePrefab, spawnPoint.position, spawnPoint.rotation);
+            tile.gameObject.SetActive(false);
             activeTiles.Add(tile);
+
+            pending.Add((tile, word.wordKana[i].ToString(), spawnPoint.position, spawnPoint.rotation));
+        }
+
+        // Esperar un frame: en este punto Awake ya corrió pero Start/OnEnable no
+        yield return null;
+
+        // Ahora activar e inicializar — nuestro código corre después del SDK
+        foreach (var (tile, character, pos, rot) in pending)
+        {
+            if (tile == null) continue;
+            tile.gameObject.SetActive(true);
+
+            // Esperar otro frame para que el OnEnable del SDK termine
+            yield return null;
+
+            tile.Initialize(character, pos, rot);
         }
     }
 
@@ -119,14 +136,12 @@ public class KanaOrderingActivityManager : MonoBehaviour
         var word = sequence.words[currentIndex];
         int wordLength = word.wordKana.Length;
 
-        // Verificar que todos los slots necesarios estén llenos
         for (int i = 0; i < wordLength; i++)
         {
             if (i >= slots.Count || slots[i] == null || slots[i].OccupiedBy == null)
                 return;
         }
 
-        // Construir la respuesta
         string answer = "";
         for (int i = 0; i < wordLength; i++)
             answer += slots[i].OccupiedBy.KanaCharacter;
@@ -142,7 +157,7 @@ public class KanaOrderingActivityManager : MonoBehaviour
         locked = true;
 
         if (feedbackText != null)
-            feedbackText.text = correct ? "◯ 正解！" : "✕ もう一度";
+            feedbackText.text = correct ? "¡Correcto!" : "Intenta de nuevo";
 
         yield return new WaitForSeconds(feedbackDuration);
 
@@ -152,7 +167,6 @@ public class KanaOrderingActivityManager : MonoBehaviour
         }
         else
         {
-            // Limpiar slots y regresar tiles a su posición inicial
             foreach (var slot in slots)
                 if (slot != null) slot.ClearSlot();
 
@@ -181,7 +195,7 @@ public class KanaOrderingActivityManager : MonoBehaviour
                 currentIndex = sequence.words.Count - 1;
 
                 if (feedbackText != null)
-                    feedbackText.text = "完了！";
+                    feedbackText.text = "¡Actividad completada!";
 
                 Debug.Log("[KanaOrderingActivityManager] Secuencia completada.");
                 return;
