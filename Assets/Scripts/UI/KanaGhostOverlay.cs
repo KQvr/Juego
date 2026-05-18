@@ -14,6 +14,10 @@ public class KanaGhostOverlay : MonoBehaviour
     [SerializeField] private float width = 0.004f;
     [SerializeField] private Material lineMaterial;
 
+    [Header("Tamanio")]
+    [Tooltip("Tamanio uniforme al que se escala cada kana en coordenadas locales del pizarron.")]
+    [SerializeField] private float targetSize = 0.08f;
+
     [Header("Animation")]
     [SerializeField] private bool animateOnBuild = true;
     [SerializeField] private float strokeDrawDuration = 0.8f;
@@ -49,7 +53,12 @@ public class KanaGhostOverlay : MonoBehaviour
         if (tpl == null || tpl.strokes == null || tpl.strokes.Count == 0) return;
         if (projector == null || projector.BoardTransform == null) return;
 
+        // Calcular centro y extension maxima de todos los trazos juntos
         Vector2 kanaCenter = CalculateGlobalBoundsCenter(tpl.strokes);
+        float maxExtent = CalculateMaxExtent(tpl.strokes, kanaCenter);
+
+        // Factor de escala para que todos los kana queden al mismo tamanio visual
+        float scale = (maxExtent > 0f) ? (targetSize / maxExtent) : 1f;
 
         foreach (var stroke in tpl.strokes)
         {
@@ -69,8 +78,10 @@ public class KanaGhostOverlay : MonoBehaviour
 
             for (int i = 0; i < stroke.points.Count; i++)
             {
-                Vector2 centered = stroke.points[i] - kanaCenter;
-                Vector3 w = projector.BoardTransform.TransformPoint(new Vector3(centered.x, centered.y, 0f));
+                // Centrar y escalar uniformemente
+                Vector2 normalized = (stroke.points[i] - kanaCenter) * scale;
+                Vector3 w = projector.BoardTransform.TransformPoint(
+                    new Vector3(normalized.x, normalized.y, 0f));
                 w += projector.BoardTransform.forward * surfaceOffset;
                 worldPts[i] = w;
             }
@@ -94,6 +105,56 @@ public class KanaGhostOverlay : MonoBehaviour
             animationRoutine = StartCoroutine(AnimateStrokeOrder());
         }
     }
+
+    // -----------------------------------------------------------------------
+    // Calculo de bounds
+    // -----------------------------------------------------------------------
+
+    private Vector2 CalculateGlobalBoundsCenter(List<KanaTemplateSet.Stroke2D> strokes)
+    {
+        float minX = float.MaxValue, minY = float.MaxValue;
+        float maxX = float.MinValue, maxY = float.MinValue;
+
+        foreach (var stroke in strokes)
+        {
+            if (stroke == null || stroke.points == null) continue;
+            foreach (var p in stroke.points)
+            {
+                if (p.x < minX) minX = p.x;
+                if (p.x > maxX) maxX = p.x;
+                if (p.y < minY) minY = p.y;
+                if (p.y > maxY) maxY = p.y;
+            }
+        }
+
+        return new Vector2((minX + maxX) * 0.5f, (minY + maxY) * 0.5f);
+    }
+
+    /// <summary>
+    /// Devuelve la mayor dimension (ancho o alto) del bounding box centrado.
+    /// Se usa para escalar el kana a targetSize de forma uniforme.
+    /// </summary>
+    private float CalculateMaxExtent(List<KanaTemplateSet.Stroke2D> strokes, Vector2 center)
+    {
+        float maxExtent = 0f;
+
+        foreach (var stroke in strokes)
+        {
+            if (stroke == null || stroke.points == null) continue;
+            foreach (var p in stroke.points)
+            {
+                float dx = Mathf.Abs(p.x - center.x);
+                float dy = Mathf.Abs(p.y - center.y);
+                maxExtent = Mathf.Max(maxExtent, dx, dy);
+            }
+        }
+
+        return maxExtent;
+    }
+
+    // -----------------------------------------------------------------------
+    // Animacion
+    // -----------------------------------------------------------------------
 
     private IEnumerator AnimateStrokeOrder()
     {
@@ -126,8 +187,6 @@ public class KanaGhostOverlay : MonoBehaviour
         } while (loopAnimation);
     }
 
-    // Los objetos Unity solo pueden ser destruidos entre frames, nunca a mitad de uno.
-    // Por eso un único null-check después del yield return null es suficiente.
     private IEnumerator AnimateSingleStroke(LineRenderer lr, Vector3[] points, float duration)
     {
         if (lr == null || points == null || points.Length < 2)
@@ -163,38 +222,17 @@ public class KanaGhostOverlay : MonoBehaviour
         animationRoutine = StartCoroutine(AnimateStrokeOrder());
     }
 
-    private Vector2 CalculateGlobalBoundsCenter(List<KanaTemplateSet.Stroke2D> strokes)
-    {
-        float minX = float.MaxValue;
-        float minY = float.MaxValue;
-        float maxX = float.MinValue;
-        float maxY = float.MinValue;
-
-        foreach (var stroke in strokes)
-        {
-            if (stroke == null || stroke.points == null) continue;
-
-            foreach (var p in stroke.points)
-            {
-                if (p.x < minX) minX = p.x;
-                if (p.x > maxX) maxX = p.x;
-                if (p.y < minY) minY = p.y;
-                if (p.y > maxY) maxY = p.y;
-            }
-        }
-
-        return new Vector2((minX + maxX) * 0.5f, (minY + maxY) * 0.5f);
-    }
+    // -----------------------------------------------------------------------
+    // Utilidades
+    // -----------------------------------------------------------------------
 
     private KanaTemplateSet.KanaTemplate FindTemplate(string lbl)
     {
         if (templateSet == null) return null;
 
         foreach (var t in templateSet.templates)
-        {
             if (t != null && t.label == lbl)
                 return t;
-        }
 
         return null;
     }
@@ -208,10 +246,8 @@ public class KanaGhostOverlay : MonoBehaviour
         }
 
         foreach (var l in lines)
-        {
             if (l != null)
                 Destroy(l.gameObject);
-        }
 
         lines.Clear();
     }

@@ -28,6 +28,9 @@ public class BasketActivityManager : MonoBehaviour
     [SerializeField] private float feedbackDuration = 1.5f;
     [SerializeField] private int visibleObjectsPerRound = 3;
 
+    [Header("Progreso")]
+    [SerializeField] private BlockActivityTracker activityTracker;
+
     private readonly List<ResettableObject> activeRoundObjects = new();
 
     private int currentIndex = 0;
@@ -94,16 +97,27 @@ public class BasketActivityManager : MonoBehaviour
         locked = false;
     }
 
+    public float GetProgress()
+    {
+        if (sequence == null || sequence.items == null || sequence.items.Count == 0) return 0f;
+        return (float)currentIndex / sequence.items.Count;
+    }
+
     private void Advance()
     {
         currentIndex++;
+
+        activityTracker?.SetProgress(GetProgress());
 
         if (currentIndex >= sequence.items.Count)
         {
             if (loopSequence)
                 currentIndex = 0;
             else
+            {
                 currentIndex = sequence.items.Count - 1;
+                activityTracker?.MarkAsCompleted();
+            }
         }
 
         if (feedbackText != null)
@@ -242,6 +256,15 @@ public class BasketActivityManager : MonoBehaviour
             if (objectLabels[i] != null)
                 objectLabels[i].text = "";
         }
+    }
+
+    public void SetData(BasketActivitySequenceSO newSequence)
+    {
+        sequence = newSequence;
+        currentIndex = 0;
+        locked = false;
+        SetupRoundObjects();
+        ShowCurrentPrompt();
     }
 
     private void Shuffle<T>(List<T> list)

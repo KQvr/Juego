@@ -21,6 +21,9 @@ public class KanaOrderingActivityManager : MonoBehaviour
     [SerializeField] private TMP_Text feedbackText;
 
     [Header("Flow")]
+    [Header("Progreso")]
+    [SerializeField] private BlockActivityTracker activityTracker;
+
     [SerializeField] private bool loopSequence = false;
     [SerializeField] private float feedbackDuration = 1.5f;
 
@@ -74,8 +77,8 @@ public class KanaOrderingActivityManager : MonoBehaviour
 
         var word = sequence.words[currentIndex];
 
-        if (hintText != null) hintText.text = word.hintText;
-        if (romajiText != null) romajiText.text = word.wordRomaji;
+        if (hintText != null)     hintText.text    = word.hintText;
+        if (romajiText != null)   romajiText.text  = word.wordRomaji;
         if (feedbackText != null) feedbackText.text = "";
 
         StartCoroutine(SetupTilesDelayed(word));
@@ -200,9 +203,17 @@ public class KanaOrderingActivityManager : MonoBehaviour
         locked = false;
     }
 
+    public float GetProgress()
+    {
+        if (sequence == null || sequence.words == null || sequence.words.Count == 0) return 0f;
+        return (float)currentIndex / sequence.words.Count;
+    }
+
     private void Advance()
     {
         currentIndex++;
+
+        activityTracker?.SetProgress(GetProgress());
 
         if (currentIndex >= sequence.words.Count)
         {
@@ -213,15 +224,24 @@ public class KanaOrderingActivityManager : MonoBehaviour
             else
             {
                 currentIndex = sequence.words.Count - 1;
+                activityTracker?.MarkAsCompleted();
 
                 if (feedbackText != null)
-                    feedbackText.text = "¡Actividad completada!";
+                    feedbackText.text = "!Actividad completada!";
 
                 Debug.Log("[KanaOrderingActivityManager] Secuencia completada.");
                 return;
             }
         }
 
+        ShowCurrentWord();
+    }
+
+    public void SetData(KanaWordSequenceSO newSequence)
+    {
+        sequence = newSequence;
+        currentIndex = 0;
+        locked = false;
         ShowCurrentWord();
     }
 

@@ -33,6 +33,9 @@ public class ReadingActivityManager : MonoBehaviour
     [SerializeField] private IndexPinchGate_OVR pinchGate;
     [SerializeField] private IndexTipProvider_OVR indexTipProvider;
 
+    [Header("Progreso")]
+    [SerializeField] private BlockActivityTracker activityTracker;
+
     [Header("Flow")]
     [SerializeField] private bool loopSequence = false;
     [SerializeField] private float feedbackDuration = 1.5f;
@@ -65,7 +68,7 @@ public class ReadingActivityManager : MonoBehaviour
     }
 
     // -------------------------------------------------------------------------
-    // Narración
+    // NarraciÃ³n
     // -------------------------------------------------------------------------
 
     private void PlayNarration(AudioClip clip)
@@ -97,7 +100,7 @@ public class ReadingActivityManager : MonoBehaviour
 
         var item = sequence.items[currentIndex];
 
-        if (bodyText != null) bodyText.text = item.bodyText;
+        if (bodyText != null)     bodyText.text     = item.bodyText;
         if (feedbackText != null) feedbackText.text = "";
 
         SetupObjects(item);
@@ -168,9 +171,17 @@ public class ReadingActivityManager : MonoBehaviour
         locked = false;
     }
 
+    public float GetProgress()
+    {
+        if (sequence == null || sequence.items == null || sequence.items.Count == 0) return 0f;
+        return (float)currentIndex / sequence.items.Count;
+    }
+
     private void Advance()
     {
         currentIndex++;
+
+        activityTracker?.SetProgress(GetProgress());
 
         if (currentIndex >= sequence.items.Count)
         {
@@ -181,6 +192,7 @@ public class ReadingActivityManager : MonoBehaviour
             else
             {
                 currentIndex = sequence.items.Count - 1;
+                activityTracker?.MarkAsCompleted();
 
                 if (feedbackText != null)
                     feedbackText.text = "!Actividad completada!";
@@ -261,6 +273,14 @@ public class ReadingActivityManager : MonoBehaviour
             int r = Random.Range(i, list.Count);
             (list[i], list[r]) = (list[r], list[i]);
         }
+    }
+
+    public void SetData(ReadingActivitySequenceSO newSequence)
+    {
+        sequence = newSequence;
+        currentIndex = 0;
+        locked = false;
+        ShowCurrentItem();
     }
 
     public void RestartActivity()

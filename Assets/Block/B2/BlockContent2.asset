@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d7e72407fcf974198bd237590403f4, type: 3}
+  m_Name: BlockContent2
+  m_EditorClassIdentifier: Assembly-CSharp::BlockContentSO
+  blockId: bk2
+  blockName: Hiragana+
+  description: 
+  hasDrawing: 1
+  kanaTemplateSet: {fileID: 11400000, guid: 72e4547fda6f9bc4fb628752b502bf9a, type: 2}
+  hasBasket: 1
+  basketSequence: {fileID: 11400000, guid: 218af31a72cf5514dacbb07cdfc6581d, type: 2}
+  hasOrdering: 1
+  orderingSequence: {fileID: 11400000, guid: 2a963a05402d6e04a93234db813f6b46, type: 2}
+  hasReading: 1
+  readingSequence: {fileID: 11400000, guid: a7677ed601a0b494b8cc794252a27910, type: 2}
