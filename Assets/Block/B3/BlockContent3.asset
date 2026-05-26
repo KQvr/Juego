@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d7e72407fcf974198bd237590403f4, type: 3}
   m_Name: BlockContent3
   m_EditorClassIdentifier: Assembly-CSharp::BlockContentSO
-  blockId: 
-  blockName: 
-  description: 
+  blockId: bk3
+  blockName: 'Katakana '
+  description: Se ven los caracteres del silabaro japones katakana en objetos cotidianos
   hasDrawing: 1
   kanaTemplateSet: {fileID: 11400000, guid: d73a2b5825d26fe49afe2775dfc5b4e4, type: 2}
   hasBasket: 1

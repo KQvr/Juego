@@ -1,174 +1,183 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Menú de selección de bloques con navegación por swipe (pinch + movimiento horizontal).
-/// Muestra un bloque a la vez con nombre, descripción, estrellas y estado de desbloqueo.
-///
-/// Estructura del Canvas sugerida:
-///   BlockMenuCanvas
-///   ├── BlockNameText      (TMP_Text)
-///   ├── BlockDescText      (TMP_Text)
-///   ├── StarsText          (TMP_Text) → ej: "★★☆"
-///   ├── PageIndicatorText  (TMP_Text) → ej: "2 / 8"
-///   ├── LockIcon           (GameObject) → visible si bloqueado
-///   ├── EnterButton        (Button) → activo si desbloqueado
-///   └── StatusText         (TMP_Text) → feedback temporal
-/// </summary>
 public class BlockMenuUI : MonoBehaviour
 {
-    [Header("Interaccion")]
-    [SerializeField] private IndexPinchGate_OVR pinchGate;
-    [SerializeField] private IndexTipProvider_OVR indexTipProvider;
+    [Header("Canvas")]
+    [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private Transform blockGrid;
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button backToMainMenuButton;
 
-    [Header("UI")]
-    [SerializeField] private TMP_Text blockNameText;
-    [SerializeField] private TMP_Text blockDescText;
-    [SerializeField] private TMP_Text starsText;
-    [SerializeField] private TMP_Text pageIndicatorText;
-    [SerializeField] private TMP_Text statusText;
-    [SerializeField] private GameObject lockIcon;
-    [SerializeField] private Button enterButton;
+    [Header("Referencias")]
+    [SerializeField] private MainMenuUI mainMenuUI;
 
-    [Header("Swipe Settings")]
-    [SerializeField] private float swipeThreshold = 0.06f;
-    [SerializeField] private float swipeCooldown  = 0.4f;
+    [Header("Prefab de boton")]
+    [SerializeField] private GameObject blockButtonPrefab;
 
-    private int currentPage = 0;
-    private bool wasPinching = false;
-    private Vector3 pinchStartPosition;
-    private float lastSwipeTime = -999f;
+    [Header("Colores")]
+    [SerializeField] private Color unlockedColor = new Color(0.2f, 0.6f, 1f);
+    [SerializeField] private Color lockedColor = new Color(0.4f, 0.4f, 0.4f);
+    [SerializeField] private Color completedColor = new Color(0.2f, 0.85f, 0.4f);
+
+    private readonly List<GameObject> blockButtons = new();
 
     void Start()
     {
-        if (enterButton != null)
-            enterButton.onClick.AddListener(EnterCurrentBlock);
+        if (backButton != null)
+            backButton.onClick.AddListener(ShowMenu);
+
+        if (backToMainMenuButton != null)
+            backToMainMenuButton.onClick.AddListener(GoToMainMenu);
 
         if (BlockManager.Instance != null)
         {
             BlockManager.Instance.OnBlockStarsChanged += OnStarsChanged;
-            BlockManager.Instance.OnBlockUnlocked     += OnBlockUnlocked;
+            BlockManager.Instance.OnBlockUnlocked += OnBlockUnlocked;
         }
 
-        RefreshUI();
+        BuildButtons();
+        HideMenu();
     }
 
     void OnDestroy()
     {
-        if (enterButton != null)
-            enterButton.onClick.RemoveListener(EnterCurrentBlock);
+        if (backButton != null)
+            backButton.onClick.RemoveListener(ShowMenu);
+
+        if (backToMainMenuButton != null)
+            backToMainMenuButton.onClick.RemoveListener(GoToMainMenu);
 
         if (BlockManager.Instance != null)
         {
             BlockManager.Instance.OnBlockStarsChanged -= OnStarsChanged;
-            BlockManager.Instance.OnBlockUnlocked     -= OnBlockUnlocked;
+            BlockManager.Instance.OnBlockUnlocked -= OnBlockUnlocked;
         }
     }
 
-    void Update()
+    // -----------------------------------------------------------------------
+    // Construccion de botones
+    // -----------------------------------------------------------------------
+
+    private void BuildButtons()
     {
-        if (indexTipProvider == null || indexTipProvider.TipTransform == null) return;
-        if (pinchGate == null) return;
-
-        bool isPinching = pinchGate.IsPinchingStrong;
-        Vector3 tipPos  = indexTipProvider.TipTransform.position;
-
-        if (isPinching && !wasPinching)
-            pinchStartPosition = tipPos;
-
-        if (!isPinching && wasPinching)
+        if (blockButtonPrefab == null)
         {
-            float delta = tipPos.x - pinchStartPosition.x;
-
-            if (Mathf.Abs(delta) >= swipeThreshold &&
-                Time.time - lastSwipeTime > swipeCooldown)
-            {
-                var blocks = BlockManager.Instance?.GetBlocks();
-                if (blocks == null || blocks.Count == 0) return;
-
-                if (delta > 0)
-                    currentPage = (currentPage - 1 + blocks.Count) % blocks.Count;
-                else
-                    currentPage = (currentPage + 1) % blocks.Count;
-
-                lastSwipeTime = Time.time;
-                RefreshUI();
-            }
+            Debug.LogWarning("[BlockMenuUI] Falta blockButtonPrefab.");
+            return;
+        }
+        if (blockGrid == null)
+        {
+            Debug.LogWarning("[BlockMenuUI] Falta blockGrid.");
+            return;
         }
 
-        wasPinching = isPinching;
-    }
+        foreach (var btn in blockButtons)
+            if (btn != null) Destroy(btn);
+        blockButtons.Clear();
 
-    // -----------------------------------------------------------------------
-    // UI
-    // -----------------------------------------------------------------------
-
-    private void RefreshUI()
-    {
-        if (BlockManager.Instance == null) return;
-
-        var blocks = BlockManager.Instance.GetBlocks();
-        if (blocks == null || blocks.Count == 0) return;
-
-        currentPage = Mathf.Clamp(currentPage, 0, blocks.Count - 1);
-        var block = blocks[currentPage];
-
-        bool unlocked = BlockManager.Instance.IsUnlocked(block.blockId);
-        int  stars    = BlockManager.Instance.GetStars(block.blockId);
-
-        if (blockNameText     != null) blockNameText.text     = block.blockName;
-        if (blockDescText     != null) blockDescText.text     = block.description;
-        if (starsText         != null) starsText.text         = BuildStarsString(stars);
-        if (pageIndicatorText != null) pageIndicatorText.text = $"{currentPage + 1} / {blocks.Count}";
-        if (lockIcon          != null) lockIcon.SetActive(!unlocked);
-        if (enterButton       != null) enterButton.interactable = unlocked;
-        if (statusText        != null) statusText.text          = unlocked ? "" : "Completa el bloque anterior";
-    }
-
-    private string BuildStarsString(int stars)
-    {
-        return stars switch
+        var blocks = BlockManager.Instance?.GetBlocks();
+        if (blocks == null || blocks.Count == 0)
         {
-            1 => "★☆☆",
-            2 => "★★☆",
-            3 => "★★★",
-            _ => "☆☆☆"
-        };
+            Debug.LogWarning("[BlockMenuUI] BlockManager no tiene bloques asignados.");
+            return;
+        }
+
+        for (int i = 0; i < blocks.Count; i++)
+        {
+            int index = i;
+            var go = Instantiate(blockButtonPrefab, blockGrid);
+            var btn = go.GetComponent<Button>();
+
+            if (btn != null)
+                btn.onClick.AddListener(() => EnterBlock(index));
+
+            blockButtons.Add(go);
+            RefreshButton(go, blocks[i], i);
+        }
     }
 
-    private void EnterCurrentBlock()
+    private void RefreshButton(GameObject go, BlockContentSO block, int index)
     {
-        if (BlockManager.Instance == null) return;
-        BlockManager.Instance.ShowBlock(currentPage);
+        if (go == null || block == null) return;
+
+        bool unlocked = BlockManager.Instance?.IsUnlocked(block.blockId) ?? false;
+        int stars = BlockManager.Instance?.GetStars(block.blockId) ?? 0;
+
+        var ui = go.GetComponent<BlockButtonUI>();
+        if (ui != null)
+        {
+            if (ui.nameText != null) ui.nameText.text = $"Bloque {index + 1}\n{block.blockName}";
+            if (ui.starsText != null) ui.starsText.text = BuildStars(stars);
+            if (ui.descText != null) ui.descText.text = unlocked ? block.description : "Bloqueado";
+            if (ui.lockOverlay != null) ui.lockOverlay.SetActive(!unlocked);
+        }
+
+        Color targetColor = stars == 3 ? completedColor :
+                            unlocked ? unlockedColor : lockedColor;
+
+        var btn = go.GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.transition = Selectable.Transition.None;
+            btn.interactable = unlocked;
+        }
+
+        var img = go.GetComponent<Image>();
+        if (img != null) img.color = targetColor;
     }
 
+    private string BuildStars(int stars) => stars switch
+    {
+        1 => "★☆☆",
+        2 => "★★☆",
+        3 => "★★★",
+        _ => "☆☆☆"
+    };
+
     // -----------------------------------------------------------------------
-    // Callbacks del BlockManager
+    // Navegacion
     // -----------------------------------------------------------------------
 
-    private void OnStarsChanged(string blockId, int stars)
+    private void EnterBlock(int index)
+    {
+        BlockManager.Instance?.ShowBlock(index);
+        HideMenu();
+    }
+
+    private void GoToMainMenu()
+    {
+        HideMenu();
+        BlockManager.Instance?.HideAllActivities();
+        mainMenuUI?.ShowMainMenu();
+    }
+
+    public void ShowMenu()
+    {
+        if (menuCanvas != null) menuCanvas.SetActive(true);
+        if (backButton != null) backButton.gameObject.SetActive(false);
+
+        BlockManager.Instance?.HideAllActivities();
+        RefreshAllButtons();
+    }
+
+    public void HideMenu()
+    {
+        if (menuCanvas != null) menuCanvas.SetActive(false);
+        if (backButton != null) backButton.gameObject.SetActive(true);
+    }
+
+    private void RefreshAllButtons()
     {
         var blocks = BlockManager.Instance?.GetBlocks();
         if (blocks == null) return;
 
-        if (blocks[currentPage].blockId == blockId)
-            RefreshUI();
+        for (int i = 0; i < blockButtons.Count && i < blocks.Count; i++)
+            RefreshButton(blockButtons[i], blocks[i], i);
     }
 
-    private void OnBlockUnlocked(string blockId)
-    {
-        RefreshUI();
-
-        if (statusText != null)
-            statusText.text = "Nuevo bloque desbloqueado!";
-
-        Invoke(nameof(ClearStatus), 3f);
-    }
-
-    private void ClearStatus()
-    {
-        if (statusText != null)
-            statusText.text = "";
-    }
+    private void OnStarsChanged(string blockId, int stars) => RefreshAllButtons();
+    private void OnBlockUnlocked(string blockId) => RefreshAllButtons();
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f968ad7bf60c18940a1a83b045deb1d5, type: 3}
-  m_Name: ReadingActivitySequence
-  m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
-  items: []
+  m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
+  m_Name: KanaWordSequence4
+  m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
+  words: []

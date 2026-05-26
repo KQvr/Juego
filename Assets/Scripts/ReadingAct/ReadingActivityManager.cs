@@ -100,7 +100,7 @@ public class ReadingActivityManager : MonoBehaviour
 
         var item = sequence.items[currentIndex];
 
-        if (bodyText != null)     bodyText.text     = item.bodyText;
+        if (bodyText != null) bodyText.text = item.bodyText;
         if (feedbackText != null) feedbackText.text = "";
 
         SetupObjects(item);
@@ -280,7 +280,9 @@ public class ReadingActivityManager : MonoBehaviour
         sequence = newSequence;
         currentIndex = 0;
         locked = false;
-        ShowCurrentItem();
+        if (gameObject.activeInHierarchy)
+            ShowCurrentItem();
+        // else: OnEnable() lo llamara cuando el GameObject se active
     }
 
     public void RestartActivity()

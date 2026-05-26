@@ -58,6 +58,10 @@ public class WristMenuFollower : MonoBehaviour
 
     private bool ShouldShowMenu(Transform palm)
     {
+        // FIX BUG 4: No mostrar el wrist menu si no hay un bloque activo
+        if (BlockManager.Instance != null && !BlockManager.Instance.HasActiveBlock)
+            return false;
+
         if (menuBlocker != null && menuBlocker.IsBlocked)
             return false;
 

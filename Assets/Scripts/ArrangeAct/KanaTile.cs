@@ -71,9 +71,14 @@ public class KanaTile : MonoBehaviour
     private void EnforceKinematic()
     {
         if (rb == null) return;
+        // Limpiar velocidades ANTES de activar kinematic
+        // (Unity no permite asignarlas en un rigidbody kinematic)
+        if (!rb.isKinematic)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
         rb.isKinematic = true;
         rb.useGravity = false;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
     }
 }

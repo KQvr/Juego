@@ -9,21 +9,15 @@ public class BlockManager : MonoBehaviour
     [Header("Bloques (en orden)")]
     [SerializeField] private List<BlockContentSO> blocks = new();
 
-    [Header("Activity Managers (una sola instancia de cada uno)")]
-    [SerializeField] private KanaLessonManager         drawingManager;
-    [SerializeField] private BasketActivityManager     basketManager;
+    [Header("Activity Managers")]
+    [SerializeField] private KanaLessonManager drawingManager;
+    [SerializeField] private BasketActivityManager basketManager;
     [SerializeField] private KanaOrderingActivityManager orderingManager;
-    [SerializeField] private ReadingActivityManager    readingManager;
+    [SerializeField] private ReadingActivityManager readingManager;
+    [SerializeField] private ActivityMenuManager activityMenuManager;
 
-    [Header("Activity Roots (para mostrar u ocultar)")]
-    [SerializeField] private GameObject drawingRoot;
-    [SerializeField] private GameObject basketRoot;
-    [SerializeField] private GameObject orderingRoot;
-    [SerializeField] private GameObject readingRoot;
-
-    // Eventos
     public event Action<string, int> OnBlockStarsChanged;
-    public event Action<string>      OnBlockUnlocked;
+    public event Action<string> OnBlockUnlocked;
 
     private readonly Dictionary<string, List<BlockActivityTracker>> activitiesByBlock = new();
     private int currentBlockIndex = -1;
@@ -74,7 +68,6 @@ public class BlockManager : MonoBehaviour
     {
         int stars = CalculateStars(tracker.BlockId);
         OnBlockStarsChanged?.Invoke(tracker.BlockId, stars);
-
         if (stars == 3) TryUnlockNext(tracker.BlockId);
     }
 
@@ -101,8 +94,8 @@ public class BlockManager : MonoBehaviour
         float avg = totalProgress / activities.Count;
 
         if (allCompleted) return 3;
-        if (avg >= 0.5f)  return 2;
-        if (anyStarted)   return 1;
+        if (avg >= 0.5f) return 2;
+        if (anyStarted) return 1;
         return 0;
     }
 
@@ -138,7 +131,7 @@ public class BlockManager : MonoBehaviour
     }
 
     // -----------------------------------------------------------------------
-    // Navegacion e inyeccion de datos
+    // Navegacion
     // -----------------------------------------------------------------------
 
     public void ShowBlock(int blockIndex)
@@ -153,28 +146,35 @@ public class BlockManager : MonoBehaviour
             return;
         }
 
+        bool sameBlock = currentBlockIndex == blockIndex;
         currentBlockIndex = blockIndex;
 
-        // Mostrar u ocultar cada actividad segun el bloque
-        SetActivityActive(drawingRoot,  drawingManager  != null && content.hasDrawing);
-        SetActivityActive(basketRoot,   basketManager   != null && content.hasBasket);
-        SetActivityActive(orderingRoot, orderingManager != null && content.hasOrdering);
-        SetActivityActive(readingRoot,  readingManager  != null && content.hasReading);
+        // FIX BUG 3: No activar todos los roots directamente.
+        // Delegar al ActivityMenuManager para que muestre SOLO la primera actividad disponible.
+        activityMenuManager?.ShowFirstAvailable(
+            content.hasDrawing,
+            content.hasBasket,
+            content.hasOrdering,
+            content.hasReading
+        );
 
-        // Inyectar datos
-        if (content.hasDrawing  && content.kanaTemplateSet != null)
-            drawingManager?.SetData(content.kanaTemplateSet);
+        // Inyectar datos solo si es un bloque diferente
+        if (!sameBlock)
+        {
+            if (content.hasDrawing && content.kanaTemplateSet != null)
+                drawingManager?.SetData(content.kanaTemplateSet);
 
-        if (content.hasBasket   && content.basketSequence != null)
-            basketManager?.SetData(content.basketSequence);
+            if (content.hasBasket && content.basketSequence != null)
+                basketManager?.SetData(content.basketSequence);
 
-        if (content.hasOrdering && content.orderingSequence != null)
-            orderingManager?.SetData(content.orderingSequence);
+            if (content.hasOrdering && content.orderingSequence != null)
+                orderingManager?.SetData(content.orderingSequence);
 
-        if (content.hasReading  && content.readingSequence != null)
-            readingManager?.SetData(content.readingSequence);
+            if (content.hasReading && content.readingSequence != null)
+                readingManager?.SetData(content.readingSequence);
+        }
 
-        Debug.Log($"[BlockManager] Mostrando bloque: {content.blockName}");
+        Debug.Log($"[BlockManager] Bloque activo: {content.blockName}");
     }
 
     public void ShowBlock(string blockId)
@@ -185,16 +185,8 @@ public class BlockManager : MonoBehaviour
 
     public void HideAllActivities()
     {
-        SetActivityActive(drawingRoot,  false);
-        SetActivityActive(basketRoot,   false);
-        SetActivityActive(orderingRoot, false);
-        SetActivityActive(readingRoot,  false);
+        activityMenuManager?.HideAllActivities();
         currentBlockIndex = -1;
-    }
-
-    private void SetActivityActive(GameObject root, bool active)
-    {
-        if (root != null) root.SetActive(active);
     }
 
     // -----------------------------------------------------------------------
@@ -202,8 +194,17 @@ public class BlockManager : MonoBehaviour
     // -----------------------------------------------------------------------
 
     public List<BlockContentSO> GetBlocks() => blocks;
+
     public BlockContentSO GetCurrentBlock() =>
-        currentBlockIndex >= 0 ? blocks[currentBlockIndex] : null;
+        currentBlockIndex >= 0 && currentBlockIndex < blocks.Count
+            ? blocks[currentBlockIndex]
+            : null;
+
+    /// <summary>
+    /// True si hay un bloque seleccionado actualmente.
+    /// Usado por WristMenuFollower para ocultar el menu si no hay bloque activo.
+    /// </summary>
+    public bool HasActiveBlock => currentBlockIndex >= 0;
 
     public void ResetAllProgress()
     {
@@ -218,6 +219,7 @@ public class BlockManager : MonoBehaviour
 
         if (blocks.Count > 0) EnsureUnlocked(blocks[0].blockId);
         PlayerPrefs.Save();
+        currentBlockIndex = -1;
         Debug.Log("[BlockManager] Progreso reiniciado.");
     }
 }

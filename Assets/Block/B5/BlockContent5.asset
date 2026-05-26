@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d7e72407fcf974198bd237590403f4, type: 3}
   m_Name: BlockContent5
   m_EditorClassIdentifier: Assembly-CSharp::BlockContentSO
-  blockId: 
-  blockName: 
-  description: 
+  blockId: bk5
+  blockName: Oraciones simples
+  description: Se empiezan a mostrar oraciones junto con una serie de particulas
+    y verbos
   hasDrawing: 0
   kanaTemplateSet: {fileID: 0}
   hasBasket: 0
   basketSequence: {fileID: 0}
-  hasOrdering: 0
+  hasOrdering: 1
   orderingSequence: {fileID: 0}
-  hasReading: 0
+  hasReading: 1
   readingSequence: {fileID: 0}

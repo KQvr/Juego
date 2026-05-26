@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
-  m_Name: KanaWordSequence
-  m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  m_Script: {fileID: 11500000, guid: f279c18c948ebe34ba08fe547e4d41b3, type: 3}
+  m_Name: KanaTemplateSet4
+  m_EditorClassIdentifier: Assembly-CSharp::KanaTemplateSet
+  templates: []

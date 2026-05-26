@@ -263,8 +263,11 @@ public class BasketActivityManager : MonoBehaviour
         sequence = newSequence;
         currentIndex = 0;
         locked = false;
-        SetupRoundObjects();
-        ShowCurrentPrompt();
+        if (gameObject.activeInHierarchy)
+        {
+            SetupRoundObjects();
+            ShowCurrentPrompt();
+        }
     }
 
     private void Shuffle<T>(List<T> list)

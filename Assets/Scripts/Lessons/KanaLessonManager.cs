@@ -229,13 +229,14 @@ public class KanaLessonManager : MonoBehaviour
         currentIndex = 0;
         advancing = false;
         RebuildSequenceFromTemplateSet();
-        ApplyCurrentKana();
+        if (gameObject.activeInHierarchy)
+            ApplyCurrentKana();
     }
 
     public void RestartLesson()
     {
         currentIndex = 0;
-        advancing    = false;
+        advancing = false;
         ApplyCurrentKana();
     }
 

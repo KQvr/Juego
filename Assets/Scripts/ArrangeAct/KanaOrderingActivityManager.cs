@@ -77,8 +77,8 @@ public class KanaOrderingActivityManager : MonoBehaviour
 
         var word = sequence.words[currentIndex];
 
-        if (hintText != null)     hintText.text    = word.hintText;
-        if (romajiText != null)   romajiText.text  = word.wordRomaji;
+        if (hintText != null) hintText.text = word.hintText;
+        if (romajiText != null) romajiText.text = word.wordRomaji;
         if (feedbackText != null) feedbackText.text = "";
 
         StartCoroutine(SetupTilesDelayed(word));
@@ -242,7 +242,9 @@ public class KanaOrderingActivityManager : MonoBehaviour
         sequence = newSequence;
         currentIndex = 0;
         locked = false;
-        ShowCurrentWord();
+        if (gameObject.activeInHierarchy)
+            ShowCurrentWord();
+        // else: OnEnable() lo llamara cuando el GameObject se active
     }
 
     private void Shuffle<T>(List<T> list)

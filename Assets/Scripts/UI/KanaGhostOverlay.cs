@@ -42,7 +42,10 @@ public class KanaGhostOverlay : MonoBehaviour
     public void SetLabel(string newLabel)
     {
         label = newLabel;
-        BuildGhost();
+        // Solo construir si el GameObject esta activo.
+        // Si no, OnEnable() llamara BuildGhost() cuando se active.
+        if (gameObject.activeInHierarchy)
+            BuildGhost();
     }
 
     public void BuildGhost()

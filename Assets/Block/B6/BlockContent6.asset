@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d7e72407fcf974198bd237590403f4, type: 3}
   m_Name: BlockContent6
   m_EditorClassIdentifier: Assembly-CSharp::BlockContentSO
-  blockId: 
-  blockName: 
+  blockId: bk6
+  blockName: Colores
   description: 
   hasDrawing: 0
   kanaTemplateSet: {fileID: 0}
