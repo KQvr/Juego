@@ -13,6 +13,33 @@ MonoBehaviour:
   m_Name: KanaWordSequence1
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
   words:
-  - wordKana: "\u305B\u3093\u305B\u3043"
-    wordRomaji: Sensei
-    hintText: Profesor
+  - wordKana: "\u306A\u3059"
+    wordRomaji: Nasu
+    hintText: Berejena
+  - wordKana: "\u306D\u305A\u307F"
+    wordRomaji: Nezumi
+    hintText: "Rat\xF3n"
+  - wordKana: "\u3053\u307E"
+    wordRomaji: Koma
+    hintText: Trompo
+  - wordKana: "\u304F\u3064"
+    wordRomaji: Kutsu
+    hintText: Zapato
+  - wordKana: "\u3046\u3057"
+    wordRomaji: Ushi
+    hintText: Vaca
+  - wordKana: "\u304B\u3081"
+    wordRomaji: Kame
+    hintText: Tortuga
+  - wordKana: "\u3048\u3093\u3074\u3064"
+    wordRomaji: Enpitsu
+    hintText: "L\xE1piz"
+  - wordKana: "\u3061\u3087\u3046"
+    wordRomaji: Chou
+    hintText: Mariposa
+  - wordKana: "\u3044\u3059"
+    wordRomaji: Isu
+    hintText: Silla
+  - wordKana: "\u304F\u3082"
+    wordRomaji: Kumo
+    hintText: "Ara\xF1a"

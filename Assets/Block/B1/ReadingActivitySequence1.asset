@@ -13,9 +13,18 @@ MonoBehaviour:
   m_Name: ReadingActivitySequence1
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
   items:
-  - bodyText: "\u305D\u306E<u>\u72AC</u>\u306F\u304B\u308F\u3044\u3044\u3002"
-    correctItemId: Dog
+  - bodyText: "\u305D\u306E<u>\u3044\u306C</u>\u306F\u304B\u308F\u3044\u3044\u3002"
+    correctItemId: Perro
     narrationClip: {fileID: 8300000, guid: 45740ce9a7c810e49b96b21d6fb8f769, type: 3}
-  - bodyText: "<u>\u30EA\u30F3\u30B4</u>\u306F\u7DD1\u8272\u3060\u3002"
-    correctItemId: Apple
-    narrationClip: {fileID: 8300000, guid: c95b115cd544ff541af406aba0f84d11, type: 3}
+  - bodyText: "\u79C1\u306E\u5BB6\u306B\u306F\u3001\u304B\u308F\u3044\u3044<u>\u306D\u3053</u>\u304C\u3044\u307E\u3059"
+    correctItemId: Gato
+    narrationClip: {fileID: 0}
+  - bodyText: "\u4ECA\u65E5\u306F\u96E8\u304C\u964D\u3063\u3066\u3044\u308B\u306E\u3067\u3001<u>\u304B\u3055</u>\u3092\u6301\u3063\u3066\u51FA\u304B\u3051\u307E\u3059\u3002"
+    correctItemId: Paraguas
+    narrationClip: {fileID: 0}
+  - bodyText: "\u767D\u304F\u3066\u5C0F\u3055\u306A<u>\u3046\u3055\u304E</u>\u304C\u8D70\u3063\u3066\u3044\u307E\u3059\u3002"
+    correctItemId: Conejo
+    narrationClip: {fileID: 0}
+  - bodyText: "\u6D77\u306B\u884C\u304F\u3068\u3001\u7802\u6D5C\u3067\u5C0F\u3055\u306A<u>\u304B\u306B</u>\u3092\u898B\u3064\u3051\u307E\u3057\u305F\u3002"
+    correctItemId: Cangrejo
+    narrationClip: {fileID: 0}
