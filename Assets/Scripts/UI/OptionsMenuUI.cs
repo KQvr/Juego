@@ -1,30 +1,21 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// Menu de opciones basico.
-/// Agrega aqui los sliders/toggles que necesites.
-///
-/// Estructura del Canvas sugerida:
-///   OptionsMenuCanvas (World Space)
-///   ├── TitleText        (TMP_Text) → "Opciones"
-///   ├── VolumeSlider     (Slider)   → volumen general
-///   ├── VolumeLabel      (TMP_Text) → "Volumen: 80%"
-///   └── BackButton       (Button)   → regresa al menu principal
+/// Menu de opciones — escena propia.
+/// El boton de regreso carga la escena del MainMenu.
 /// </summary>
 public class OptionsMenuUI : MonoBehaviour
 {
-    [Header("Canvas")]
-    [SerializeField] private GameObject optionsCanvas;
-
     [Header("Opciones")]
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Text volumeLabel;
 
     [Header("Navegacion")]
     [SerializeField] private Button backButton;
-    [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     private const string VOLUME_KEY = "MasterVolume";
 
@@ -40,25 +31,14 @@ public class OptionsMenuUI : MonoBehaviour
             UpdateVolumeLabel(volumeSlider.value);
         }
 
-        HideOptions();
+        // Aplicar volumen guardado
+        AudioListener.volume = PlayerPrefs.GetFloat(VOLUME_KEY, 1f);
     }
 
     void OnDestroy()
     {
         if (backButton != null) backButton.onClick.RemoveListener(GoBack);
         if (volumeSlider != null) volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
-    }
-
-    public void ShowOptions()
-    {
-        Debug.Log($"[OptionsMenuUI] ShowOptions - optionsCanvas null: {optionsCanvas == null}");
-        if (optionsCanvas != null) optionsCanvas.SetActive(true);
-        else Debug.LogWarning("[OptionsMenuUI] optionsCanvas es null!");
-    }
-
-    public void HideOptions()
-    {
-         optionsCanvas.SetActive(false);
     }
 
     private void OnVolumeChanged(float value)
@@ -75,9 +55,5 @@ public class OptionsMenuUI : MonoBehaviour
             volumeLabel.text = $"Volumen: {Mathf.RoundToInt(value * 100)}%";
     }
 
-    private void GoBack()
-    {
-        HideOptions();
-        mainMenuUI?.ShowMainMenu();
-    }
+    private void GoBack() => SceneManager.LoadScene(mainMenuSceneName);
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BlockMenuUI : MonoBehaviour
@@ -11,8 +12,8 @@ public class BlockMenuUI : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button backToMainMenuButton;
 
-    [Header("Referencias")]
-    [SerializeField] private MainMenuUI mainMenuUI;
+    [Header("Escena Principal")]
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
 
     [Header("Prefab de boton")]
     [SerializeField] private GameObject blockButtonPrefab;
@@ -39,7 +40,7 @@ public class BlockMenuUI : MonoBehaviour
         }
 
         BuildButtons();
-        HideMenu();
+        ShowMenu();
     }
 
     void OnDestroy()
@@ -149,9 +150,7 @@ public class BlockMenuUI : MonoBehaviour
 
     private void GoToMainMenu()
     {
-        HideMenu();
-        BlockManager.Instance?.HideAllActivities();
-        mainMenuUI?.ShowMainMenu();
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public void ShowMenu()

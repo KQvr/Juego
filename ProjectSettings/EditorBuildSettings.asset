@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Dibujo.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: 839c77cc3d4dd2d4992c3aee985d7891
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
     guid: d95aa75db47a59249a32d0f6239babec
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: ffcf327df316a0848bed9045e9608128
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 81cba70bbfcf71b40beda8a0517eb02e, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
