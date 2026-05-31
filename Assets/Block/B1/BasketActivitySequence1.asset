@@ -25,9 +25,9 @@ MonoBehaviour:
   - itemId: Conejo
     promptText: Deposita al conejo
     japaneseText: "\u3046\u3055\u304E"
-  - itemId: Cangrejo
-    promptText: Deposita el cangrejo
-    japaneseText: "\u304B\u306B"
+  - itemId: Rana
+    promptText: Deposita la rana
+    japaneseText: "\u304B\u3048\u308B"
   - itemId: Hongo
     promptText: Deposita el hongo
     japaneseText: "\u304D\u306E\u3053"

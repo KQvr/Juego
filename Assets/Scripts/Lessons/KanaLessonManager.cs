@@ -37,7 +37,17 @@ public class KanaLessonManager : MonoBehaviour
     [SerializeField] private string textPrefix = "Escribe: ";
     [SerializeField] private string completedText = "Leccion completada";
 
-    private int currentIndex = 0;
+    [SerializeField] private int _currentIndex = 0;
+    private int currentIndex
+    {
+        get => _currentIndex;
+        set
+        {
+            if (_currentIndex != value)
+                Debug.Log($"[KanaLessonManager] currentIndex: {_currentIndex} → {value}\n{System.Environment.StackTrace}");
+            _currentIndex = value;
+        }
+    }
     private bool advancing = false;
 
     // -----------------------------------------------------------------------

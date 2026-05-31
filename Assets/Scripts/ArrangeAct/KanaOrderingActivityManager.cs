@@ -229,6 +229,18 @@ public class KanaOrderingActivityManager : MonoBehaviour
                 if (feedbackText != null)
                     feedbackText.text = "!Actividad completada!";
 
+                // Limpiar tiles y slots
+                foreach (var tile in activeTiles)
+                    if (tile != null) Destroy(tile.gameObject);
+                activeTiles.Clear();
+
+                foreach (var slot in slots)
+                    if (slot != null)
+                    {
+                        slot.ClearSlot();
+                        slot.gameObject.SetActive(false);
+                    }
+
                 Debug.Log("[KanaOrderingActivityManager] Secuencia completada.");
                 return;
             }

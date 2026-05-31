@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2c905b107a8e04f8da999b763e882a, type: 3}
   m_Name: BasketActivitySequence2
   m_EditorClassIdentifier: Assembly-CSharp::BasketActivitySequenceSO
-  items: []
+  items:
+  - itemId: Flor
+    promptText: Deposita la flor
+    japaneseText: "\u306F\u306A"
+  - itemId: Libro
+    promptText: Deposita el libro
+    japaneseText: "\u307B\u3093"
+  - itemId: Agua
+    promptText: Deposita el vaso de agua
+    japaneseText: "\u307F\u305A"
+  - itemId: Cerdo
+    promptText: Deposita al cerdo
+    japaneseText: "\u3076\u305F"
+  - itemId: Globo
+    promptText: Deposita el globo
+    japaneseText: "\u3075\u3046\u305B\u3093"
+  - itemId: Palillos
+    promptText: Deposita los palillos
+    japaneseText: "\u306F\u3057"
+  - itemId: Pollito
+    promptText: Deposita al pollito
+    japaneseText: "\u3072\u3088\u3053"
+  - itemId: Estrella
+    promptText: Deposita la estrella
+    japaneseText: "\u307B\u3057"
+  - itemId: Almohada
+    promptText: Deposita la almohada
+    japaneseText: "\u307E\u304F\u3089"
+  - itemId: Mandarina
+    promptText: Deposita la mandarina
+    japaneseText: "\u307F\u304B\u3093"

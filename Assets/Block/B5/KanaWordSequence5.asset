@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
+  m_Name: KanaWordSequence5
+  m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
+  words:
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 
+  - wordKana: 
+    wordRomaji: 
+    hintText: 

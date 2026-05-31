@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f968ad7bf60c18940a1a83b045deb1d5, type: 3}
   m_Name: ReadingActivitySequence2
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
-  items: []
+  items:
+  - bodyText: "\u306A\u304C\u3044 <u>\u3078\u3073</u>\u304C \u3044\u308B\u3002\r\n<u>\u3078\u3073</u>\u306F
+      \u3057\u308D\u3044!"
+    correctItemId: Serpiente
+    narrationClip: {fileID: 0}
+  - bodyText: "\u3088\u308B\u3001<u>\u307B\u305F\u308B</u>\u304C \u3072\u304B\u308B\u3002\r\n\u3061\u3044\u3055\u3044
+      <u>\u307B\u305F\u308B</u>\u3002"
+    correctItemId: 
+    narrationClip: {fileID: 0}
+  - bodyText: "\u307F\u305A\u306E \u306A\u304B\u306B <u>\u3081\u3060\u304B</u>\u304C
+      \u304A\u3088\u3050\u3002\r\n\u3061\u3044\u3055\u3044 <u>\u3081\u3060\u304B</u>\u3002"
+    correctItemId: 
+    narrationClip: {fileID: 0}
+  - bodyText: "\u3042\u3081\u306E \u3072\u306B <u>\u307F\u306E</u>\u3092 \u304D\u308B\u3002\r\n\u3075\u308B\u3044
+      <u>\u307F\u306E</u>\u3002"
+    correctItemId: 
+    narrationClip: {fileID: 0}
+  - bodyText: "\u3042\u305F\u307E\u306B <u>\u307C\u3046\u3057</u>\u3092 \u304B\u3076\u308B\u3002\r\n\u3042\u304B\u3044
+      <u>\u307C\u3046\u3057</u>!"
+    correctItemId: 
+    narrationClip: {fileID: 0}

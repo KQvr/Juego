@@ -59,6 +59,14 @@ public class ReadingActivityManager : MonoBehaviour
             repeatButton.onClick.RemoveListener(RepeatNarration);
     }
 
+    void OnEnable()
+    {
+        // Reconfigurar los objetos cada vez que la actividad se activa,
+        // por si el pool compartido cambio de estado en otra actividad.
+        if (sequence != null && sequence.items != null && sequence.items.Count > 0)
+            ShowCurrentItem();
+    }
+
     void Update()
     {
         if (locked) return;
@@ -196,6 +204,14 @@ public class ReadingActivityManager : MonoBehaviour
 
                 if (feedbackText != null)
                     feedbackText.text = "!Actividad completada!";
+
+                if (bodyText != null)
+                    bodyText.text = "";
+
+                // Ocultar todos los objetos
+                foreach (var obj in allObjects)
+                    if (obj != null) obj.gameObject.SetActive(false);
+                activeObjects.Clear();
 
                 Debug.Log("[ReadingActivityManager] Secuencia completada.");
                 return;

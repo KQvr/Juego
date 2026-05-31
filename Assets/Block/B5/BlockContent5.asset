@@ -18,7 +18,7 @@ MonoBehaviour:
     y verbos
   hasDrawing: 0
   kanaTemplateSet: {fileID: 0}
-  hasBasket: 0
+  hasBasket: 1
   basketSequence: {fileID: 0}
   hasOrdering: 1
   orderingSequence: {fileID: 0}

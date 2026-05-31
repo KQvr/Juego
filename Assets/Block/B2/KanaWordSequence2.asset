@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
   m_Name: KanaWordSequence2
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  words:
+  - wordKana: "\u3080\u3057"
+    wordRomaji: Mushi
+    hintText: Insecto
+  - wordKana: "\u3082\u3082"
+    wordRomaji: Momo
+    hintText: "Melocot\xF3n"
+  - wordKana: "\u3084\u307E"
+    wordRomaji: Yama
+    hintText: "Monta\xF1a"
+  - wordKana: "\u3089\u3044\u304A\u3093"
+    wordRomaji: Raion
+    hintText: "Le\xF3n"
+  - wordKana: "\u308A\u3093\u3054"
+    wordRomaji: Ringo
+    hintText: Manzana
+  - wordKana: "\u308F\u3057"
+    wordRomaji: Washi
+    hintText: "\xC1guila"
+  - wordKana: "\u3070\u3089"
+    wordRomaji: Bara
+    hintText: Rosa
+  - wordKana: "\u3070\u306A\u306A"
+    wordRomaji: Banana
+    hintText: Banana
+  - wordKana: "\u3071\u3093\u3060"
+    wordRomaji: Panda
+    hintText: Panda
+  - wordKana: "\u305E\u3046"
+    wordRomaji: Zou
+    hintText: Elefante

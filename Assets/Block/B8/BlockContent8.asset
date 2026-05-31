@@ -19,7 +19,7 @@ MonoBehaviour:
   kanaTemplateSet: {fileID: 0}
   hasBasket: 1
   basketSequence: {fileID: 0}
-  hasOrdering: 1
+  hasOrdering: 0
   orderingSequence: {fileID: 0}
   hasReading: 1
   readingSequence: {fileID: 0}

@@ -51,6 +51,17 @@ public class BasketActivityManager : MonoBehaviour
             basketReceiver.OnItemDropped -= HandleItemDropped;
     }
 
+    void OnEnable()
+    {
+        // Reconfigurar los objetos cada vez que la actividad se activa,
+        // por si el pool compartido cambio de estado en otra actividad.
+        if (sequence != null && sequence.items != null && sequence.items.Count > 0)
+        {
+            SetupRoundObjects();
+            ShowCurrentPrompt();
+        }
+    }
+
     private void HandleItemDropped(BasketCollectible droppedItem)
     {
         if (locked) return;
@@ -112,11 +123,31 @@ public class BasketActivityManager : MonoBehaviour
         if (currentIndex >= sequence.items.Count)
         {
             if (loopSequence)
+            {
                 currentIndex = 0;
+            }
             else
             {
                 currentIndex = sequence.items.Count - 1;
                 activityTracker?.MarkAsCompleted();
+
+                // Mostrar mensaje de completado y salir
+                if (feedbackText != null)
+                    feedbackText.text = "!Actividad completada!";
+
+                if (promptText != null)
+                    promptText.text = "";
+
+                if (japaneseText != null)
+                    japaneseText.text = "";
+
+                // Ocultar objetos restantes y limpiar labels
+                foreach (var obj in allObjects)
+                    if (obj != null) obj.gameObject.SetActive(false);
+                ClearAllObjectLabels();
+
+                Debug.Log("[BasketActivityManager] Secuencia completada.");
+                return;
             }
         }
 

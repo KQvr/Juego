@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: ReadingActivitySequence1
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
   items:
-  - bodyText: "\u305D\u306E<u>\u3044\u306C</u>\u306F\u304B\u308F\u3044\u3044\u3002"
-    correctItemId: Perro
-    narrationClip: {fileID: 8300000, guid: 45740ce9a7c810e49b96b21d6fb8f769, type: 3}
-  - bodyText: "\u79C1\u306E\u5BB6\u306B\u306F\u3001\u304B\u308F\u3044\u3044<u>\u306D\u3053</u>\u304C\u3044\u307E\u3059"
-    correctItemId: Gato
-    narrationClip: {fileID: 0}
-  - bodyText: "\u4ECA\u65E5\u306F\u96E8\u304C\u964D\u3063\u3066\u3044\u308B\u306E\u3067\u3001<u>\u304B\u3055</u>\u3092\u6301\u3063\u3066\u51FA\u304B\u3051\u307E\u3059\u3002"
-    correctItemId: Paraguas
-    narrationClip: {fileID: 0}
-  - bodyText: "\u767D\u304F\u3066\u5C0F\u3055\u306A<u>\u3046\u3055\u304E</u>\u304C\u8D70\u3063\u3066\u3044\u307E\u3059\u3002"
-    correctItemId: Conejo
-    narrationClip: {fileID: 0}
-  - bodyText: "\u6D77\u306B\u884C\u304F\u3068\u3001\u7802\u6D5C\u3067\u5C0F\u3055\u306A<u>\u304B\u306B</u>\u3092\u898B\u3064\u3051\u307E\u3057\u305F\u3002"
+  - bodyText: "\u3042\u304B\u3044 \u304A\u306B\u3068 \u3042\u304A\u3044 <u>\u304A\u306B</u>\u304C
+      \u3044\u308B\u3002\r\n<u>\u304A\u306B</u>\u3068 \u3042\u305D\u3076\u3088!"
+    correctItemId: DemJP
+    narrationClip: {fileID: 8300000, guid: 23cdc0bc32fa2c140865fd1909312788, type: 3}
+  - bodyText: "\u305D\u3089\u3092 <u>\u3053\u3044\u306E\u307C\u308A</u>\u304C \u304A\u3088\u3050\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u3053\u3044\u306E\u307C\u308A</u>!"
+    correctItemId: Carpa
+    narrationClip: {fileID: 8300000, guid: 56e046cbcd65afa4b9ee9caa3badc007, type: 3}
+  - bodyText: "\u3042\u3055\u306F <u>\u305F\u307E\u3054</u>\u3092 \u305F\u3079\u308B\u3002\r\n\u3061\u3044\u3055\u3044
+      \u3068\u308A\u306E <u>\u305F\u307E\u3054</u>\u3002"
+    correctItemId: Huevo
+    narrationClip: {fileID: 8300000, guid: f76909ee75c0d104db7bd5dae2583ff1, type: 3}
+  - bodyText: "\u3088\u308B\u3001\u304A\u304A\u304D\u3044 <u>\u3064\u304D</u>\u3092
+      \u307F\u308B\u3002\r\n<u>\u3064\u304D</u>\u306F \u304D\u308C\u3044\u3060!"
+    correctItemId: Luna
+    narrationClip: {fileID: 8300000, guid: e7c3ad054779c684eafc9d790c933dab, type: 3}
+  - bodyText: "\u3046\u307F\u306B <u>\u304B\u306B</u>\u304C \u3044\u308B\u3002\r\n\u3042\u304B\u3044
+      <u>\u304B\u306B</u>!"
     correctItemId: Cangrejo
-    narrationClip: {fileID: 0}
+    narrationClip: {fileID: 8300000, guid: b1a83e408618cc84a8791d2a2ab6afd0, type: 3}
