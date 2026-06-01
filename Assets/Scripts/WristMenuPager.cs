@@ -1,18 +1,16 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Navegacion por swipe entre actividades en el menu de muneca.
-/// Detecta pinch + movimiento horizontal del dedo indice para cambiar pagina.
-/// Muestra el nombre de la actividad actual y un boton para entrar.
+/// Menu de muneca — navega entre actividades del bloque actual
+/// y tiene un boton para volver al menu de bloques.
 ///
-/// Requiere en el Inspector:
-///   - IndexPinchGate_OVR y IndexTipProvider_OVR de la mano derecha
-///   - TMP_Text para el nombre de la actividad
-///   - TMP_Text para el indicador de pagina (ej: "2 / 4")
-///   - Button de entrar
-///   - ActivityMenuManager
+/// Canvas del menu de muneca:
+///   ├── ActivityNameText   (TMP_Text) → nombre de la actividad actual
+///   ├── PageIndicatorText  (TMP_Text) → "2 / 4"
+///   ├── EnterButton        (Button)   → entra a la actividad seleccionada
+///   └── BackToMenuButton   (Button)   → vuelve al menu de bloques
 /// </summary>
 public class WristMenuPager : MonoBehaviour
 {
@@ -24,17 +22,17 @@ public class WristMenuPager : MonoBehaviour
     [SerializeField] private TMP_Text activityNameText;
     [SerializeField] private TMP_Text pageIndicatorText;
     [SerializeField] private Button enterButton;
+    [SerializeField] private Button backToMenuButton;
+    [SerializeField] private Button resetBlockButton;
 
-    [Header("Manager")]
+    [Header("Managers")]
     [SerializeField] private ActivityMenuManager activityMenuManager;
+    [SerializeField] private BlockMenuUI blockMenuUI;
 
     [Header("Swipe Settings")]
-    [Tooltip("Distancia horizontal minima (metros) para contar como swipe.")]
     [SerializeField] private float swipeThreshold = 0.06f;
-    [Tooltip("Segundos de cooldown entre swipes para evitar saltos multiples.")]
     [SerializeField] private float swipeCooldown = 0.4f;
 
-    // Nombres que se muestran en el menu
     private readonly string[] activityNames = new string[]
     {
         "Dibujo de Kana",
@@ -53,6 +51,12 @@ public class WristMenuPager : MonoBehaviour
         if (enterButton != null)
             enterButton.onClick.AddListener(EnterCurrentActivity);
 
+        if (backToMenuButton != null)
+            backToMenuButton.onClick.AddListener(GoBackToMenu);
+
+        if (resetBlockButton != null)
+            resetBlockButton.onClick.AddListener(ResetCurrentBlock);
+
         UpdateUI();
     }
 
@@ -60,6 +64,12 @@ public class WristMenuPager : MonoBehaviour
     {
         if (enterButton != null)
             enterButton.onClick.RemoveListener(EnterCurrentActivity);
+
+        if (backToMenuButton != null)
+            backToMenuButton.onClick.RemoveListener(GoBackToMenu);
+
+        if (resetBlockButton != null)
+            resetBlockButton.onClick.RemoveListener(ResetCurrentBlock);
     }
 
     void Update()
@@ -70,42 +80,32 @@ public class WristMenuPager : MonoBehaviour
         bool isPinching = pinchGate.IsPinchingStrong;
         Vector3 tipPos = indexTipProvider.TipTransform.position;
 
-        // Registrar inicio del pinch
         if (isPinching && !wasPinching)
-        {
             pinchStartPosition = tipPos;
-        }
 
-        // Detectar swipe al soltar el pinch
         if (!isPinching && wasPinching)
         {
             float delta = tipPos.x - pinchStartPosition.x;
 
-            if (Mathf.Abs(delta) >= swipeThreshold && Time.time - lastSwipeTime > swipeCooldown)
+            if (Mathf.Abs(delta) >= swipeThreshold &&
+                Time.time - lastSwipeTime > swipeCooldown)
             {
                 if (delta > 0)
-                    NavigateNext();
+                    currentPage = (currentPage - 1 + activityNames.Length) % activityNames.Length;
                 else
-                    NavigatePrevious();
+                    currentPage = (currentPage + 1) % activityNames.Length;
 
                 lastSwipeTime = Time.time;
+                UpdateUI();
             }
         }
 
         wasPinching = isPinching;
     }
 
-    private void NavigateNext()
-    {
-        currentPage = (currentPage + 1) % activityNames.Length;
-        UpdateUI();
-    }
-
-    private void NavigatePrevious()
-    {
-        currentPage = (currentPage - 1 + activityNames.Length) % activityNames.Length;
-        UpdateUI();
-    }
+    // -----------------------------------------------------------------------
+    // UI
+    // -----------------------------------------------------------------------
 
     private void UpdateUI()
     {
@@ -116,16 +116,32 @@ public class WristMenuPager : MonoBehaviour
             pageIndicatorText.text = $"{currentPage + 1} / {activityNames.Length}";
     }
 
+    // -----------------------------------------------------------------------
+    // Acciones
+    // -----------------------------------------------------------------------
+
     private void EnterCurrentActivity()
     {
         if (activityMenuManager == null) return;
 
         switch (currentPage)
         {
-            case 0: activityMenuManager.ShowDrawingActivity();   break;
-            case 1: activityMenuManager.ShowBasketActivity();    break;
-            case 2: activityMenuManager.ShowOrderingActivity();  break;
-            case 3: activityMenuManager.ShowReadingActivity();   break;
+            case 0: activityMenuManager.ShowDrawingActivity(); break;
+            case 1: activityMenuManager.ShowBasketActivity(); break;
+            case 2: activityMenuManager.ShowOrderingActivity(); break;
+            case 3: activityMenuManager.ShowReadingActivity(); break;
         }
+    }
+
+    private void GoBackToMenu()
+    {
+        // Ocultar todas las actividades y volver al menu de bloques
+        activityMenuManager?.HideAllActivities();
+        blockMenuUI?.ShowMenu();
+    }
+
+    private void ResetCurrentBlock()
+    {
+        BlockManager.Instance?.ResetCurrentBlockProgress();
     }
 }

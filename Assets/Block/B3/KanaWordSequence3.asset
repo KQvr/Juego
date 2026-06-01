@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
   m_Name: KanaWordSequence3
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  words:
+  - wordKana: "\u30BD\u30D5\u30A1"
+    wordRomaji: Sofa
+    hintText: "Sof\xE1"
+  - wordKana: "\u30C1\u30E7\u30B3\u30EC\u30FC\u30C8"
+    wordRomaji: Chokoreeto
+    hintText: Chocolate
+  - wordKana: "\u30CA\u30A4\u30D5"
+    wordRomaji: Naifu
+    hintText: Cuchillo
+  - wordKana: "\u30D0\u30A4\u30AF"
+    wordRomaji: Baiku
+    hintText: Moto
+  - wordKana: "\u30D4\u30A2\u30CE"
+    wordRomaji: Piano
+    hintText: Piano
+  - wordKana: "\u30D5\u30A9\u30FC\u30AF"
+    wordRomaji: Fooku
+    hintText: Tenedor
+  - wordKana: "\u30DC\u30FC\u30EB"
+    wordRomaji: Booru
+    hintText: Pelota
+  - wordKana: "\u30B8\u30E5\u30FC\u30B9"
+    wordRomaji: Juusu
+    hintText: Jugo
+  - wordKana: "\u30B9\u30D7\u30FC\u30F3"
+    wordRomaji: Supuun
+    hintText: Cuchara
+  - wordKana: "\u30C9\u30A2"
+    wordRomaji: Doa
+    hintText: Puerta

@@ -37,17 +37,7 @@ public class KanaLessonManager : MonoBehaviour
     [SerializeField] private string textPrefix = "Escribe: ";
     [SerializeField] private string completedText = "Leccion completada";
 
-    [SerializeField] private int _currentIndex = 0;
-    private int currentIndex
-    {
-        get => _currentIndex;
-        set
-        {
-            if (_currentIndex != value)
-                Debug.Log($"[KanaLessonManager] currentIndex: {_currentIndex} → {value}\n{System.Environment.StackTrace}");
-            _currentIndex = value;
-        }
-    }
+    private int currentIndex = 0;
     private bool advancing = false;
 
     // -----------------------------------------------------------------------
@@ -174,6 +164,7 @@ public class KanaLessonManager : MonoBehaviour
             else
             {
                 currentIndex = Mathf.Max(0, kanaSequence.Count - 1);
+                activityTracker?.MarkAsCompleted();
                 UpdateKanaText(completedText);
                 UpdateRomajiText("");
                 Debug.Log("[KanaLessonManager] Leccion completada.");
@@ -238,6 +229,12 @@ public class KanaLessonManager : MonoBehaviour
         templateSet = newTemplateSet;
         currentIndex = 0;
         advancing = false;
+
+        // Actualizar el templateSet del evaluator y el ghost overlay
+        // para que el recognizer y los trazos guia usen los kana del bloque actual
+        evaluator?.SetTemplateSet(newTemplateSet);
+        ghostOverlay?.SetTemplateSet(newTemplateSet);
+
         RebuildSequenceFromTemplateSet();
         if (gameObject.activeInHierarchy)
             ApplyCurrentKana();

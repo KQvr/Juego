@@ -36,6 +36,15 @@ public class KanaEvaluator : MonoBehaviour
         expectedStrokeCount = strokeCount;
     }
 
+    /// <summary>
+    /// Reenvia el nuevo template set al recognizer interno.
+    /// Llamado cuando se cambia de bloque.
+    /// </summary>
+    public void SetTemplateSet(KanaTemplateSet newTemplateSet)
+    {
+        recognizer?.SetTemplateSet(newTemplateSet);
+    }
+
     public bool IsReadyToEvaluate(int currentStrokeCount)
     {
         return currentStrokeCount >= expectedStrokeCount;

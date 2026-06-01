@@ -15,21 +15,21 @@ MonoBehaviour:
   items:
   - bodyText: "\u3088\u308B\u3001<u>\u30E9\u30F3\u30D7</u>\u3092 \u3064\u3051\u308B\u3002\r\n\u3042\u304B\u308B\u3044
       <u>\u30E9\u30F3\u30D7</u>\u3002"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Lampara
+    narrationClip: {fileID: 8300000, guid: 35896ebce779dce44beb3bf46baac992, type: 3}
   - bodyText: "\u3042\u304A\u3044 <u>\u30D0\u30C3\u30B0</u>\u3092 \u3082\u3064\u3002\r\n\u304A\u304A\u304D\u3044
       <u>\u30D0\u30C3\u30B0</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: BolsaK
+    narrationClip: {fileID: 8300000, guid: b6696739ccfbd19489350199f3e00910, type: 3}
   - bodyText: "<u>\u30ED\u30DC\u30C3\u30C8</u>\u304C \u3042\u308B\u304F\u3002\r\n\u3042\u305F\u3089\u3057\u3044
       <u>\u30ED\u30DC\u30C3\u30C8</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Robot
+    narrationClip: {fileID: 8300000, guid: 8dba395fcaaa78a4fa612336d4f82392, type: 3}
   - bodyText: "\u3068\u3082\u3060\u3061\u3068 <u>\u30B5\u30C3\u30AB\u30FC</u>\u3092
       \u3059\u308B\u3002\r\n\u305F\u306E\u3057\u3044 <u>\u30B5\u30C3\u30AB\u30FC</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: BalonF
+    narrationClip: {fileID: 8300000, guid: b172da560f7619240be74a240f2232bd, type: 3}
   - bodyText: "\u3088\u308B\u3001<u>\u30D9\u30C3\u30C9</u>\u3067 \u306D\u308B\u3002\r\n\u304A\u304A\u304D\u3044
       <u>\u30D9\u30C3\u30C9</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Cama
+    narrationClip: {fileID: 8300000, guid: baa1b3f3838a1cc4da32dbe03f24a112, type: 3}

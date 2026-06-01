@@ -16,10 +16,10 @@ MonoBehaviour:
   blockName: "Kanji b\xE1sico"
   description: 
   hasDrawing: 1
-  kanaTemplateSet: {fileID: 0}
+  kanaTemplateSet: {fileID: 11400000, guid: 585e41278c14bd4459b20abd78c0255d, type: 2}
   hasBasket: 1
-  basketSequence: {fileID: 0}
+  basketSequence: {fileID: 11400000, guid: 584aaaae49347db42be6050c56fa3d86, type: 2}
   hasOrdering: 0
   orderingSequence: {fileID: 0}
   hasReading: 1
-  readingSequence: {fileID: 0}
+  readingSequence: {fileID: 11400000, guid: 1ebadf8929c73b847b850b3cf0db5576, type: 2}

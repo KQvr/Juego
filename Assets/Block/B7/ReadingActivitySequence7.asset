@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f968ad7bf60c18940a1a83b045deb1d5, type: 3}
   m_Name: ReadingActivitySequence7
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
-  items: []
+  items:
+  - bodyText: "\u3042\u3055\u3001<u>\u3066\u3089</u>\u3078 \u3044\u304F\u3002\r\n\u3075\u308B\u3044
+      <u>\u3066\u3089</u>!"
+    correctItemId: Templo
+    narrationClip: {fileID: 8300000, guid: 54e2f694f39b8684e81b756fb9fccc78, type: 3}
+  - bodyText: "\u304A\u3057\u3087\u3046\u304C\u3064\u3001<u>\u3058\u3093\u3058\u3083</u>\u3078
+      \u3044\u304F\u3002\r\n\u304A\u304A\u304D\u3044 <u>\u3058\u3093\u3058\u3083</u>\u3002"
+    correctItemId: TemploS
+    narrationClip: {fileID: 8300000, guid: d6b130c411497f94d9f1234e3dc55b33, type: 3}
+  - bodyText: "\u305F\u304B\u3044 <u>\u30BF\u30EF\u30FC</u>\u3092 \u307F\u308B\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u30BF\u30EF\u30FC</u>!"
+    correctItemId: Torre
+    narrationClip: {fileID: 8300000, guid: 8425b26808eeae64cae898bb1e367106, type: 3}
+  - bodyText: "\u306A\u3064\u306F <u>\u30D7\u30FC\u30EB</u>\u3067 \u304A\u3088\u3050\u3002\r\n\u3064\u3081\u305F\u3044
+      <u>\u30D7\u30FC\u30EB</u>!"
+    correctItemId: Piscina
+    narrationClip: {fileID: 8300000, guid: c42039d1c4abad54c87c45823cb936f5, type: 3}
+  - bodyText: "\u306A\u3064\u306F <u>\u3046\u307F</u>\u306B \u3044\u304F\u3002\r\n\u3042\u304A\u3044
+      <u>\u3046\u307F</u>!"
+    correctItemId: Mar
+    narrationClip: {fileID: 8300000, guid: e287bc3a364cfd64a81262d7afd91d0c, type: 3}

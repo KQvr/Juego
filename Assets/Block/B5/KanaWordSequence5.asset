@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: KanaWordSequence5
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
   words:
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
-  - wordKana: 
-    wordRomaji: 
-    hintText: 
+  - wordKana: "\u3068\u3051\u3044"
+    wordRomaji: Tokei
+    hintText: Reloj
+  - wordKana: "\u304B\u304E"
+    wordRomaji: Kagi
+    hintText: Llave
+  - wordKana: "\u3055\u3044\u3075"
+    wordRomaji: Saifu
+    hintText: Cartera
+  - wordKana: "\u30DE\u30D5\u30E9\u30FC"
+    wordRomaji: Mafuraa
+    hintText: Bufanda
+  - wordKana: "\u3066\u3076\u304F\u308D"
+    wordRomaji: Tebukuro
+    hintText: Guantes
+  - wordKana: "\u304B\u304C\u307F"
+    wordRomaji: Kagami
+    hintText: Espejo
+  - wordKana: "\u306F\u3055\u307F"
+    wordRomaji: Hasami
+    hintText: Tijeras
+  - wordKana: "\u306E\u308A"
+    wordRomaji: Nori
+    hintText: Pegamento
+  - wordKana: "\u3082\u306E\u3055\u3057"
+    wordRomaji: Monosashi
+    hintText: Regla
+  - wordKana: "\u3051\u3057\u3054\u3080"
+    wordRomaji: Keshigomu
+    hintText: Borrador

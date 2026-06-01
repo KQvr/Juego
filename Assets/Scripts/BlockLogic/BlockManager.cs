@@ -222,4 +222,37 @@ public class BlockManager : MonoBehaviour
         currentBlockIndex = -1;
         Debug.Log("[BlockManager] Progreso reiniciado.");
     }
+
+    /// <summary>
+    /// Reinicia el progreso unicamente del bloque actual.
+    /// No afecta el desbloqueo del bloque ni el progreso de otros bloques.
+    /// </summary>
+    public void ResetCurrentBlockProgress()
+    {
+        var current = GetCurrentBlock();
+        if (current == null)
+        {
+            Debug.LogWarning("[BlockManager] No hay un bloque activo para reiniciar.");
+            return;
+        }
+
+        if (activitiesByBlock.TryGetValue(current.blockId, out var activities))
+        {
+            foreach (var a in activities)
+                a.ResetProgress();
+        }
+
+        // Re-inyectar datos para reiniciar las actividades en memoria
+        if (current.hasDrawing && current.kanaTemplateSet != null)
+            drawingManager?.SetData(current.kanaTemplateSet);
+        if (current.hasBasket && current.basketSequence != null)
+            basketManager?.SetData(current.basketSequence);
+        if (current.hasOrdering && current.orderingSequence != null)
+            orderingManager?.SetData(current.orderingSequence);
+        if (current.hasReading && current.readingSequence != null)
+            readingManager?.SetData(current.readingSequence);
+
+        OnBlockStarsChanged?.Invoke(current.blockId, 0);
+        Debug.Log($"[BlockManager] Progreso del bloque '{current.blockName}' reiniciado.");
+    }
 }

@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2c905b107a8e04f8da999b763e882a, type: 3}
   m_Name: BasketActivitySequence3
   m_EditorClassIdentifier: Assembly-CSharp::BasketActivitySequenceSO
-  items: []
+  items:
+  - itemId: TV
+    promptText: "Deposita la televisi\xF3n"
+    japaneseText: "\u30C6\u30EC\u30D3"
+  - itemId: Vaso
+    promptText: Deposita el vaso
+    japaneseText: "\u30B3\u30C3\u30D7"
+  - itemId: Pluma
+    promptText: Deposita la pluma
+    japaneseText: Pen
+  - itemId: Cuaderno
+    promptText: Deposita el cuaderno
+    japaneseText: "\u30CE\u30FC\u30C8"
+  - itemId: Cafe
+    promptText: "Deposita el caf\xE9"
+    japaneseText: "\u30B3\u30FC\u30D2\u30FC"
+  - itemId: Mesa
+    promptText: Deposita la mesa
+    japaneseText: "\u30C6\u30FC\u30D6\u30EB"
+  - itemId: Helado
+    promptText: Deposita el helado
+    japaneseText: "\u30A2\u30A4\u30B9"
+  - itemId: Camara
+    promptText: "Deposita la c\xE1mara"
+    japaneseText: "\u30AB\u30E1\u30E9"
+  - itemId: Guitarra
+    promptText: Deposita la guitarra
+    japaneseText: "\u30AE\u30BF\u30FC"
+  - itemId: Pastel
+    promptText: Deposita el pastel
+    japaneseText: "\u30B1\u30FC\u30AD"

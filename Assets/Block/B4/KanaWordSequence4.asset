@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
   m_Name: KanaWordSequence4
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  words:
+  - wordKana: "\u304A\u304B\u3042\u3055\u3093"
+    wordRomaji: Okaasan
+    hintText: Madre
+  - wordKana: "\u304A\u3068\u3046\u3055\u3093"
+    wordRomaji: Otousan
+    hintText: Padre
+  - wordKana: "\u3044\u3082\u3046\u3068"
+    wordRomaji: Imouto
+    hintText: Hermana menor
+  - wordKana: "\u304A\u306B\u3044\u3055\u3093"
+    wordRomaji: Oniisan
+    hintText: Hermano menor
+  - wordKana: "\u304A\u3070\u3042\u3055\u3093"
+    wordRomaji: Obaasan
+    hintText: Abuela
+  - wordKana: "\u304A\u3058\u3044\u3055\u3093"
+    wordRomaji: Ojiisan
+    hintText: Abuelo
+  - wordKana: "\u3042\u304B\u3061\u3083\u3093"
+    wordRomaji: Akachan
+    hintText: "Beb\xE9"
+  - wordKana: "\u30D1\u30F3"
+    wordRomaji: Pan
+    hintText: Pan
+  - wordKana: "\u3059\u3057"
+    wordRomaji: Sushi
+    hintText: Sushi
+  - wordKana: "\u30E9\u30FC\u30E1\u30F3"
+    wordRomaji: Raamen
+    hintText: Ramen

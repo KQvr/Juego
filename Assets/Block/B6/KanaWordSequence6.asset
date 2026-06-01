@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
   m_Name: KanaWordSequence6
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  words:
+  - wordKana: "\u3042\u304B\u3044\u308A\u3093\u3054"
+    wordRomaji: Akai Ringo
+    hintText: Manzana roja
+  - wordKana: "\u3042\u304A\u3044\u30DC\u30FC\u30EB"
+    wordRomaji: Aoi Booru
+    hintText: Pelota azul
+  - wordKana: "\u3057\u308D\u3044\u3046\u3055\u304E"
+    wordRomaji: Shiroi Usagi
+    hintText: Conejo blanco
+  - wordKana: "\u304F\u308D\u3044\u306D\u3053"
+    wordRomaji: Kuroi neko
+    hintText: Gato negro
+  - wordKana: "\u304D\u3044\u308D\u3044\u30D0\u30CA\u30CA"
+    wordRomaji: Kiiroi banana
+    hintText: Banana amarilla
+  - wordKana: "\u304A\u304A\u304D\u3044\u305E\u3046"
+    wordRomaji: Midori no ki
+    hintText: "\xC1rbol verde"
+  - wordKana: "\u304A\u304A\u304D\u3044\u305E\u3046"
+    wordRomaji: Ooki zou
+    hintText: Elefante grande
+  - wordKana: "\u3061\u3044\u3055\u3044\u306D\u305A\u307F"
+    wordRomaji: Chiisai nezumi
+    hintText: "Rat\xF3n peque\xF1o"
+  - wordKana: "\u305D\u308D\u3070\u3093"
+    wordRomaji: Soroban
+    hintText: "\xC1baco"
+  - wordKana: "\u305F\u304B\u3044\u30D3\u30EB"
+    wordRomaji: Takai biru
+    hintText: Edificio alto

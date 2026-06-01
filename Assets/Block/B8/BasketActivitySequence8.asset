@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2c905b107a8e04f8da999b763e882a, type: 3}
+  m_Name: BasketActivitySequence8
+  m_EditorClassIdentifier: Assembly-CSharp::BasketActivitySequenceSO
+  items:
+  - itemId: PerroK
+    promptText: Deposita al perro
+    japaneseText: "\u72AC"
+  - itemId: Sol
+    promptText: Deposita el sol
+    japaneseText: "\u65E5"
+  - itemId: Luna
+    promptText: Deposita la luna
+    japaneseText: "\u6708"
+  - itemId: Llama
+    promptText: Deposita la llama
+    japaneseText: "\u706B"
+  - itemId: Arbol
+    promptText: "Deposita el \xE1rbol"
+    japaneseText: "\u6728"
+  - itemId: Oro
+    promptText: Deposita el lingote de oro
+    japaneseText: "\u91D1"
+  - itemId: Tierra
+    promptText: "Deposita el mont\xEDculo de tierra"
+    japaneseText: "\u571F"
+  - itemId: Montana
+    promptText: "Deposita l\xF1a monta\xF1a"
+    japaneseText: "\u5C71"
+  - itemId: Rio
+    promptText: "Deposita el r\xEDo"
+    japaneseText: 
+  - itemId: Boca
+    promptText: 'Deposita la boca '
+    japaneseText: "\u53E3"
+  - itemId: Ojo
+    promptText: Deposita el ojo
+    japaneseText: "\u76EE"
+  - itemId: Oreja
+    promptText: Deposita la oreja
+    japaneseText: "\u8033"
+  - itemId: Pie
+    promptText: Deposita el pie
+    japaneseText: "\u8DB3"
+  - itemId: Nube
+    promptText: Deposita la nube
+    japaneseText: "\u96E8"
+  - itemId: Piedra
+    promptText: Deposita la piedra
+    japaneseText: "\u77F3"

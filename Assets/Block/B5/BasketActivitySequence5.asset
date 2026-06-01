@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: BasketActivitySequence5
   m_EditorClassIdentifier: Assembly-CSharp::BasketActivitySequenceSO
   items:
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
-  - itemId: 
-    promptText: 
-    japaneseText: 
+  - itemId: Bici
+    promptText: Deposita la bicicleta
+    japaneseText: "\u3058\u3066\u3093\u3057\u3083"
+  - itemId: Bolsa
+    promptText: Deposita la bolsa
+    japaneseText: "\u304B\u3070\u3093"
+  - itemId: Carro
+    promptText: Deposita el carro
+    japaneseText: "\u304F\u308B\u307E"
+  - itemId: Tel
+    promptText: "Deposita el tel\xE9fono"
+    japaneseText: "\u3067\u3093\u308F"
+  - itemId: Papel
+    promptText: Deposita la hoja de papel
+    japaneseText: "\u304B\u307F"
+  - itemId: Estampilla
+    promptText: Deposita la estampilla
+    japaneseText: "\u304D\u3063\u3066"
+  - itemId: Carta
+    promptText: Deposita la carta
+    japaneseText: "\u3066\u304C\u307F"
+  - itemId: Revista
+    promptText: Deposita la revista
+    japaneseText: "\u3056\u3063\u3057"
+  - itemId: Periodico
+    promptText: "Deposite el peri\xF3dico"
+    japaneseText: "\u3057\u3093\u3076\u3093"
+  - itemId: Lentes
+    promptText: Deposite los lentes
+    japaneseText: "\u3081\u304C\u306D"

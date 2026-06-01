@@ -18,8 +18,8 @@ MonoBehaviour:
   hasDrawing: 0
   kanaTemplateSet: {fileID: 0}
   hasBasket: 1
-  basketSequence: {fileID: 0}
+  basketSequence: {fileID: 11400000, guid: 7e6c8b5c31ff0024d81fca6be6979c8b, type: 2}
   hasOrdering: 1
-  orderingSequence: {fileID: 0}
+  orderingSequence: {fileID: 11400000, guid: f15dae3bb84d7574b9ad0137c515efcc, type: 2}
   hasReading: 1
-  readingSequence: {fileID: 0}
+  readingSequence: {fileID: 11400000, guid: 8d4bfd485ea229e4aa95753e5881d547, type: 2}

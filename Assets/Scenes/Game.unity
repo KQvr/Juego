@@ -1689,6 +1689,143 @@ MonoBehaviour:
     _installationVariants:
     - _memberName: mode
       _value: '{"value__":0}'
+--- !u!1 &42854968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42854969}
+  - component: {fileID: 42854971}
+  - component: {fileID: 42854970}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &42854969
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42854968}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1910172480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &42854970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42854968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Reiniciar el progreso del nivel
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: de3bf68f4f9edbd45bfe2b2c49e44911, type: 2}
+  m_sharedMaterial: {fileID: 8729688567214386823, guid: de3bf68f4f9edbd45bfe2b2c49e44911, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 1, y: 0, z: 1, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &42854971
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42854968}
+  m_CullTransparentMesh: 1
 --- !u!1 &45889022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,7 +2671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 10, y: 15, z: 0.01}
+  _size: {x: 9.84698, y: 18.00935, z: 0.01}
 --- !u!114 &75671688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3035,7 +3172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 10, y: 5, z: 0.01}
+  _size: {x: 18, y: 6, z: 0.01}
 --- !u!114 &97637617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,7 +3450,7 @@ GameObject:
   - component: {fileID: 106693255}
   - component: {fileID: 106693254}
   m_Layer: 0
-  m_Name: Btn
+  m_Name: ActBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3336,7 +3473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.37}
+  m_AnchoredPosition: {x: 0, y: 5.85}
   m_SizeDelta: {x: 16.5, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106693254
@@ -3433,7 +3570,7 @@ GameObject:
   - component: {fileID: 107302930}
   - component: {fileID: 107302929}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Indic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3455,7 +3592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.38}
+  m_AnchoredPosition: {x: 0, y: 2.6}
   m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &107302929
@@ -3830,7 +3967,7 @@ MonoBehaviour:
   itemId: Piedra
   displayName: Piedra
   japaneseName: "\u77F3"
-  romajiName: Ishi
+  romajiName: Ishi/Seki
 --- !u!23 &115197614
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6228,7 +6365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10644,7 +10781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12763,7 +12900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.74}
   m_SizeDelta: {x: 90, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335309265
@@ -12852,7 +12989,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -25.015781, y: 0, z: -25.28471, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15599,7 +15736,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -25.284771, y: 0, z: -25.553646, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -16560,7 +16697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.099}
   m_SizeDelta: {x: 10, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &441019877
@@ -19736,7 +19873,7 @@ MonoBehaviour:
   itemId: Tren
   displayName: Tren
   japaneseName: "\u3048\u304D"
-  romajiName: Kuruma
+  romajiName: Eki
 --- !u!23 &534850939
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21422,7 +21559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: c2bb93f6-d970-4e4c-b5d2-04013be5d996
+  instanceId: c097c6b9-995b-441c-b417-c43e8b90e920
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -22131,7 +22268,7 @@ GameObject:
   - component: {fileID: 618009127}
   - component: {fileID: 618009122}
   m_Layer: 0
-  m_Name: Madre
+  m_Name: Onigiri
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22251,10 +22388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Madre
-  displayName: Madre
-  japaneseName: "\u304A\u304B\u3042\u3055\u3093"
-  romajiName: Okaasan
+  itemId: Onigiri
+  displayName: Onigiri
+  japaneseName: "\u304A\u306B\u304E\u308A"
+  romajiName: Onigiri
 --- !u!23 &618009124
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22463,6 +22600,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
   m_PrefabInstance: {fileID: 1558455600}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &643699842
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1370804011}
+    m_Modifications:
+    - target: {fileID: 763916688358990998, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: slotIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924514508149290286, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_Name
+      value: KanaSlot8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924514508149290286, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.036870003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603270095794455949, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603270095794455949, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575914108781295281, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
 --- !u!1 &644797195
 GameObject:
   m_ObjectHideFlags: 0
@@ -25959,8 +26173,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Volver al men\xFA de actividades"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: de3bf68f4f9edbd45bfe2b2c49e44911, type: 2}
+  m_sharedMaterial: {fileID: 8729688567214386823, guid: de3bf68f4f9edbd45bfe2b2c49e44911, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25984,13 +26198,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -29042,7 +29256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.985}
+  m_AnchoredPosition: {x: 7.97, y: -1.61}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &821119364
@@ -29182,7 +29396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30005,7 +30219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 4c854165-f7ed-475d-8195-a1bde9612515
+  instanceId: 5aee3faf-f7bd-4b43-8744-7de29fad7718
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -33897,7 +34111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34777,7 +34991,7 @@ GameObject:
   - component: {fileID: 974670694}
   - component: {fileID: 974670689}
   m_Layer: 0
-  m_Name: Ramen
+  m_Name: Zanahoria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34897,10 +35111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Ramen
-  displayName: Ramen
-  japaneseName: "\u30E9\u30FC\u30E1\u30F3"
-  romajiName: Ramen
+  itemId: Zanahoria
+  displayName: Zanahoria
+  japaneseName: "\u306B\u3093\u3058\u3093"
+  romajiName: Ninjin
 --- !u!23 &974670691
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35707,7 +35921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1013853084
 Transform:
   m_ObjectHideFlags: 0
@@ -39640,7 +39854,7 @@ MonoBehaviour:
   itemId: Luna
   displayName: Luna
   japaneseName: "\u6708"
-  romajiName: Tsuki
+  romajiName: Tsuki/Getsu
 --- !u!23 &1099082377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39711,7 +39925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: fd5cd9a8-9684-4d52-8a82-41a7459c1819
+  instanceId: 12a809b1-0f87-48a0-afbc-5a076621dce9
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -40959,7 +41173,7 @@ MonoBehaviour:
   itemId: Nube
   displayName: Nube con lluvia
   japaneseName: "\u732B"
-  romajiName: Ame
+  romajiName: Ame/U
 --- !u!23 &1121457905
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -41598,7 +41812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -43104,9 +43318,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
   itemId: Arbol
-  displayName: Arbol
+  displayName: "\xC1rbol"
   japaneseName: "\u6728"
-  romajiName: Ki
+  romajiName: Ki/Moku
 --- !u!23 &1185469833
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43367,7 +43581,7 @@ GameObject:
   - component: {fileID: 1206123908}
   - component: {fileID: 1206123903}
   m_Layer: 0
-  m_Name: Abuelo
+  m_Name: Uvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43487,10 +43701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Abuelo
-  displayName: Abuelo
-  japaneseName: "\u304A\u3058\u3044\u3055\u3093"
-  romajiName: Ojiisan
+  itemId: Uvas
+  displayName: Uvas
+  japaneseName: "\u3076\u3069\u3046"
+  romajiName: Budou
 --- !u!23 &1206123905
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43682,7 +43896,7 @@ GameObject:
   - component: {fileID: 1212681825}
   - component: {fileID: 1212681820}
   m_Layer: 0
-  m_Name: Bebe
+  m_Name: Queso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43697,8 +43911,8 @@ Transform:
   m_GameObject: {fileID: 1212681815}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59252995, y: 0.249, z: -0.424}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: -0.59253, y: 0.24899995, z: -0.424}
+  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1112729928}
@@ -43802,10 +44016,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Bebe
-  displayName: "Beb\xE9"
-  japaneseName: "\u3042\u304B\u3061\u3083\u3093"
-  romajiName: Akachan
+  itemId: Queso
+  displayName: Queso
+  japaneseName: "\u30C1\u30FC\u30BA"
+  romajiName: Chiizu
 --- !u!23 &1212681822
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -44381,7 +44595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: ec645c7c-17a3-46d1-9a4c-9103c6642df5
+  instanceId: 71a628eb-7e75-4183-863a-0e1d6328cdd8
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -44908,7 +45122,6 @@ MonoBehaviour:
   advanceDelay: 1
   textPrefix: 'Escribe: '
   completedText: " Lecci\xF3n completada"
-  _currentIndex: 0
 --- !u!4 &1256282287
 Transform:
   m_ObjectHideFlags: 0
@@ -45090,7 +45303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.74}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262449609
@@ -45179,7 +45392,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 22.486961, y: 0, z: 22.191147, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -47725,6 +47938,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 339943551}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1350992743 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+  m_PrefabInstance: {fileID: 643699842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1350992747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 763916688358990998, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
+  m_PrefabInstance: {fileID: 643699842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8159e497188df254ca5101f9c74a6a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KanaSlot
 --- !u!1 &1351588305
 GameObject:
   m_ObjectHideFlags: 0
@@ -47973,37 +48202,6 @@ MonoBehaviour:
     _installationVariants:
     - _memberName: mode
       _value: '{"value__":0}'
---- !u!1 &1359995170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1359995171}
-  m_Layer: 7
-  m_Name: SpawnPoint9
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1359995171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359995170}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15214002, y: -0.36773002, z: 0.0068700016}
-  m_LocalScale: {x: 0.18023251, y: 0.08105266, z: 0.0001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083091836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365331511
 GameObject:
   m_ObjectHideFlags: 0
@@ -48306,6 +48504,7 @@ Transform:
   - {fileID: 261353890}
   - {fileID: 635254839}
   - {fileID: 1765812956}
+  - {fileID: 1350992743}
   m_Father: {fileID: 1218773185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373033673
@@ -48520,9 +48719,9 @@ Transform:
   - {fileID: 1665821997}
   - {fileID: 2138787931}
   - {fileID: 1765307517}
-  - {fileID: 1206123899}
   - {fileID: 1212681816}
   - {fileID: 1837038552}
+  - {fileID: 1206123899}
   - {fileID: 1992357536}
   - {fileID: 974670685}
   - {fileID: 1928114543}
@@ -48654,7 +48853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: d077a26e-8cd4-4eb7-8235-7db8545d3041
+  instanceId: 7139856e-201a-4b1d-970e-8c5ac29d67a0
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -49711,7 +49910,7 @@ MonoBehaviour:
   itemId: Llama
   displayName: Llama
   japaneseName: "\u706B"
-  romajiName: Ka
+  romajiName: Hi/Ka
 --- !u!23 &1392582086
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -50238,13 +50437,13 @@ MonoBehaviour:
   - {fileID: 1386490200}
   - {fileID: 698184420}
   - {fileID: 1912164329}
+  - {fileID: 340364821}
   - {fileID: 2003295046}
   - {fileID: 2064475100}
   - {fileID: 2059859915}
   - {fileID: 1671447314}
   - {fileID: 1885561834}
   - {fileID: 677466355}
-  - {fileID: 917356842}
   - {fileID: 1059317825}
   - {fileID: 917356842}
   - {fileID: 1662257651}
@@ -51417,7 +51616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: "Monta\xF1a"
+  itemId: Montana
   displayName: "Monta\xF1a"
   japaneseName: "\u5C71"
   romajiName: Yama
@@ -51491,7 +51690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: a85bed9c-9937-49a5-95c6-2fce86e1ba6e
+  instanceId: 905dfe89-94a4-42ee-bbe4-72d3272e50db
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -52373,8 +52572,8 @@ Transform:
   m_GameObject: {fileID: 1470766296}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02488, y: -0.071529984, z: 0.9}
-  m_LocalScale: {x: 1.5, y: 1, z: 0.01}
+  m_LocalPosition: {x: -0.0334, y: -0.0647, z: 0.9}
+  m_LocalScale: {x: 1.9049599, y: 1.142998, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1958894942}
@@ -56032,7 +56231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -56365,7 +56564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: 57a00d45-49a4-4f8c-82e1-92b828fea134
+  instanceId: fbf62e3e-b14e-4e01-aad4-3791bdd0cfb7
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -56467,37 +56666,6 @@ MonoBehaviour:
   _selectSurface: {fileID: 0}
   _movementProvider: {fileID: 1571041066}
   _tiebreakerScore: 0
---- !u!1 &1583211616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1583211617}
-  m_Layer: 7
-  m_Name: SpawnPoint10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1583211617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583211616}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.047859967, y: -0.36773002, z: 0.0068700016}
-  m_LocalScale: {x: 0.18023251, y: 0.08105266, z: 0.0001}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083091836}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1590003136
 GameObject:
   m_ObjectHideFlags: 0
@@ -58971,7 +59139,7 @@ GameObject:
   - component: {fileID: 1665822006}
   - component: {fileID: 1665822001}
   m_Layer: 0
-  m_Name: HermanaM
+  m_Name: Carne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59091,10 +59259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: HerM
-  displayName: Hermana menor
-  japaneseName: "\u3044\u3082\u3046\u3068"
-  romajiName: Imouto
+  itemId: Carne
+  displayName: Carne
+  japaneseName: "\u306B\u304F"
+  romajiName: Niku
 --- !u!23 &1665822003
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61066,14 +61234,15 @@ RectTransform:
   m_Children:
   - {fileID: 1299654725}
   - {fileID: 106693253}
-  - {fileID: 1817715993}
   - {fileID: 107302928}
+  - {fileID: 1817715993}
+  - {fileID: 1910172480}
   m_Father: {fileID: 29041992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 15}
+  m_AnchoredPosition: {x: -0.00115, y: -0.02257}
+  m_SizeDelta: {x: 9.84698, y: 18.00935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1729446661
 Canvas:
@@ -61182,7 +61351,10 @@ MonoBehaviour:
   activityNameText: {fileID: 2077893205}
   pageIndicatorText: {fileID: 107302929}
   enterButton: {fileID: 106693254}
+  backToMenuButton: {fileID: 0}
+  resetBlockButton: {fileID: 1910172481}
   activityMenuManager: {fileID: 1906608024}
+  blockMenuUI: {fileID: 134071364}
   swipeThreshold: 0.06
   swipeCooldown: 0.4
 --- !u!1 &1731227715
@@ -61643,7 +61815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 96e557cf-2470-4c6c-b6d2-056579c7e0d6
+  instanceId: 5c001ce3-7794-4283-8a1b-128ab07985ad
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -61700,7 +61872,7 @@ GameObject:
   - component: {fileID: 1748496787}
   - component: {fileID: 1748496782}
   m_Layer: 0
-  m_Name: Padre
+  m_Name: Fresa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61820,10 +61992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Padre
-  displayName: Padre
-  japaneseName: "\u304A\u3068\u3046\u3055\u3093"
-  romajiName: Otousan
+  itemId: Fresa
+  displayName: Fresa
+  japaneseName: "\u3044\u3061\u3054"
+  romajiName: Ichigo
 --- !u!23 &1748496784
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62027,7 +62199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: fde8f239-4791-45e3-83f5-286ba26bb1da
+  instanceId: 4e77d762-b541-4e96-9e02-842c3e4c9309
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -62115,7 +62287,7 @@ GameObject:
   - component: {fileID: 1765307526}
   - component: {fileID: 1765307521}
   m_Layer: 0
-  m_Name: Abuela
+  m_Name: Miso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62235,10 +62407,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Abuela
-  displayName: Abuela
-  japaneseName: "\u304A\u3070\u3042\u3055\u3093"
-  romajiName: Obaasan
+  itemId: Miso
+  displayName: Miso
+  japaneseName: "\u307F\u305D\u3057\u308B"
+  romajiName: Misoshiru
 --- !u!23 &1765307523
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62569,7 +62741,7 @@ MonoBehaviour:
   itemId: Ojo
   displayName: Ojo
   japaneseName: "\u76EE"
-  romajiName: Me
+  romajiName: Me/Moku
 --- !u!23 &1771696195
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63504,8 +63676,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3.79}
-  m_SizeDelta: {x: 16.5, y: 8}
+  m_AnchoredPosition: {x: 0.025002, y: -0.93}
+  m_SizeDelta: {x: 16.583, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817715994
 MonoBehaviour:
@@ -63526,7 +63698,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -63572,13 +63744,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1817715996
@@ -64158,7 +64330,7 @@ GameObject:
   - component: {fileID: 1837038561}
   - component: {fileID: 1837038556}
   m_Layer: 0
-  m_Name: Pan
+  m_Name: Leche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64278,10 +64450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Pan
-  displayName: Pan
-  japaneseName: "\u30D1\u30F3"
-  romajiName: Pan
+  itemId: Leche
+  displayName: Leche
+  japaneseName: "\u304E\u3085\u3046\u306B\u3085\u3046"
+  romajiName: Gyuunyuu
 --- !u!23 &1837038558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64430,8 +64602,6 @@ MonoBehaviour:
   - {fileID: 509197725}
   - {fileID: 789979899}
   - {fileID: 558717150}
-  - {fileID: 1359995171}
-  - {fileID: 1583211617}
   slots:
   - {fileID: 1919040678}
   - {fileID: 2075325631}
@@ -64440,6 +64610,7 @@ MonoBehaviour:
   - {fileID: 373502684}
   - {fileID: 635254838}
   - {fileID: 1765812955}
+  - {fileID: 1350992747}
   hintText: {fileID: 335309265}
   romajiText: {fileID: 398660556}
   feedbackText: {fileID: 1262449609}
@@ -64498,8 +64669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.27194002, y: -0.24033004}
-  m_SizeDelta: {x: 10, y: 5}
+  m_AnchoredPosition: {x: -0.2, y: -0.1697}
+  m_SizeDelta: {x: 15.4899, y: 6.4136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1850475303
 MonoBehaviour:
@@ -64706,7 +64877,7 @@ MonoBehaviour:
   itemId: Oreja
   displayName: Oreja
   japaneseName: "\u8033"
-  romajiName: Mimi
+  romajiName: Mimi/Ji
 --- !u!23 &1851417911
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66812,6 +66983,127 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1910172479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910172480}
+  - component: {fileID: 1910172483}
+  - component: {fileID: 1910172482}
+  - component: {fileID: 1910172481}
+  m_Layer: 0
+  m_Name: Reset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1910172480
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910172479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 42854969}
+  m_Father: {fileID: 1729446660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.025002, y: -5.98}
+  m_SizeDelta: {x: 16.583, y: 8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1910172481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910172479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1910172482}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1910172482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910172479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 1
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1910172483
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910172479}
+  m_CullTransparentMesh: 1
 --- !u!1 &1911690029
 GameObject:
   m_ObjectHideFlags: 0
@@ -67465,7 +67757,7 @@ MonoBehaviour:
   itemId: Sol
   displayName: Sol
   japaneseName: "\u65E5"
-  romajiName: Nichi
+  romajiName: Hi/Nichi
 --- !u!23 &1928114549
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67536,7 +67828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: 8d4ce79d-add2-490c-ade9-fe9e8c13302b
+  instanceId: ec089584-804a-48da-ad48-98028912c016
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -68269,10 +68561,11 @@ MonoBehaviour:
   projector: {fileID: 73809693}
   templateSet: {fileID: 11400000, guid: a1f99a283fcf64342ba7906cc7fa4b77, type: 2}
   label: Nu
-  surfaceOffset: -0.002
+  surfaceOffset: -0.02
   width: 0.004
   lineMaterial: {fileID: 2100000, guid: fcd6e6d0413622d418daab01f18e8a4c, type: 2}
-  targetSize: 0.1
+  targetSize: 0.12
+  shortStrokeLoopThreshold: 0.05
   animateOnBuild: 1
   strokeDrawDuration: 0.8
   delayBetweenStrokes: 0.25
@@ -68693,7 +68986,7 @@ GameObject:
   - component: {fileID: 1972905493}
   - component: {fileID: 1972905492}
   m_Layer: 3
-  m_Name: Text (TMP) (1)
+  m_Name: Romaji
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68715,7 +69008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -67.7}
+  m_AnchoredPosition: {x: 0, y: -79.3}
   m_SizeDelta: {x: 154, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1972905492
@@ -68961,7 +69254,7 @@ Transform:
   m_GameObject: {fileID: 1980383733}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02488, y: 1.198, z: 0.613}
+  m_LocalPosition: {x: 0.02488, y: 1.083, z: 0.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -69681,10 +69974,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: Sushi
-  displayName: Sushi
-  japaneseName: "\u3059\u3057"
-  romajiName: Sushi
+  itemId: Repollo
+  displayName: Repollo
+  japaneseName: "\u30AD\u30E3\u30D9\u30C4"
+  romajiName: Kyabetsu
 --- !u!23 &1992357542
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -73183,8 +73476,6 @@ Transform:
   - {fileID: 509197725}
   - {fileID: 789979899}
   - {fileID: 558717150}
-  - {fileID: 1359995171}
-  - {fileID: 1583211617}
   m_Father: {fileID: 1218773185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2085739308
@@ -73827,7 +74118,7 @@ GameObject:
   - component: {fileID: 2116132619}
   - component: {fileID: 2116132618}
   m_Layer: 3
-  m_Name: Text (TMP)
+  m_Name: Instruc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74770,7 +75061,7 @@ GameObject:
   - component: {fileID: 2138787940}
   - component: {fileID: 2138787935}
   m_Layer: 0
-  m_Name: HermanoM
+  m_Name: Tofu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74890,10 +75181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e574c862a1ee343b8a12591a37f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketCollectible
-  itemId: HermanoM
-  displayName: Hermano Mayor
-  japaneseName: "\u304A\u306B\u3044\u3055\u3093"
-  romajiName: Oniisan
+  itemId: Tofu
+  displayName: Tofu
+  japaneseName: "\u3068\u3046\u3075"
+  romajiName: Toufu
 --- !u!23 &2138787937
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -75444,6 +75735,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1013853084}
     m_Modifications:
+    - target: {fileID: 144738327921460689, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -75470,11 +75765,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 10
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -75506,11 +75801,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.042250007
+      value: -0.0289
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.21272004
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2016628805171047511, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -75524,9 +75819,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3366668291622314533, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_margin.x
+      value: -36.680866
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366668291622314533, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_margin.z
+      value: -36.88918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019822189780693223, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_margin.x
+      value: -36.680874
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019822189780693223, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_margin.y
+      value: 37.304127
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019822189780693223, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_margin.z
+      value: -36.680805
+      objectReference: {fileID: 0}
     - target: {fileID: 7487436832199017185, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
       propertyPath: m_Name
       value: InstructionCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090196691714349442, guid: fdee4f296ebc88b49bbd6f5b7404a02a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75667,7 +75986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0007300377
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074101641449852325, guid: 5d61413a4d524104e998bd604351e5f0, type: 3}
       propertyPath: m_LocalPosition.z

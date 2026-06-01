@@ -15,21 +15,21 @@ MonoBehaviour:
   items:
   - bodyText: "<u>\u305F\u307E\u306D\u304E</u>\u3092 \u304D\u308B\u3002\r\n\u304A\u304A\u304D\u3044
       <u>\u305F\u307E\u306D\u304E</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Cebolla
+    narrationClip: {fileID: 8300000, guid: e45c82363b2242046bf4b866568bfdf1, type: 3}
   - bodyText: "\u304A\u3072\u308B\u306F <u>\u3068\u3093\u304B\u3064</u>\u3092 \u305F\u3079\u308B\u3002\r\n\u304A\u3044\u3057\u3044
       <u>\u3068\u3093\u304B\u3064</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Tonkatsu
+    narrationClip: {fileID: 8300000, guid: 963432172c652da40839c19d20c417ec, type: 3}
   - bodyText: "\u3042\u3055\u306F <u>\u304A\u3061\u3083</u>\u3092 \u306E\u3080\u3002\r\n\u3042\u3064\u3044
       <u>\u304A\u3061\u3083</u>\u3002"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Te
+    narrationClip: {fileID: 8300000, guid: 884752b4a2c889f4292a43b15f78b8da, type: 3}
   - bodyText: "\u306A\u3064\u306B <u>\u30A2\u30A4\u30B9\u30AF\u30EA\u30FC\u30E0</u>\u3092
       \u305F\u3079\u308B\u3002\r\n\u3064\u3081\u305F\u3044 <u>\u30A2\u30A4\u30B9\u30AF\u30EA\u30FC\u30E0</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Helado
+    narrationClip: {fileID: 8300000, guid: cc0d001493e63334cad9c2da148dde65, type: 3}
   - bodyText: "<u>\u30C1\u30AD\u30F3</u>\u306F \u304A\u3044\u3057\u3044\u3002\r\n\u3042\u3064\u3044
       <u>\u30C1\u30AD\u30F3</u>!"
-    correctItemId: 
-    narrationClip: {fileID: 0}
+    correctItemId: Pollo
+    narrationClip: {fileID: 8300000, guid: f4e0f2b67eecad14a80e18e924419ae4, type: 3}

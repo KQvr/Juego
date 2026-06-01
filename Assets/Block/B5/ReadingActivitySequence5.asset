@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: ReadingActivitySequence5
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
   items:
-  - bodyText: 
-    correctItemId: 
-    narrationClip: {fileID: 0}
-  - bodyText: 
-    correctItemId: 
-    narrationClip: {fileID: 0}
-  - bodyText: 
-    correctItemId: 
-    narrationClip: {fileID: 0}
-  - bodyText: 
-    correctItemId: 
-    narrationClip: {fileID: 0}
-  - bodyText: 
-    correctItemId: 
-    narrationClip: {fileID: 0}
+  - bodyText: "\u3061\u3044\u3055\u3044 <u>\u306F\u3053</u>\u3092 \u3042\u3051\u308B\u3002\r\n\u306A\u304B\u306B
+      \u306A\u306B\u304C \u3042\u308B\u304B\u306A?"
+    correctItemId: Caja
+    narrationClip: {fileID: 8300000, guid: bd6bee7aad7d51d419326948b9676343, type: 3}
+  - bodyText: "<u>\u307E\u3069</u>\u304B\u3089 \u305D\u3089\u3092 \u307F\u308B\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u307E\u3069</u>\u3002"
+    correctItemId: Ventana
+    narrationClip: {fileID: 8300000, guid: d4ae0414247d2da40a43da5436a71c5e, type: 3}
+  - bodyText: "\u3088\u308B\u3001<u>\u3067\u3093\u304D</u>\u3092 \u3064\u3051\u308B\u3002\r\n\u3042\u304B\u308B\u3044
+      <u>\u3067\u3093\u304D</u>\u3002"
+    correctItemId: Foco
+    narrationClip: {fileID: 8300000, guid: 72677dd50c842d6499b668f268afa622, type: 3}
+  - bodyText: "<u>\u30C9\u30A2</u>\u3092 \u3042\u3051\u308B\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u30C9\u30A2</u>!"
+    correctItemId: Puerta
+    narrationClip: {fileID: 8300000, guid: 10c656a275b06654aa87bf6b9b415436, type: 3}
+  - bodyText: "\u3061\u3044\u3055\u3044 <u>\u3044\u306C</u>\u3068 \u3042\u305D\u3076\u3002\r\n\u304B\u308F\u3044\u3044
+      <u>\u3044\u306C</u>!"
+    correctItemId: Perro
+    narrationClip: {fileID: 8300000, guid: 30fb808c61239b14dac8ce41ab826b85, type: 3}

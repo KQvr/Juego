@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f968ad7bf60c18940a1a83b045deb1d5, type: 3}
   m_Name: ReadingActivitySequence6
   m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
-  items: []
+  items:
+  - bodyText: "\u3042\u308C\u306F \u3072\u304F\u3044 <u>\u3044\u3048</u>\u3002\r\n\u3061\u3044\u3055\u304F\u3066
+      \u304B\u308F\u3044\u3044 <u>\u3044\u3048</u>!"
+    correctItemId: CasaB
+    narrationClip: {fileID: 8300000, guid: 62c8fabfdbd87554d8911489a5814675, type: 3}
+  - bodyText: "\u306B\u308F\u306B \u306A\u304C\u3044 <u>\u3078\u3073</u>\u304C \u3044\u308B\u3002\r\n\u304F\u308D\u3044
+      <u>\u3078\u3073</u>!"
+    correctItemId: SerpienteL
+    narrationClip: {fileID: 8300000, guid: fd6769814cc19f84d905fe25f067086c, type: 3}
+  - bodyText: "\u3064\u304F\u3048\u306B \u307F\u3058\u304B\u3044 <u>\u3048\u3093\u3074\u3064</u>\u3002\r\n\u3042\u304B\u3044
+      <u>\u3048\u3093\u3074\u3064</u>\u3002"
+    correctItemId: LapizC
+    narrationClip: {fileID: 8300000, guid: 0ea163455946f384697c6b0b79522671, type: 3}
+  - bodyText: "\u3042\u3055\u306F \u3042\u3064\u3044 <u>\u30B3\u30FC\u30D2\u30FC</u>\u3092
+      \u306E\u3080\u3002\r\n\u304F\u308D\u3044 <u>\u30B3\u30FC\u30D2\u30FC</u>!"
+    correctItemId: CafeC
+    narrationClip: {fileID: 8300000, guid: fa9a0ad6dddebde41b3b9a5d5a8a2cf2, type: 3}
+  - bodyText: "\u306A\u3064\u306B \u3064\u3081\u305F\u3044 <u>\u30A2\u30A4\u30B9</u>\u3092
+      \u305F\u3079\u308B\u3002\r\n\u304A\u3044\u3057\u3044 <u>\u30A2\u30A4\u30B9</u>!"
+    correctItemId: HeladoF
+    narrationClip: {fileID: 8300000, guid: 1d54e0baf44701d4d995fe53a99977d0, type: 3}

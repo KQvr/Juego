@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273022fed65a8f42ad1c8b87e01889c, type: 3}
   m_Name: KanaWordSequence7
   m_EditorClassIdentifier: Assembly-CSharp::KanaWordSequenceSO
-  words: []
+  words:
+  - wordKana: "\u3067\u3093\u3057\u3083"
+    wordRomaji: Densha
+    hintText: Tren
+  - wordKana: "\u30D0\u30B9"
+    wordRomaji: Basu
+    hintText: "Autob\xFAs"
+  - wordKana: "\u3072\u3053\u3046\u304D"
+    wordRomaji: Hikouki
+    hintText: "Avi\xF3n"
+  - wordKana: "\u3075\u306D"
+    wordRomaji: Fune
+    hintText: Barco
+  - wordKana: "\u30BF\u30AF\u30B7\u30FC"
+    wordRomaji: Takushii
+    hintText: Taxi
+  - wordKana: "\u30AB\u30EC\u30F3\u30C0\u30FC"
+    wordRomaji: Karendaa
+    hintText: Calendario
+  - wordKana: "\u3044\u3048"
+    wordRomaji: Ie
+    hintText: Casa
+  - wordKana: "\u306F\u3057"
+    wordRomaji: Hashi
+    hintText: Puente
+  - wordKana: "\u307F\u3061"
+    wordRomaji: MIchi
+    hintText: Camino/Calle
+  - wordKana: "\u3053\u3046\u3070\u3093"
+    wordRomaji: Kouban
+    hintText: "Caseta de pol\xEDcia"
