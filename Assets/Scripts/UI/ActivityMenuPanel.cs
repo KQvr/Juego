@@ -1,23 +1,39 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Menu de muneca con 4 botones tipo tab — uno por actividad.
-/// Click en un tab entra inmediatamente a esa actividad.
-/// Los tabs de actividades que no estan en el bloque actual quedan deshabilitados.
+/// Menu flotante con boton de toggle.
+/// Por defecto solo se muestra un boton pequenio; al pulsarlo se despliega
+/// el panel completo con tabs de actividades + back + reset.
 ///
-/// Estructura del Canvas:
-///   ├── Tabs row
-///   │     ├── DrawingTab    (Button con label "Dibujo")
-///   │     ├── BasketTab     (Button con label "Cesta")
-///   │     ├── OrderingTab   (Button con label "Ordenar")
-///   │     └── ReadingTab    (Button con label "Lectura")
-///   ├── BackToMenuButton    (Button)  → vuelve al menu de bloques
-///   └── ResetBlockButton    (Button)  → reinicia progreso del bloque actual
+/// Estructura recomendada del Canvas:
+///   GameMenuCanvas (World Space, posicion fija frente al usuario)
+///   ├── ToggleButton            (siempre activo, con label "Menu" o icono)
+///   └── ExpandedPanel           (active/inactive segun toggle)
+///         ├── TabsRow
+///         │     ├── DrawingTab
+///         │     ├── BasketTab
+///         │     ├── OrderingTab
+///         │     └── ReadingTab
+///         ├── BackToMenuButton
+///         └── ResetBlockButton
 /// </summary>
-public class WristMenuPager : MonoBehaviour
+public class ActivityMenuPanel : MonoBehaviour
 {
+    [Header("Toggle")]
+    [SerializeField] private Button toggleButton;
+    [SerializeField] private GameObject expandedPanel;
+    [Tooltip("True: el panel empieza colapsado. False: empieza visible.")]
+    [SerializeField] private bool startCollapsed = true;
+    [Tooltip("True: cerrar el panel automaticamente al seleccionar una actividad.")]
+    [SerializeField] private bool collapseAfterSelection = true;
+
+    [Header("Visibilidad global")]
+    [Tooltip("GameObject contenedor que se oculta cuando no hay un bloque activo (menu de bloques visible). Si esta vacio, se intenta usar el Canvas del mismo GameObject.")]
+    [SerializeField] private GameObject menuRoot;
+
+    private Canvas menuCanvas;
+
     [Header("Tabs de actividad")]
     [SerializeField] private Button drawingTab;
     [SerializeField] private Button basketTab;
@@ -25,7 +41,6 @@ public class WristMenuPager : MonoBehaviour
     [SerializeField] private Button readingTab;
 
     [Header("Visual del tab activo")]
-    [Tooltip("Color del tab actualmente activo. Los demas usan su color normal.")]
     [SerializeField] private Color activeTabColor = new Color(0.4f, 0.7f, 1f, 1f);
     [SerializeField] private Color normalTabColor = Color.white;
 
@@ -38,9 +53,44 @@ public class WristMenuPager : MonoBehaviour
     [SerializeField] private BlockMenuUI blockMenuUI;
 
     private int currentActivity = -1;
+    private string lastKnownBlockId = null;
+
+    void Awake()
+    {
+        if (menuRoot == null)
+            menuCanvas = GetComponent<Canvas>();
+    }
+
+    void Update()
+    {
+        bool shouldShow = BlockManager.Instance != null && BlockManager.Instance.HasActiveBlock;
+
+        if (menuRoot != null)
+        {
+            if (menuRoot.activeSelf != shouldShow)
+                menuRoot.SetActive(shouldShow);
+        }
+        else if (menuCanvas != null)
+        {
+            if (menuCanvas.enabled != shouldShow)
+                menuCanvas.enabled = shouldShow;
+        }
+
+        // Refrescar tabs si cambio el bloque activo (de null a real o entre bloques)
+        string currentBlockId = BlockManager.Instance?.GetCurrentBlock()?.blockId;
+        if (currentBlockId != lastKnownBlockId)
+        {
+            lastKnownBlockId = currentBlockId;
+            currentActivity = -1; // resetear seleccion al cambiar de bloque
+            RefreshTabsAvailability();
+        }
+    }
 
     void Start()
     {
+        if (toggleButton != null)
+            toggleButton.onClick.AddListener(TogglePanel);
+
         if (drawingTab != null) drawingTab.onClick.AddListener(() => SelectActivity(0));
         if (basketTab != null) basketTab.onClick.AddListener(() => SelectActivity(1));
         if (orderingTab != null) orderingTab.onClick.AddListener(() => SelectActivity(2));
@@ -52,28 +102,48 @@ public class WristMenuPager : MonoBehaviour
         if (resetBlockButton != null)
             resetBlockButton.onClick.AddListener(ResetCurrentBlock);
 
+        if (expandedPanel != null)
+            expandedPanel.SetActive(!startCollapsed);
+
         RefreshTabsAvailability();
     }
 
     void OnEnable()
     {
-        // Cada vez que el wrist menu reaparece, refrescar disponibilidad por si
-        // cambio el bloque activo.
         RefreshTabsAvailability();
     }
 
     void OnDestroy()
     {
+        if (toggleButton != null) toggleButton.onClick.RemoveListener(TogglePanel);
+
         if (drawingTab != null) drawingTab.onClick.RemoveAllListeners();
         if (basketTab != null) basketTab.onClick.RemoveAllListeners();
         if (orderingTab != null) orderingTab.onClick.RemoveAllListeners();
         if (readingTab != null) readingTab.onClick.RemoveAllListeners();
 
-        if (backToMenuButton != null)
-            backToMenuButton.onClick.RemoveListener(GoBackToMenu);
+        if (backToMenuButton != null) backToMenuButton.onClick.RemoveListener(GoBackToMenu);
+        if (resetBlockButton != null) resetBlockButton.onClick.RemoveListener(ResetCurrentBlock);
+    }
 
-        if (resetBlockButton != null)
-            resetBlockButton.onClick.RemoveListener(ResetCurrentBlock);
+    // -----------------------------------------------------------------------
+    // Toggle
+    // -----------------------------------------------------------------------
+
+    public void TogglePanel()
+    {
+        if (expandedPanel == null) return;
+        expandedPanel.SetActive(!expandedPanel.activeSelf);
+    }
+
+    public void OpenPanel()
+    {
+        if (expandedPanel != null) expandedPanel.SetActive(true);
+    }
+
+    public void ClosePanel()
+    {
+        if (expandedPanel != null) expandedPanel.SetActive(false);
     }
 
     // -----------------------------------------------------------------------
@@ -97,10 +167,6 @@ public class WristMenuPager : MonoBehaviour
         if (btn == null) return;
         btn.interactable = interactable;
     }
-
-    // -----------------------------------------------------------------------
-    // Highlight visual del tab activo
-    // -----------------------------------------------------------------------
 
     private void UpdateTabHighlights()
     {
@@ -136,6 +202,9 @@ public class WristMenuPager : MonoBehaviour
 
         currentActivity = index;
         UpdateTabHighlights();
+
+        if (collapseAfterSelection)
+            ClosePanel();
     }
 
     private void GoBackToMenu()
@@ -143,6 +212,7 @@ public class WristMenuPager : MonoBehaviour
         activityMenuManager?.HideAllActivities();
         blockMenuUI?.ShowMenu();
         currentActivity = -1;
+        ClosePanel();
     }
 
     private void ResetCurrentBlock()

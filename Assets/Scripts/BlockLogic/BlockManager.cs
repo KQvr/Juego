@@ -19,7 +19,7 @@ public class BlockManager : MonoBehaviour
     public event Action<string, int> OnBlockStarsChanged;
     public event Action<string> OnBlockUnlocked;
 
-    private readonly Dictionary<string, List<BlockActivityTracker>> activitiesByBlock = new();
+    private readonly List<BlockActivityTracker> allTrackers = new();
     private int currentBlockIndex = -1;
 
     // -----------------------------------------------------------------------
@@ -46,55 +46,66 @@ public class BlockManager : MonoBehaviour
 
     public void RegisterActivity(BlockActivityTracker tracker)
     {
-        if (!activitiesByBlock.ContainsKey(tracker.BlockId))
-            activitiesByBlock[tracker.BlockId] = new();
+        if (!allTrackers.Contains(tracker))
+            allTrackers.Add(tracker);
 
-        if (!activitiesByBlock[tracker.BlockId].Contains(tracker))
-            activitiesByBlock[tracker.BlockId].Add(tracker);
+        // Si ya hay un bloque activo, asignarselo al tracker recien registrado
+        var current = GetCurrentBlock();
+        if (current != null)
+            tracker.SetBlockId(current.blockId);
     }
 
     public void UnregisterActivity(BlockActivityTracker tracker)
     {
-        if (activitiesByBlock.TryGetValue(tracker.BlockId, out var list))
-            list.Remove(tracker);
+        allTrackers.Remove(tracker);
     }
 
     public void OnActivityProgressChanged(BlockActivityTracker tracker)
     {
-        OnBlockStarsChanged?.Invoke(tracker.BlockId, CalculateStars(tracker.BlockId));
+        if (string.IsNullOrEmpty(tracker.CurrentBlockId)) return;
+        OnBlockStarsChanged?.Invoke(tracker.CurrentBlockId, CalculateStars(tracker.CurrentBlockId));
     }
 
     public void OnActivityCompleted(BlockActivityTracker tracker)
     {
-        int stars = CalculateStars(tracker.BlockId);
-        OnBlockStarsChanged?.Invoke(tracker.BlockId, stars);
-        if (stars == 3) TryUnlockNext(tracker.BlockId);
+        if (string.IsNullOrEmpty(tracker.CurrentBlockId)) return;
+        int stars = CalculateStars(tracker.CurrentBlockId);
+        OnBlockStarsChanged?.Invoke(tracker.CurrentBlockId, stars);
+        if (stars == 3) TryUnlockNext(tracker.CurrentBlockId);
     }
 
     // -----------------------------------------------------------------------
-    // Estrellas
+    // Estrellas — lee de PlayerPrefs, asi funciona para cualquier bloque
     // -----------------------------------------------------------------------
 
     public int CalculateStars(string blockId)
     {
-        if (!activitiesByBlock.TryGetValue(blockId, out var activities) ||
-            activities == null || activities.Count == 0) return 0;
+        var block = blocks.Find(b => b.blockId == blockId);
+        if (block == null) return 0;
 
-        bool allCompleted = true;
+        int totalActivities = 0;
+        int completedCount = 0;
         float totalProgress = 0f;
         bool anyStarted = false;
 
-        foreach (var a in activities)
+        void Consider(BlockActivityType type)
         {
-            if (!a.IsCompleted) allCompleted = false;
-            if (a.Progress > 0f) anyStarted = true;
-            totalProgress += a.Progress;
+            totalActivities++;
+            float p = BlockActivityTracker.GetSavedProgress(blockId, type);
+            bool c = BlockActivityTracker.GetSavedCompleted(blockId, type);
+            totalProgress += p;
+            if (c) completedCount++;
+            if (p > 0f) anyStarted = true;
         }
 
-        float avg = totalProgress / activities.Count;
+        if (block.hasDrawing) Consider(BlockActivityType.Drawing);
+        if (block.hasBasket) Consider(BlockActivityType.Basket);
+        if (block.hasOrdering) Consider(BlockActivityType.Ordering);
+        if (block.hasReading) Consider(BlockActivityType.Reading);
 
-        if (allCompleted) return 3;
-        if (avg >= 0.5f) return 2;
+        if (totalActivities == 0) return 0;
+        if (completedCount == totalActivities) return 3;
+        if (totalProgress / totalActivities >= 0.5f) return 2;
         if (anyStarted) return 1;
         return 0;
     }
@@ -149,8 +160,12 @@ public class BlockManager : MonoBehaviour
         bool sameBlock = currentBlockIndex == blockIndex;
         currentBlockIndex = blockIndex;
 
-        // FIX BUG 3: No activar todos los roots directamente.
-        // Delegar al ActivityMenuManager para que muestre SOLO la primera actividad disponible.
+        // Asignar el blockId actual a todos los trackers para que reporten
+        // bajo el bloque correcto
+        foreach (var t in allTrackers)
+            t.SetBlockId(content.blockId);
+
+        // Mostrar la primera actividad disponible
         activityMenuManager?.ShowFirstAvailable(
             content.hasDrawing,
             content.hasBasket,
@@ -187,6 +202,10 @@ public class BlockManager : MonoBehaviour
     {
         activityMenuManager?.HideAllActivities();
         currentBlockIndex = -1;
+
+        // Limpiar blockId en los trackers para que no guarden bajo un bloque
+        foreach (var t in allTrackers)
+            t.SetBlockId(null);
     }
 
     // -----------------------------------------------------------------------
@@ -200,10 +219,6 @@ public class BlockManager : MonoBehaviour
             ? blocks[currentBlockIndex]
             : null;
 
-    /// <summary>
-    /// True si hay un bloque seleccionado actualmente.
-    /// Usado por WristMenuFollower para ocultar el menu si no hay bloque activo.
-    /// </summary>
     public bool HasActiveBlock => currentBlockIndex >= 0;
 
     public void ResetAllProgress()
@@ -212,10 +227,16 @@ public class BlockManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey($"block_{block.blockId}_unlocked");
 
-            if (activitiesByBlock.TryGetValue(block.blockId, out var activities))
-                foreach (var a in activities)
-                    a.ResetProgress();
+            // Borrar progreso de cada tipo de actividad bajo cada bloque
+            BlockActivityTracker.ClearSaved(block.blockId, BlockActivityType.Drawing);
+            BlockActivityTracker.ClearSaved(block.blockId, BlockActivityType.Basket);
+            BlockActivityTracker.ClearSaved(block.blockId, BlockActivityType.Ordering);
+            BlockActivityTracker.ClearSaved(block.blockId, BlockActivityType.Reading);
         }
+
+        // Resetear trackers en memoria
+        foreach (var t in allTrackers)
+            t.ResetProgress();
 
         if (blocks.Count > 0) EnsureUnlocked(blocks[0].blockId);
         PlayerPrefs.Save();
@@ -225,7 +246,6 @@ public class BlockManager : MonoBehaviour
 
     /// <summary>
     /// Reinicia el progreso unicamente del bloque actual.
-    /// No afecta el desbloqueo del bloque ni el progreso de otros bloques.
     /// </summary>
     public void ResetCurrentBlockProgress()
     {
@@ -236,13 +256,17 @@ public class BlockManager : MonoBehaviour
             return;
         }
 
-        if (activitiesByBlock.TryGetValue(current.blockId, out var activities))
-        {
-            foreach (var a in activities)
-                a.ResetProgress();
-        }
+        // Borrar PlayerPrefs del bloque actual
+        BlockActivityTracker.ClearSaved(current.blockId, BlockActivityType.Drawing);
+        BlockActivityTracker.ClearSaved(current.blockId, BlockActivityType.Basket);
+        BlockActivityTracker.ClearSaved(current.blockId, BlockActivityType.Ordering);
+        BlockActivityTracker.ClearSaved(current.blockId, BlockActivityType.Reading);
 
-        // Re-inyectar datos para reiniciar las actividades en memoria
+        // Resetear trackers en memoria
+        foreach (var t in allTrackers)
+            t.ResetProgress();
+
+        // Re-inyectar datos para reiniciar las actividades
         if (current.hasDrawing && current.kanaTemplateSet != null)
             drawingManager?.SetData(current.kanaTemplateSet);
         if (current.hasBasket && current.basketSequence != null)

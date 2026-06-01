@@ -1,37 +1,31 @@
 using System;
 using UnityEngine;
 
+public enum BlockActivityType { Drawing, Basket, Ordering, Reading }
+
 /// <summary>
-/// Colócalo en el mismo GameObject que el activity manager.
+/// Coloquelo en el mismo GameObject que el activity manager.
 /// Reporta progreso y completado al BlockManager.
 ///
-/// Conexión en Inspector:
-///   - Asignar blockId y activityId
-///   - El activity manager llama a SetProgress(float) y MarkAsCompleted()
-///     via sus propios eventos, o directamente desde su script.
+/// El blockId es DINAMICO — lo asigna BlockManager cuando el usuario
+/// entra a un bloque (via SetBlockId). El tipo de actividad si es fijo.
 /// </summary>
 public class BlockActivityTracker : MonoBehaviour
 {
     [Header("Identidad")]
-    [SerializeField] private string blockId;
-    [SerializeField] private string activityId;
+    [Tooltip("Tipo de actividad — fijo. El bloque al que pertenece es dinamico.")]
+    [SerializeField] private BlockActivityType activityType;
 
-    public string BlockId   => blockId;
-    public string ActivityId => activityId;
-    public float  Progress  { get; private set; }
-    public bool   IsCompleted { get; private set; }
+    public BlockActivityType ActivityType => activityType;
+    public string ActivityId => activityType.ToString().ToLower();
+    public string CurrentBlockId { get; private set; }
+    public float Progress { get; private set; }
+    public bool IsCompleted { get; private set; }
 
     public event Action<BlockActivityTracker> OnTrackerCompleted;
 
     void Start()
     {
-        // Cargar progreso guardado
-        float saved = PlayerPrefs.GetFloat(SaveKey("progress"), 0f);
-        bool  comp  = PlayerPrefs.GetInt(SaveKey("completed"), 0) == 1;
-
-        Progress    = saved;
-        IsCompleted = comp;
-
         BlockManager.Instance?.RegisterActivity(this);
     }
 
@@ -41,8 +35,24 @@ public class BlockActivityTracker : MonoBehaviour
     }
 
     /// <summary>
-    /// Llamado por el activity manager con un valor entre 0 y 1.
+    /// Llamado por BlockManager cuando el usuario entra a un bloque.
+    /// El tracker recarga su estado para el bloque dado.
     /// </summary>
+    public void SetBlockId(string newBlockId)
+    {
+        CurrentBlockId = newBlockId;
+
+        if (string.IsNullOrEmpty(newBlockId))
+        {
+            Progress = 0f;
+            IsCompleted = false;
+            return;
+        }
+
+        Progress = PlayerPrefs.GetFloat(SaveKey("progress"), 0f);
+        IsCompleted = PlayerPrefs.GetInt(SaveKey("completed"), 0) == 1;
+    }
+
     public void SetProgress(float progress)
     {
         Progress = Mathf.Clamp01(progress);
@@ -50,15 +60,12 @@ public class BlockActivityTracker : MonoBehaviour
         BlockManager.Instance?.OnActivityProgressChanged(this);
     }
 
-    /// <summary>
-    /// Llamado por el activity manager cuando su secuencia termina al 100%.
-    /// </summary>
     public void MarkAsCompleted()
     {
         if (IsCompleted) return;
 
         IsCompleted = true;
-        Progress    = 1f;
+        Progress = 1f;
         Save();
 
         OnTrackerCompleted?.Invoke(this);
@@ -68,18 +75,42 @@ public class BlockActivityTracker : MonoBehaviour
     public void ResetProgress()
     {
         IsCompleted = false;
-        Progress    = 0f;
+        Progress = 0f;
         Save();
         BlockManager.Instance?.OnActivityProgressChanged(this);
     }
 
     private void Save()
     {
-        PlayerPrefs.SetFloat(SaveKey("progress"),   Progress);
-        PlayerPrefs.SetInt(SaveKey("completed"),    IsCompleted ? 1 : 0);
+        if (string.IsNullOrEmpty(CurrentBlockId)) return;
+        PlayerPrefs.SetFloat(SaveKey("progress"), Progress);
+        PlayerPrefs.SetInt(SaveKey("completed"), IsCompleted ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     private string SaveKey(string suffix) =>
-        $"block_{blockId}_activity_{activityId}_{suffix}";
+        $"block_{CurrentBlockId}_activity_{ActivityId}_{suffix}";
+
+    // -----------------------------------------------------------------------
+    // Helpers estaticos para leer estado de cualquier bloque sin tracker
+    // -----------------------------------------------------------------------
+
+    public static float GetSavedProgress(string blockId, BlockActivityType type)
+    {
+        string id = type.ToString().ToLower();
+        return PlayerPrefs.GetFloat($"block_{blockId}_activity_{id}_progress", 0f);
+    }
+
+    public static bool GetSavedCompleted(string blockId, BlockActivityType type)
+    {
+        string id = type.ToString().ToLower();
+        return PlayerPrefs.GetInt($"block_{blockId}_activity_{id}_completed", 0) == 1;
+    }
+
+    public static void ClearSaved(string blockId, BlockActivityType type)
+    {
+        string id = type.ToString().ToLower();
+        PlayerPrefs.DeleteKey($"block_{blockId}_activity_{id}_progress");
+        PlayerPrefs.DeleteKey($"block_{blockId}_activity_{id}_completed");
+    }
 }

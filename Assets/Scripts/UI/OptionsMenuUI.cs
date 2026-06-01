@@ -9,9 +9,13 @@ using UnityEngine.UI;
 /// </summary>
 public class OptionsMenuUI : MonoBehaviour
 {
-    [Header("Opciones")]
+    [Header("Volumen")]
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Text volumeLabel;
+
+    [Header("Mano dominante")]
+    [SerializeField] private Button handToggleButton;
+    [SerializeField] private TMP_Text handLabel;
 
     [Header("Navegacion")]
     [SerializeField] private Button backButton;
@@ -33,12 +37,17 @@ public class OptionsMenuUI : MonoBehaviour
 
         // Aplicar volumen guardado
         AudioListener.volume = PlayerPrefs.GetFloat(VOLUME_KEY, 1f);
+
+        if (handToggleButton != null)
+            handToggleButton.onClick.AddListener(OnToggleHand);
+        UpdateHandLabel();
     }
 
     void OnDestroy()
     {
         if (backButton != null) backButton.onClick.RemoveListener(GoBack);
         if (volumeSlider != null) volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
+        if (handToggleButton != null) handToggleButton.onClick.RemoveListener(OnToggleHand);
     }
 
     private void OnVolumeChanged(float value)
@@ -53,6 +62,21 @@ public class OptionsMenuUI : MonoBehaviour
     {
         if (volumeLabel != null)
             volumeLabel.text = $"Volumen: {Mathf.RoundToInt(value * 100)}%";
+    }
+
+    private void OnToggleHand()
+    {
+        HandPreference.Dominant = HandPreference.Dominant == Handedness.Right
+            ? Handedness.Left
+            : Handedness.Right;
+        UpdateHandLabel();
+    }
+
+    private void UpdateHandLabel()
+    {
+        if (handLabel == null) return;
+        string hand = HandPreference.Dominant == Handedness.Right ? "Derecha" : "Izquierda";
+        handLabel.text = $"Mano dominante: {hand}";
     }
 
     private void GoBack() => SceneManager.LoadScene(mainMenuSceneName);
