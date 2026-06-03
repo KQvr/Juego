@@ -50741,8 +50741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbfe17975f6b7ac4bab7abf14e77436e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndexPinchGate_OVR
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  leftHand: {fileID: 1251988350}
+  rightHand: {fileID: 768500508}
   role: 0
   minPinchStrength: 0.5
 --- !u!114 &1414128749
@@ -50831,8 +50831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d821dd0f0314e488af63955c7c6693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndexTipProvider_OVR
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  leftHand: {fileID: 1251988350}
+  rightHand: {fileID: 768500508}
   role: 0
 --- !u!82 &1414128751
 AudioSource:
@@ -57605,7 +57605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1600710026
 Transform:
   m_ObjectHideFlags: 0
@@ -69681,7 +69681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1980383734
 Transform:
   m_ObjectHideFlags: 0

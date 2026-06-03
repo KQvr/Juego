@@ -64,7 +64,12 @@ public class ReadingActivityManager : MonoBehaviour
         // Reconfigurar los objetos cada vez que la actividad se activa,
         // por si el pool compartido cambio de estado en otra actividad.
         if (sequence != null && sequence.items != null && sequence.items.Count > 0)
-            ShowCurrentItem();
+        {
+            if (activityTracker != null && activityTracker.IsCompleted)
+                ShowCompletedState();
+            else
+                ShowCurrentItem();
+        }
     }
 
     void Update()
@@ -189,36 +194,47 @@ public class ReadingActivityManager : MonoBehaviour
     {
         currentIndex++;
 
-        activityTracker?.SetProgress(GetProgress());
-
         if (currentIndex >= sequence.items.Count)
         {
             if (loopSequence)
             {
                 currentIndex = 0;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
+                activityTracker?.SetProgress(0f);
             }
             else
             {
                 currentIndex = sequence.items.Count - 1;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
                 activityTracker?.MarkAsCompleted();
-
-                if (feedbackText != null)
-                    feedbackText.text = "!Actividad completada!";
-
-                if (bodyText != null)
-                    bodyText.text = "";
-
-                // Ocultar todos los objetos
-                foreach (var obj in allObjects)
-                    if (obj != null) obj.gameObject.SetActive(false);
-                activeObjects.Clear();
-
+                ShowCompletedState();
                 Debug.Log("[ReadingActivityManager] Secuencia completada.");
                 return;
             }
         }
+        else
+        {
+            activityTracker?.SetCurrentItemIndex(currentIndex);
+            activityTracker?.SetProgress(GetProgress());
+        }
 
         ShowCurrentItem();
+    }
+
+    private void ShowCompletedState()
+    {
+        locked = true;
+
+        if (feedbackText != null)
+            feedbackText.text = "!Actividad completada!";
+
+        if (bodyText != null)
+            bodyText.text = "";
+
+        // Ocultar todos los objetos
+        foreach (var obj in allObjects)
+            if (obj != null) obj.gameObject.SetActive(false);
+        activeObjects.Clear();
     }
 
     // -------------------------------------------------------------------------
@@ -294,11 +310,20 @@ public class ReadingActivityManager : MonoBehaviour
     public void SetData(ReadingActivitySequenceSO newSequence)
     {
         sequence = newSequence;
-        currentIndex = 0;
         locked = false;
-        if (gameObject.activeInHierarchy)
+
+        // Cargar indice persistido (o 0 si no hay tracker)
+        int savedIndex = activityTracker != null ? activityTracker.CurrentItemIndex : 0;
+        currentIndex = (sequence != null && sequence.items != null && sequence.items.Count > 0)
+            ? Mathf.Clamp(savedIndex, 0, sequence.items.Count - 1)
+            : 0;
+
+        if (!gameObject.activeInHierarchy) return;
+
+        if (activityTracker != null && activityTracker.IsCompleted)
+            ShowCompletedState();
+        else
             ShowCurrentItem();
-        // else: OnEnable() lo llamara cuando el GameObject se active
     }
 
     public void RestartActivity()

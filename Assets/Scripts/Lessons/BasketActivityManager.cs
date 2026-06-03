@@ -57,8 +57,15 @@ public class BasketActivityManager : MonoBehaviour
         // por si el pool compartido cambio de estado en otra actividad.
         if (sequence != null && sequence.items != null && sequence.items.Count > 0)
         {
-            SetupRoundObjects();
-            ShowCurrentPrompt();
+            if (activityTracker != null && activityTracker.IsCompleted)
+            {
+                ShowCompletedState();
+            }
+            else
+            {
+                SetupRoundObjects();
+                ShowCurrentPrompt();
+            }
         }
     }
 
@@ -118,37 +125,28 @@ public class BasketActivityManager : MonoBehaviour
     {
         currentIndex++;
 
-        activityTracker?.SetProgress(GetProgress());
-
         if (currentIndex >= sequence.items.Count)
         {
             if (loopSequence)
             {
                 currentIndex = 0;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
+                activityTracker?.SetProgress(GetProgress());
             }
             else
             {
                 currentIndex = sequence.items.Count - 1;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
                 activityTracker?.MarkAsCompleted();
-
-                // Mostrar mensaje de completado y salir
-                if (feedbackText != null)
-                    feedbackText.text = "!Actividad completada!";
-
-                if (promptText != null)
-                    promptText.text = "";
-
-                if (japaneseText != null)
-                    japaneseText.text = "";
-
-                // Ocultar objetos restantes y limpiar labels
-                foreach (var obj in allObjects)
-                    if (obj != null) obj.gameObject.SetActive(false);
-                ClearAllObjectLabels();
-
+                ShowCompletedState();
                 Debug.Log("[BasketActivityManager] Secuencia completada.");
                 return;
             }
+        }
+        else
+        {
+            activityTracker?.SetCurrentItemIndex(currentIndex);
+            activityTracker?.SetProgress(GetProgress());
         }
 
         if (feedbackText != null)
@@ -156,6 +154,24 @@ public class BasketActivityManager : MonoBehaviour
 
         SetupRoundObjects();
         ShowCurrentPrompt();
+    }
+
+    private void ShowCompletedState()
+    {
+        locked = true;
+
+        if (feedbackText != null)
+            feedbackText.text = "!Actividad completada!";
+
+        if (promptText != null)
+            promptText.text = "";
+
+        if (japaneseText != null)
+            japaneseText.text = "";
+
+        foreach (var obj in allObjects)
+            if (obj != null) obj.gameObject.SetActive(false);
+        ClearAllObjectLabels();
     }
 
     private void ShowCurrentPrompt()
@@ -292,9 +308,21 @@ public class BasketActivityManager : MonoBehaviour
     public void SetData(BasketActivitySequenceSO newSequence)
     {
         sequence = newSequence;
-        currentIndex = 0;
         locked = false;
-        if (gameObject.activeInHierarchy)
+
+        // Cargar el indice persistido (o 0 si no hay tracker)
+        int savedIndex = activityTracker != null ? activityTracker.CurrentItemIndex : 0;
+        currentIndex = (sequence != null && sequence.items != null && sequence.items.Count > 0)
+            ? Mathf.Clamp(savedIndex, 0, sequence.items.Count - 1)
+            : 0;
+
+        if (!gameObject.activeInHierarchy) return;
+
+        if (activityTracker != null && activityTracker.IsCompleted)
+        {
+            ShowCompletedState();
+        }
+        else
         {
             SetupRoundObjects();
             ShowCurrentPrompt();

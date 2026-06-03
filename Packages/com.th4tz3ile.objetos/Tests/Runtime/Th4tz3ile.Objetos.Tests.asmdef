@@ -1,0 +1,11 @@
+{
+    "name": "Th4tz3ile.Objetos.Tests",
+    "references": [
+        "Th4tz3ile.Objetos"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

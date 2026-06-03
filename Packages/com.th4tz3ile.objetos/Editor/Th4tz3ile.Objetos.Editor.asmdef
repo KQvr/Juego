@@ -1,0 +1,10 @@
+{
+    "name": "Th4tz3ile.Objetos.Editor",
+    "references": [
+      "Th4tz3ile.Objetos"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

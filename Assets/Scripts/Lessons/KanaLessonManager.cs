@@ -160,22 +160,34 @@ public class KanaLessonManager : MonoBehaviour
             if (loopSequence)
             {
                 currentIndex = 0;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
+                activityTracker?.SetProgress(0f);
             }
             else
             {
                 currentIndex = Mathf.Max(0, kanaSequence.Count - 1);
+                activityTracker?.SetCurrentItemIndex(currentIndex);
                 activityTracker?.MarkAsCompleted();
-                UpdateKanaText(completedText);
-                UpdateRomajiText("");
+                ShowCompletedState();
                 Debug.Log("[KanaLessonManager] Leccion completada.");
                 advancing = false;
                 yield break;
             }
         }
+        else
+        {
+            activityTracker?.SetCurrentItemIndex(currentIndex);
+            activityTracker?.SetProgress(kanaSequence.Count > 0 ? (float)currentIndex / kanaSequence.Count : 0f);
+        }
 
-        activityTracker?.SetProgress(kanaSequence.Count > 0 ? (float)currentIndex / kanaSequence.Count : 0f);
         ApplyCurrentKana();
         advancing = false;
+    }
+
+    private void ShowCompletedState()
+    {
+        UpdateKanaText(completedText);
+        UpdateRomajiText("");
     }
 
     // -----------------------------------------------------------------------
@@ -227,7 +239,6 @@ public class KanaLessonManager : MonoBehaviour
     public void SetData(KanaTemplateSet newTemplateSet)
     {
         templateSet = newTemplateSet;
-        currentIndex = 0;
         advancing = false;
 
         // Actualizar el templateSet del evaluator y el ghost overlay
@@ -236,7 +247,18 @@ public class KanaLessonManager : MonoBehaviour
         ghostOverlay?.SetTemplateSet(newTemplateSet);
 
         RebuildSequenceFromTemplateSet();
-        if (gameObject.activeInHierarchy)
+
+        // Cargar indice persistido (o 0 si no hay tracker)
+        int savedIndex = activityTracker != null ? activityTracker.CurrentItemIndex : 0;
+        currentIndex = (kanaSequence != null && kanaSequence.Count > 0)
+            ? Mathf.Clamp(savedIndex, 0, kanaSequence.Count - 1)
+            : 0;
+
+        if (!gameObject.activeInHierarchy) return;
+
+        if (activityTracker != null && activityTracker.IsCompleted)
+            ShowCompletedState();
+        else
             ApplyCurrentKana();
     }
 

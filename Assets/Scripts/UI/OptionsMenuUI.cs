@@ -30,13 +30,13 @@ public class OptionsMenuUI : MonoBehaviour
 
         if (volumeSlider != null)
         {
-            volumeSlider.value = PlayerPrefs.GetFloat(VOLUME_KEY, 1f);
+            volumeSlider.value = PlayerPrefs.GetFloat(ProfileManager.Key(VOLUME_KEY), 1f);
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
             UpdateVolumeLabel(volumeSlider.value);
         }
 
         // Aplicar volumen guardado
-        AudioListener.volume = PlayerPrefs.GetFloat(VOLUME_KEY, 1f);
+        AudioListener.volume = PlayerPrefs.GetFloat(ProfileManager.Key(VOLUME_KEY), 1f);
 
         if (handToggleButton != null)
             handToggleButton.onClick.AddListener(OnToggleHand);
@@ -53,7 +53,7 @@ public class OptionsMenuUI : MonoBehaviour
     private void OnVolumeChanged(float value)
     {
         AudioListener.volume = value;
-        PlayerPrefs.SetFloat(VOLUME_KEY, value);
+        PlayerPrefs.SetFloat(ProfileManager.Key(VOLUME_KEY), value);
         PlayerPrefs.Save();
         UpdateVolumeLabel(value);
     }

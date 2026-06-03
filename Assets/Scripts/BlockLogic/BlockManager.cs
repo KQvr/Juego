@@ -117,13 +117,13 @@ public class BlockManager : MonoBehaviour
     // -----------------------------------------------------------------------
 
     public bool IsUnlocked(string blockId) =>
-        PlayerPrefs.GetInt($"block_{blockId}_unlocked", 0) == 1;
+        PlayerPrefs.GetInt(ProfileManager.Key($"block_{blockId}_unlocked"), 0) == 1;
 
     private void EnsureUnlocked(string blockId)
     {
         if (!IsUnlocked(blockId))
         {
-            PlayerPrefs.SetInt($"block_{blockId}_unlocked", 1);
+            PlayerPrefs.SetInt(ProfileManager.Key($"block_{blockId}_unlocked"), 1);
             PlayerPrefs.Save();
         }
     }
@@ -225,7 +225,7 @@ public class BlockManager : MonoBehaviour
     {
         foreach (var block in blocks)
         {
-            PlayerPrefs.DeleteKey($"block_{block.blockId}_unlocked");
+            PlayerPrefs.DeleteKey(ProfileManager.Key($"block_{block.blockId}_unlocked"));
 
             // Borrar progreso de cada tipo de actividad bajo cada bloque
             BlockActivityTracker.ClearSaved(block.blockId, BlockActivityType.Drawing);

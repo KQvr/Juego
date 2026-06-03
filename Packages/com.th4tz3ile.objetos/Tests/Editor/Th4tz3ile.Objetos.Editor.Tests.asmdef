@@ -1,0 +1,14 @@
+{
+    "name": "Th4tz3ile.Objetos.Editor.Tests",
+    "references": [
+        "Th4tz3ile.Objetos.Editor",
+        "Th4tz3ile.Objetos"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

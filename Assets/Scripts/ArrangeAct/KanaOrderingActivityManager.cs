@@ -43,7 +43,10 @@ public class KanaOrderingActivityManager : MonoBehaviour
     void OnEnable()
     {
         locked = false;
-        ShowCurrentWord();
+        if (activityTracker != null && activityTracker.IsCompleted)
+            ShowCompletedState();
+        else
+            ShowCurrentWord();
     }
 
     void OnDisable()
@@ -213,50 +216,73 @@ public class KanaOrderingActivityManager : MonoBehaviour
     {
         currentIndex++;
 
-        activityTracker?.SetProgress(GetProgress());
-
         if (currentIndex >= sequence.words.Count)
         {
             if (loopSequence)
             {
                 currentIndex = 0;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
+                activityTracker?.SetProgress(0f);
             }
             else
             {
                 currentIndex = sequence.words.Count - 1;
+                activityTracker?.SetCurrentItemIndex(currentIndex);
                 activityTracker?.MarkAsCompleted();
-
-                if (feedbackText != null)
-                    feedbackText.text = "!Actividad completada!";
-
-                // Limpiar tiles y slots
-                foreach (var tile in activeTiles)
-                    if (tile != null) Destroy(tile.gameObject);
-                activeTiles.Clear();
-
-                foreach (var slot in slots)
-                    if (slot != null)
-                    {
-                        slot.ClearSlot();
-                        slot.gameObject.SetActive(false);
-                    }
-
+                ShowCompletedState();
                 Debug.Log("[KanaOrderingActivityManager] Secuencia completada.");
                 return;
             }
+        }
+        else
+        {
+            activityTracker?.SetCurrentItemIndex(currentIndex);
+            activityTracker?.SetProgress(GetProgress());
         }
 
         ShowCurrentWord();
     }
 
+    private void ShowCompletedState()
+    {
+        locked = true;
+
+        if (feedbackText != null)
+            feedbackText.text = "!Actividad completada!";
+
+        if (hintText != null)
+            hintText.text = "";
+
+        // Limpiar tiles y slots
+        foreach (var tile in activeTiles)
+            if (tile != null) Destroy(tile.gameObject);
+        activeTiles.Clear();
+
+        foreach (var slot in slots)
+            if (slot != null)
+            {
+                slot.ClearSlot();
+                slot.gameObject.SetActive(false);
+            }
+    }
+
     public void SetData(KanaWordSequenceSO newSequence)
     {
         sequence = newSequence;
-        currentIndex = 0;
         locked = false;
-        if (gameObject.activeInHierarchy)
+
+        // Cargar indice persistido (o 0 si no hay tracker)
+        int savedIndex = activityTracker != null ? activityTracker.CurrentItemIndex : 0;
+        currentIndex = (sequence != null && sequence.words != null && sequence.words.Count > 0)
+            ? Mathf.Clamp(savedIndex, 0, sequence.words.Count - 1)
+            : 0;
+
+        if (!gameObject.activeInHierarchy) return;
+
+        if (activityTracker != null && activityTracker.IsCompleted)
+            ShowCompletedState();
+        else
             ShowCurrentWord();
-        // else: OnEnable() lo llamara cuando el GameObject se active
     }
 
     private void Shuffle<T>(List<T> list)

@@ -18,11 +18,11 @@ public static class HandPreference
 
     public static Handedness Dominant
     {
-        get => (Handedness)PlayerPrefs.GetInt(KEY, (int)Handedness.Right);
+        get => (Handedness)PlayerPrefs.GetInt(ProfileManager.Key(KEY), (int)Handedness.Right);
         set
         {
             if (Dominant == value) return;
-            PlayerPrefs.SetInt(KEY, (int)value);
+            PlayerPrefs.SetInt(ProfileManager.Key(KEY), (int)value);
             PlayerPrefs.Save();
             OnChanged?.Invoke(value);
         }
