@@ -31,6 +31,8 @@ public class BasketActivityManager : MonoBehaviour
     [Header("Progreso")]
     [SerializeField] private BlockActivityTracker activityTracker;
 
+    public BlockActivityTracker ActivityTracker => activityTracker;
+
     private readonly List<ResettableObject> activeRoundObjects = new();
 
     private int currentIndex = 0;
@@ -63,6 +65,7 @@ public class BasketActivityManager : MonoBehaviour
             }
             else
             {
+                if (feedbackText != null) feedbackText.text = "";
                 SetupRoundObjects();
                 ShowCurrentPrompt();
             }
@@ -324,6 +327,7 @@ public class BasketActivityManager : MonoBehaviour
         }
         else
         {
+            if (feedbackText != null) feedbackText.text = "";
             SetupRoundObjects();
             ShowCurrentPrompt();
         }

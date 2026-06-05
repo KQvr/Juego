@@ -33,6 +33,81 @@ public class BlockManager : MonoBehaviour
 
         if (blocks.Count > 0)
             EnsureUnlocked(blocks[0].blockId);
+
+        // Buscar TODOS los trackers (incluyendo los que estan en GameObjects
+        // inactivos) y registrarlos manualmente. Esto evita el bug donde
+        // las actividades se desactivan en Start del ActivityMenuManager y
+        // los trackers nunca corren su Start, por lo que no se registran.
+        var trackers = FindObjectsByType<BlockActivityTracker>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None
+        );
+        foreach (var t in trackers)
+            if (!allTrackers.Contains(t))
+                allTrackers.Add(t);
+
+        ValidateTrackerSetup();
+    }
+
+    /// <summary>
+    /// Verifica que cada activity manager tenga un tracker del tipo correcto
+    /// y que no haya trackers compartidos o duplicados.
+    /// </summary>
+    private void ValidateTrackerSetup()
+    {
+        // Contar trackers por tipo
+        var byType = new Dictionary<BlockActivityType, List<BlockActivityTracker>>();
+        foreach (BlockActivityType t in System.Enum.GetValues(typeof(BlockActivityType)))
+            byType[t] = new List<BlockActivityTracker>();
+
+        foreach (var t in allTrackers)
+            if (t != null) byType[t.ActivityType].Add(t);
+
+        foreach (var pair in byType)
+        {
+            if (pair.Value.Count == 0)
+                Debug.LogWarning($"[BlockManager] No hay tracker de tipo {pair.Key} en la escena.");
+            else if (pair.Value.Count > 1)
+                Debug.LogWarning($"[BlockManager] Hay {pair.Value.Count} trackers de tipo {pair.Key}. " +
+                                 $"Deberia haber solo uno. GameObjects: " +
+                                 $"{string.Join(", ", pair.Value.ConvertAll(x => x.gameObject.name))}");
+        }
+
+        // Verificar que cada manager tenga un tracker del tipo correcto
+        CheckManagerTracker(drawingManager?.ActivityTracker, BlockActivityType.Drawing, "drawingManager");
+        CheckManagerTracker(basketManager?.ActivityTracker, BlockActivityType.Basket, "basketManager");
+        CheckManagerTracker(orderingManager?.ActivityTracker, BlockActivityType.Ordering, "orderingManager");
+        CheckManagerTracker(readingManager?.ActivityTracker, BlockActivityType.Reading, "readingManager");
+
+        // Verificar que no haya managers compartiendo el mismo tracker
+        var refs = new[]
+        {
+            (drawingManager?.ActivityTracker,  "drawingManager"),
+            (basketManager?.ActivityTracker,   "basketManager"),
+            (orderingManager?.ActivityTracker, "orderingManager"),
+            (readingManager?.ActivityTracker,  "readingManager"),
+        };
+        for (int i = 0; i < refs.Length; i++)
+        {
+            for (int j = i + 1; j < refs.Length; j++)
+            {
+                if (refs[i].Item1 != null && refs[i].Item1 == refs[j].Item1)
+                    Debug.LogError($"[BlockManager] {refs[i].Item2} y {refs[j].Item2} comparten el MISMO tracker " +
+                                   $"({refs[i].Item1.gameObject.name}). Cada manager debe tener su propio tracker.");
+            }
+        }
+    }
+
+    private static void CheckManagerTracker(BlockActivityTracker tracker, BlockActivityType expected, string managerName)
+    {
+        if (tracker == null)
+        {
+            Debug.LogWarning($"[BlockManager] {managerName} no tiene Activity Tracker asignado.");
+            return;
+        }
+        if (tracker.ActivityType != expected)
+            Debug.LogError($"[BlockManager] {managerName} tiene un tracker de tipo {tracker.ActivityType} " +
+                           $"pero deberia ser {expected}. Cambia el Activity Type en el tracker, o asigna otro.");
     }
 
     void OnDestroy()

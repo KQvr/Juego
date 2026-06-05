@@ -29,6 +29,8 @@ public class KanaLessonManager : MonoBehaviour
     [Header("Progreso")]
     [SerializeField] private BlockActivityTracker activityTracker;
 
+    public BlockActivityTracker ActivityTracker => activityTracker;
+
     [Header("Flow")]
     [SerializeField] private bool loopSequence = false;
     [SerializeField] private float advanceDelay = 1.0f;

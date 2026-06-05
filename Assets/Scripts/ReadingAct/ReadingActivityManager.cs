@@ -36,6 +36,8 @@ public class ReadingActivityManager : MonoBehaviour
     [Header("Progreso")]
     [SerializeField] private BlockActivityTracker activityTracker;
 
+    public BlockActivityTracker ActivityTracker => activityTracker;
+
     [Header("Flow")]
     [SerializeField] private bool loopSequence = false;
     [SerializeField] private float feedbackDuration = 1.5f;
@@ -68,7 +70,10 @@ public class ReadingActivityManager : MonoBehaviour
             if (activityTracker != null && activityTracker.IsCompleted)
                 ShowCompletedState();
             else
+            {
+                if (feedbackText != null) feedbackText.text = "";
                 ShowCurrentItem();
+            }
         }
     }
 
@@ -323,7 +328,10 @@ public class ReadingActivityManager : MonoBehaviour
         if (activityTracker != null && activityTracker.IsCompleted)
             ShowCompletedState();
         else
+        {
+            if (feedbackText != null) feedbackText.text = "";
             ShowCurrentItem();
+        }
     }
 
     public void RestartActivity()

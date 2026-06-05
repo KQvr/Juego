@@ -24,6 +24,8 @@ public class KanaOrderingActivityManager : MonoBehaviour
     [Header("Progreso")]
     [SerializeField] private BlockActivityTracker activityTracker;
 
+    public BlockActivityTracker ActivityTracker => activityTracker;
+
     [SerializeField] private bool loopSequence = false;
     [SerializeField] private float feedbackDuration = 1.5f;
 
@@ -46,7 +48,10 @@ public class KanaOrderingActivityManager : MonoBehaviour
         if (activityTracker != null && activityTracker.IsCompleted)
             ShowCompletedState();
         else
+        {
+            if (feedbackText != null) feedbackText.text = "";
             ShowCurrentWord();
+        }
     }
 
     void OnDisable()
@@ -282,7 +287,10 @@ public class KanaOrderingActivityManager : MonoBehaviour
         if (activityTracker != null && activityTracker.IsCompleted)
             ShowCompletedState();
         else
+        {
+            if (feedbackText != null) feedbackText.text = "";
             ShowCurrentWord();
+        }
     }
 
     private void Shuffle<T>(List<T> list)
