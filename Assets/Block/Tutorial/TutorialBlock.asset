@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d7e72407fcf974198bd237590403f4, type: 3}
+  m_Name: TutorialBlock
+  m_EditorClassIdentifier: Assembly-CSharp::BlockContentSO
+  blockId: tuto
+  blockName: Tutorial
+  description: 
+  hasDrawing: 1
+  kanaTemplateSet: {fileID: 11400000, guid: fa058cb8d73ccab4fb4d40d36d31fab0, type: 2}
+  hasBasket: 1
+  basketSequence: {fileID: 11400000, guid: 28492def38c2c8a45be6ccb8d8e0112e, type: 2}
+  hasOrdering: 1
+  orderingSequence: {fileID: 11400000, guid: 720c857ddb850a4478f9edaeeeee8eac, type: 2}
+  hasReading: 1
+  readingSequence: {fileID: 11400000, guid: ded337882defdb34b942e6f6f2a3a118, type: 2}
