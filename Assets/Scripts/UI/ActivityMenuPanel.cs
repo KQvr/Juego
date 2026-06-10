@@ -58,12 +58,34 @@ public class ActivityMenuPanel : MonoBehaviour
     void Awake()
     {
         if (menuRoot == null)
+        {
+            // Busca Canvas en self primero, luego en padres
             menuCanvas = GetComponent<Canvas>();
+            if (menuCanvas == null)
+                menuCanvas = GetComponentInParent<Canvas>();
+
+            if (menuCanvas == null)
+                Debug.LogWarning($"[ActivityMenuPanel] No se encontro ni Menu Root ni Canvas. " +
+                                 $"El menu no podra ocultarse/mostrarse automaticamente. " +
+                                 $"Asigna 'Menu Root' en el Inspector o pon este script en un GameObject con Canvas.",
+                                 this);
+        }
     }
 
     void Update()
     {
         bool shouldShow = BlockManager.Instance != null && BlockManager.Instance.HasActiveBlock;
+
+        // Log cuando cambia el estado
+        if (shouldShow != lastLoggedShouldShow)
+        {
+            Debug.Log($"[ActivityMenuPanel] shouldShow cambio a: {shouldShow} " +
+                      $"(Instance: {(BlockManager.Instance != null ? "OK" : "NULL")}, " +
+                      $"HasActiveBlock: {(BlockManager.Instance?.HasActiveBlock ?? false)}, " +
+                      $"menuRoot: {(menuRoot != null ? menuRoot.name : "NULL")}, " +
+                      $"menuCanvas: {(menuCanvas != null ? menuCanvas.name : "NULL")})");
+            lastLoggedShouldShow = shouldShow;
+        }
 
         if (menuRoot != null)
         {
@@ -85,6 +107,8 @@ public class ActivityMenuPanel : MonoBehaviour
             RefreshTabsAvailability();
         }
     }
+
+    private bool lastLoggedShouldShow = false;
 
     void Start()
     {

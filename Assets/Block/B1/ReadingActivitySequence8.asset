@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f968ad7bf60c18940a1a83b045deb1d5, type: 3}
+  m_Name: ReadingActivitySequence8
+  m_EditorClassIdentifier: Assembly-CSharp::ReadingActivitySequenceSO
+  items:
+  - bodyText: "\u3042\u304D\u306E <u>\u305F\u3093\u307C</u>\u3092 \u307F\u308B\u3002\r\n\u304D\u3044\u308D\u3044
+      <u>\u305F\u3093\u307C</u>!"
+    correctItemId: Arrozal
+    narrationClip: {fileID: 8300000, guid: de0dfd055e8f18649aab6d483df72ff5, type: 3}
+  - bodyText: "\u3053\u3046\u3048\u3093\u306B <u>\u4EBA</u>\u304C \u3044\u308B\u3002\r\n\u305F\u304F\u3055\u3093\u306E
+      <u>\u4EBA</u>!"
+    correctItemId: Persona
+    narrationClip: {fileID: 8300000, guid: d8f1f66c709b8c941860f961229edfb9, type: 3}
+  - bodyText: "\u3046\u307F\u306B \u304A\u304A\u304D\u3044 <u>\u306A\u307F</u>\u3002\r\n\u3057\u308D\u3044
+      <u>\u306A\u307F</u>!"
+    correctItemId: Ola
+    narrationClip: {fileID: 8300000, guid: 07a7796043d80e1479b07f33d4951eb3, type: 3}
+  - bodyText: "\u3042\u305F\u307E\u306B <u>\u3066</u>\u3092 \u304A\u304F\u3002\r\n\u3061\u3044\u3055\u3044
+      <u>\u3066</u>\u3002"
+    correctItemId: Mano
+    narrationClip: {fileID: 8300000, guid: 9d6b6ebef62562746a3b1c2450c9654e, type: 3}
+  - bodyText: "\u3042\u304A\u3044 <u>\u3082\u308A</u>\u3092 \u3042\u308B\u304F\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u3082\u308A</u>!"
+    correctItemId: Bosque
+    narrationClip: {fileID: 8300000, guid: e48e02f12e65758409e56fb21900f5dd, type: 3}
+  - bodyText: "\u3064\u304F\u3048\u306B <u>\u672C</u>\u304C \u3042\u308B\u3002\r\n\u304A\u3082\u3057\u308D\u3044
+      <u>\u672C</u>!"
+    correctItemId: Libro
+    narrationClip: {fileID: 8300000, guid: 67b72aae55b4cfe4ebc232ff3992b8a6, type: 3}
+  - bodyText: "\u3042\u304B\u3044 <u>\u304F\u308B\u307E</u>\u3092 \u307F\u308B\u3002\r\n\u304A\u304A\u304D\u3044
+      <u>\u304F\u308B\u307E</u>!"
+    correctItemId: Carro
+    narrationClip: {fileID: 8300000, guid: e963543b25297d444b872ad254cfc92a, type: 3}
+  - bodyText: "\u306B\u308F\u306B \u304D\u308C\u3044\u306A <u>\u306F\u306A</u>\u3002\r\n\u3042\u304B\u3044
+      <u>\u306F\u306A</u>!"
+    correctItemId: Flor
+    narrationClip: {fileID: 8300000, guid: 1da08c08c28a0e1438b42d79e5634768, type: 3}
+  - bodyText: "\u3046\u307F\u306B <u>\u3055\u304B\u306A</u>\u304C \u304A\u3088\u3050\u3002\r\n\u3061\u3044\u3055\u3044
+      <u>\u3055\u304B\u306A</u>!"
+    correctItemId: Pez
+    narrationClip: {fileID: 8300000, guid: d0564c605ed4fc644a32c1853d65b8dc, type: 3}
+  - bodyText: "\u3061\u3044\u3055\u3044 <u>\u306D\u3053</u>\u3068 \u3042\u305D\u3076\u3002\r\n\u304F\u308D\u3044
+      <u>\u306D\u3053</u>!"
+    correctItemId: GatoK
+    narrationClip: {fileID: 8300000, guid: a60916860db4d3242890930786138991, type: 3}

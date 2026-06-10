@@ -6,6 +6,10 @@ public class ResettableObject : MonoBehaviour
     [Header("Respawn")]
     [SerializeField] private Transform defaultRespawnPoint;
     [SerializeField] private bool useOwnStartAsFallback = true;
+
+    [Tooltip("Si esta marcado (recomendado), el objeto siempre conserva la rotacion que tiene en el editor/prefab y el respawn point solo controla la POSICION. Si esta desmarcado, la rotacion la toma del respawn point.")]
+    [SerializeField] private bool preserveOwnRotation = true;
+
     [SerializeField] private float respawnDelay = 0.5f;
 
     [Header("Safety")]
@@ -14,12 +18,16 @@ public class ResettableObject : MonoBehaviour
 
     private Vector3 startPosition;
     private Quaternion startRotation;
+    private Quaternion ownInitialRotation;
     private Rigidbody rb;
     private Coroutine respawnRoutine;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        // Siempre capturamos la rotacion inicial propia del objeto (editor/prefab)
+        ownInitialRotation = transform.rotation;
 
         if (defaultRespawnPoint != null)
         {
@@ -37,7 +45,6 @@ public class ResettableObject : MonoBehaviour
     {
         if (!monitorFall) return;
         if (!gameObject.activeInHierarchy) return;
-
         if (transform.position.y < minYBeforeAutoRespawn)
             RespawnNow();
     }
@@ -49,7 +56,6 @@ public class ResettableObject : MonoBehaviour
             StopCoroutine(respawnRoutine);
             respawnRoutine = null;
         }
-
         ApplyRespawn();
     }
 
@@ -57,7 +63,6 @@ public class ResettableObject : MonoBehaviour
     {
         if (respawnRoutine != null)
             StopCoroutine(respawnRoutine);
-
         respawnRoutine = StartCoroutine(RespawnAfterDelay());
     }
 
@@ -71,9 +76,8 @@ public class ResettableObject : MonoBehaviour
     private void ApplyRespawn()
     {
         gameObject.SetActive(true);
-
         transform.position = startPosition;
-        transform.rotation = startRotation;
+        transform.rotation = preserveOwnRotation ? ownInitialRotation : startRotation;
 
         if (rb != null)
         {
@@ -82,7 +86,6 @@ public class ResettableObject : MonoBehaviour
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
-
             rb.Sleep();
         }
     }
@@ -90,9 +93,12 @@ public class ResettableObject : MonoBehaviour
     public void SetRespawnPoint(Transform newRespawnPoint)
     {
         if (newRespawnPoint == null) return;
-
         defaultRespawnPoint = newRespawnPoint;
         startPosition = newRespawnPoint.position;
-        startRotation = newRespawnPoint.rotation;
+
+        // Si preserveOwnRotation esta activo, no copiamos la rotacion del respawn point.
+        // El objeto mantiene su rotacion propia (capturada en Awake).
+        if (!preserveOwnRotation)
+            startRotation = newRespawnPoint.rotation;
     }
 }

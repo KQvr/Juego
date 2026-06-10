@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2c905b107a8e04f8da999b763e882a, type: 3}
+  m_Name: BasketActivitySequence6
+  m_EditorClassIdentifier: Assembly-CSharp::BasketActivitySequenceSO
+  items:
+  - itemId: Uno
+    promptText: "Deposita el n\xFAmero uno"
+    japaneseText: "\u3044\u3061"
+  - itemId: Dos
+    promptText: "Deposita el n\xFAmero dos"
+    japaneseText: "\u306B"
+  - itemId: Tres
+    promptText: "Deposita el n\xFAmero tres"
+    japaneseText: "\u3055\u3093"
+  - itemId: Cuatro
+    promptText: "Deposita el n\xFAmero cuatro"
+    japaneseText: "\u3057"
+  - itemId: Cinco
+    promptText: "Deposita el n\xFAmero cinco"
+    japaneseText: "\u3054"
+  - itemId: Seis
+    promptText: "Deposita el n\xFAmero seis"
+    japaneseText: "\u308D\u304F"
+  - itemId: Siete
+    promptText: "Deposita el n\xFAmero siete"
+    japaneseText: "\u306A\u306A"
+  - itemId: Ocho
+    promptText: "Deposita el n\xFAmero ocho"
+    japaneseText: "\u306F\u3061"
+  - itemId: Nueve
+    promptText: "Deposita el n\xFAmero nueve"
+    japaneseText: "\u304D\u3085\u3046"
+  - itemId: Diez
+    promptText: "Deposita el n\xFAmero diez"
+    japaneseText: "\u3058\u3085\u3046"
