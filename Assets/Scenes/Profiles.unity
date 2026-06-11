@@ -22506,32 +22506,32 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1984185205}
-  - {fileID: 1357589432}
-  - {fileID: 758857383}
-  - {fileID: 468377550}
-  - {fileID: 1714071919}
-  - {fileID: 1732973974}
-  - {fileID: 723928408}
-  - {fileID: 1440861142}
-  - {fileID: 90773419}
-  - {fileID: 800262013}
   - {fileID: 42500061}
-  - {fileID: 1062564648}
+  - {fileID: 1375879218}
+  - {fileID: 83746614}
   - {fileID: 1095214113}
+  - {fileID: 758857383}
   - {fileID: 561533005}
   - {fileID: 661821472}
   - {fileID: 1814991712}
+  - {fileID: 1440861142}
   - {fileID: 1834474053}
   - {fileID: 767013546}
   - {fileID: 884378595}
-  - {fileID: 104121886}
-  - {fileID: 1488108494}
-  - {fileID: 83746614}
-  - {fileID: 1523201232}
-  - {fileID: 1375879218}
   - {fileID: 533988085}
   - {fileID: 1575241719}
+  - {fileID: 90773419}
+  - {fileID: 800262013}
+  - {fileID: 1984185205}
+  - {fileID: 468377550}
+  - {fileID: 1062564648}
+  - {fileID: 1714071919}
+  - {fileID: 723928408}
+  - {fileID: 1523201232}
+  - {fileID: 1357589432}
+  - {fileID: 1488108494}
+  - {fileID: 1732973974}
+  - {fileID: 104121886}
   m_Father: {fileID: 1830304602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -22562,7 +22562,7 @@ MonoBehaviour:
   m_CellSize: {x: 17, y: 17}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
-  m_ConstraintCount: 14
+  m_ConstraintCount: 8
 --- !u!114 &2141480727
 MonoBehaviour:
   m_ObjectHideFlags: 0
