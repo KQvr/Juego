@@ -60,12 +60,40 @@ public static class ProfileManager
     public static void DeleteProfile(int index)
     {
         if (index < 0 || index >= MaxProfiles) return;
+
+        string prefix = $"p{index}_";
+
+        // Borrar el nombre del perfil
         PlayerPrefs.DeleteKey(string.Format(NAME_KEY_FORMAT, index));
+
+        // Borrar preferencias generales del perfil
+        PlayerPrefs.DeleteKey(prefix + "DominantHand");
+        PlayerPrefs.DeleteKey(prefix + "MasterVolume");
+
+        // Borrar progreso de todos los bloques y actividades de este perfil.
+        // Si se agregan bloques o actividades nuevas, actualizar estas listas.
+        string[] blockIds = {
+            "bk1", "bk2", "bk3", "bk4",
+            "bk5", "bk6", "bk7", "bk8"
+        };
+        string[] activities = { "drawing", "basket", "ordering", "reading" };
+
+        foreach (string blockId in blockIds)
+        {
+            PlayerPrefs.DeleteKey(prefix + $"block_{blockId}_unlocked");
+            foreach (string activity in activities)
+            {
+                PlayerPrefs.DeleteKey(prefix + $"block_{blockId}_activity_{activity}_progress");
+                PlayerPrefs.DeleteKey(prefix + $"block_{blockId}_activity_{activity}_completed");
+                PlayerPrefs.DeleteKey(prefix + $"block_{blockId}_activity_{activity}_index");
+            }
+        }
+
         if (CurrentIndex == index)
             CurrentIndex = -1;
         PlayerPrefs.Save();
-        // Nota: las keys de progreso NO se borran aqui (quedan huerfanas pero
-        // no causan problemas y se reusarian si el slot se recrea con nombre).
+
+        Debug.Log($"[ProfileManager] Perfil {index} borrado junto con todo su progreso.");
     }
 
     // -----------------------------------------------------------------------
