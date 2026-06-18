@@ -16,7 +16,7 @@ MonoBehaviour:
   blockName: Hiragana simple
   description: Se ven los primeros caracteres del silabario japones basico
   hasDrawing: 1
-  kanaTemplateSet: {fileID: 11400000, guid: 7b1ac3730f70c61419249ee415eb2d01, type: 2}
+  kanaTemplateSet: {fileID: 11400000, guid: a1f99a283fcf64342ba7906cc7fa4b77, type: 2}
   hasBasket: 1
   basketSequence: {fileID: 11400000, guid: 6cf422e523f559c4199f3ec72a84ad07, type: 2}
   hasOrdering: 1
